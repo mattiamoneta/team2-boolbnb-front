@@ -125,9 +125,9 @@ a.offcanvas-btn i{
 
 /* Fixed nav */
 
-.navbar-top-fix{
-    margin-top: 72px;
-  }
+  .navbar-top-fix{
+      padding-top: 72px!important;
+    }
   
   .navbar-float-animation{
     animation: navbar-slide-in .3s ease;
@@ -181,3 +181,4 @@ a.offcanvas-btn i{
   .navbar-toggler:hover .line-3{
     transform: translateY(-10px) rotate(270deg);
   }
+

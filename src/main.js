@@ -7,7 +7,7 @@ import '@fontsource-variable/montserrat';
 import { router } from './router';
 import 'bootstrap';
 
-createApp(App).mount('#app')
+createApp(App).use(router).mount('#app');
 
 
 
