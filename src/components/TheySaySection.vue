@@ -36,6 +36,12 @@ export default {
     max-height: 2rem;
     filter: brightness(0);
     opacity: 50%;
+    transition: all 0.4s ease;
+
+    &:hover {
+      filter: brightness(1);
+      opacity: 1;
+    }
   }
 }
 </style>
