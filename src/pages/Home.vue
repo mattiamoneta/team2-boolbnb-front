@@ -1,7 +1,13 @@
 <script>
 import { store } from "../store";
+
+import MainSearchbar from "../components/MainSearchbar.vue";
+
 export default {
   name: "TheHome",
+  components: {
+    MainSearchbar,
+  },
   data() {
     return {
       store,
@@ -13,7 +19,7 @@ export default {
 <template>
   <main>
     <!-- jumbotron -->
-    <div id="jumbotron" class="p-5bg-light">
+    <div id="jumbotron" class="p-5">
       <div class="ms_overlay">
         <div class="container">
           <h1 class="display-5">
@@ -24,21 +30,7 @@ export default {
       </div>
     </div>
 
-    <!-- searchbar -->
-    <div class="position-relative">
-      <div
-        class="container p-3 rounded-3 bg-white position-absolute top-0 start-50 translate-middle"
-      >
-        <form class="d-flex justify-content-center" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Cerca una località"
-          />
-          <button class="ms_btn ms_btn_main" type="submit">Cerca</button>
-        </form>
-      </div>
-    </div>
+    <MainSearchbar />
   </main>
 </template>
 
@@ -46,8 +38,8 @@ export default {
 @use "../styles/partials/colors" as *;
 
 #jumbotron {
-  height: 35rem;
-  background-color: $light_gray_color;
+  height: 30rem;
+  background-color: lightgray;
   background-size: cover;
   background-position: center;
   position: relative;
