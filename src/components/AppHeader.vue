@@ -13,8 +13,9 @@
 </script>
 
 <template>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ms-bg-light py-lg-0">
+   <header>
+     <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg ms-bg-light-gradient py-lg-0">
         <div class="container">
             <a class="navbar-brand fw-bolder ms_text_main_darker" href="#">Boolbnb</a>
 
@@ -57,6 +58,7 @@
     </nav>
     <!-- End Navbar -->
   
+   </header>
 </template>
 
 <style scoped lang="scss">
