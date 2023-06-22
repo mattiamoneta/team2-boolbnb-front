@@ -3,6 +3,7 @@ import { store } from "../store";
 
 import MainSearchbar from "../components/MainSearchbar.vue";
 import AppMainSection from "../components/AppMainSection.vue";
+import AppCard from "../components/AppCard.vue";
 import TheySaySection from "../components/TheySaySection.vue";
 
 export default {
@@ -10,7 +11,6 @@ export default {
   components: {
     MainSearchbar,
     AppMainSection,
-    TheySaySection,
   },
   data() {
     return {
@@ -40,10 +40,8 @@ export default {
 
     <AppMainSection title="In Evidenza" theme="dark"> </AppMainSection>
 
-    <AppMainSection
-      title="Offriamo i servizi migliori"
-      theme="dark"
-    ></AppMainSection>
+    <AppMainSection title="Offriamo i servizi migliori" theme="dark">
+    </AppMainSection>
   </main>
 </template>
 
