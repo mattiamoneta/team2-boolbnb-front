@@ -33,7 +33,7 @@
                     
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item mx-lg-3">
-                            <a class="ms-nav-link py-4" aria-current="page" href="#">Chi Siamo</a>
+                            <a class="ms-nav-link py-4" aria-current="page" href="#" :to="{ name: 'search' }">Chi Siamo</a>
                         </li>
                         <li class="nav-item mx-lg-3">
                             <a class="ms-nav-link py-4" aria-current="page" href="#">Supporto</a>
