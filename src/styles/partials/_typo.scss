@@ -1,32 +1,49 @@
 /* TYPOGRAPHY */
+@use "./colors" as *;
+
 $font-serif: "Lora", serif;
 $font-sans-serif: "Montserrat", sans-serif;
 
 *,
 html,
-
-body{
-    font-family: $font-sans-serif;
+body {
+  font-family: $font-sans-serif;
+  text-rendering: optimizeLegibility;
+  color: $black_text_color;
 }
 
-h1, h2, h3,
-h4, h5, h6{
-    font-family: $font-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-serif;
 }
 
-.font-primary{font-family: $font-serif}
-.font-secondary{font-family: $font-sans-serif}
+.font-primary {
+  font-family: $font-serif;
+}
+.font-secondary {
+  font-family: $font-sans-serif;
+}
 
 .font-semibold {
-    font-weight: 600;
+  font-weight: 600;
 }
 
-
-.error-page-title{
-    font-size: 8rem;
-    font-weight: bold;
+.error-page-title {
+  font-size: 8rem;
+  font-weight: bold;
 }
 
+.ms_section_title {
+  color: var(--black_text_color);
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+}
 
-
-
+.ms_section_title.ms_border_dark {
+  border-bottom: 1px solid #868e96;
+}

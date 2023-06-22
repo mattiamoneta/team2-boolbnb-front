@@ -3,23 +3,75 @@
 
 /* NAVBAR */
 
+.ms-nav-link{
+    font-size: .9rem!important;
+    position: relative;
+    color: $main_darker2_color;
+    height: 100%;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.ms-nav-link:after{
+    content: '';
+    position: absolute;
+    left: -16px;
+    bottom: 0;
+    opacity: 0;
+    width: calc(100% + 32px);
+    height: 2px;
+    transition: width $transition_fast, opacity $transition_fast;
+    background-color: $main_darker2_color;
+
+}
+
+.ms-nav-link:before{
+    content: '';
+    position: absolute;
+    left: -16px;
+    bottom: 0;
+    width: calc(100% + 32px);
+    height: 0%;
+    transition: height $transition_fast, opacity $transition_fast;
+    background-image: linear-gradient(transparent, rgba(#fff, 0.5));
+    filter: blur();
+}
+
+.ms-nav-link:hover:before{
+    height: 50%;
+}
+
+.ms-nav-link:hover:after{
+    opacity: 1;
+}
+
+
+
 .nav-link.user-dropdown{
     border: 1px solid rgb(228, 228, 228);
     border-radius: 25px;
     font-size: .8rem;
+    transition: box-shadow $transition_fast, opacity $transition_fast, transform $transition_fast;
 }
 
 .nav-link.user-dropdown:hover .user-icon i{
     transition: opacity $transition_fast, transform $transition_fast;
 }
 
-.nav-link.user-dropdown:hover .user-icon i{
-    transform: translateX(-30px);
-}
-.nav-link.user-dropdown:hover .user-icon::after{
-    transform: translateX(-30px);
+.nav-link.user-dropdown:hover{
+    -webkit-box-shadow: 0px 3px 5px 0px rgba($main_darker2_color, .5); 
+    box-shadow: 0px 3px 5px 0px rgba($main_darker2_color, .5);
+
+    transform: translateY(-1px) ;
 }
 
+.nav-link.user-dropdown:hover .user-icon.animated i{
+    transform: translateX(-30px);
+}
+.nav-link.user-dropdown:hover .user-icon.animated::after{
+    transform: translateX(-30px);
+}
 
 .user-dropdown .user-icon{
     overflow: hidden;
@@ -34,10 +86,10 @@
     color: white;
 }
 
-.user-dropdown .user-icon::after{
+.user-dropdown .user-icon.animated::after{
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    content: "\f0c9";
+    content: "\f054";
     position: absolute;
     width: 30px;
     height: 30px;
@@ -46,6 +98,7 @@
     right: -30px;
     transition: transform $transition_fast;
     font-size: .8rem;
+    color: $main_darker2_color;
 }
 
 .menu-item{
@@ -67,3 +120,4 @@ a.offcanvas-btn{
 a.offcanvas-btn i{
     font-weight: 2rem!important;
 }
+
