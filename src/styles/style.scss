@@ -1,5 +1,3 @@
-@import "bootstrap";
-
 @use "partials/vars" as *; // Global Variables
 @use "partials/colors" as *; // Colors
 @use "partials/layout" as *; // Custom margin, positions ecc...
@@ -14,3 +12,6 @@
 
 @use "partials/navbar" as *;
 @use "partials/sidebar" as *;
+
+
+@import "bootstrap";
