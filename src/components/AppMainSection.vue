@@ -28,13 +28,14 @@ export default {
             {{ title }}
           </h2>
         </div>
-      <!-- End Title -->
+        <!-- End Title -->
 
-      <!-- Component Row -->
-      <div class="row">
-        <slot> </slot>
+        <!-- Component Row -->
+        <div class="row">
+          <slot> </slot>
+        </div>
+        <!-- End Row -->
       </div>
-      <!-- End Row -->
     </div>
   </section>
 </template>

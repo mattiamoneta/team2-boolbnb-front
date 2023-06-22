@@ -41,7 +41,7 @@ export default {
     <div class="searchbar-fix"></div>
 
     <AppMainSection title="In Evidenza" theme="dark">
-      <AppCard v-for="n in 4"/>
+      <AppCard v-for="n in 4" />
     </AppMainSection>
 
     <AppMainSection title="Offriamo i servizi migliori" theme="dark">
@@ -59,7 +59,7 @@ export default {
 #jumbotron {
   height: 30rem;
   background-color: lightgray;
-  background-image: url('../assets/hero-bg.jpg');
+  background-image: url("../assets/hero-bg.jpg");
 
   background-size: cover;
   background-position: center;
@@ -76,7 +76,6 @@ export default {
   }
 
   .ms_overlay {
-    
     position: absolute;
     left: 0;
     top: 0;

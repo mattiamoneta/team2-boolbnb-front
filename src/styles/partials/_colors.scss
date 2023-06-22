@@ -9,45 +9,45 @@ $premium_color: #fcc419;
 //BG COLORS
 
 .ms-bg-light {
-    background-color: $main_color !important;
+  background-color: $main_color !important;
 }
-
 .ms-bg-light-gradient {
-    background-image: linear-gradient($main_color, transparent)!important;
+  background-image: linear-gradient($main_color, transparent) !important;
 }
-
-
 .ms-bg-dark {
-    background-color: $main_darker2_color !important;
+  background-color: $main_darker2_color !important;
 }
 .ms-bg-premium {
-    background-color: $premium_color !important;
+  background-color: $premium_color !important;
+}
+.ms-bg-black {
+  background-color: $black_text_color !important;
 }
 
 //text COLORS
 
 .ms_text_light {
-    color: $main_color !important;
+  color: $main_color !important;
 }
 .ms_text_main_darker {
-    color: $main_darker_color !important;
+  color: $main_darker_color !important;
 }
 .ms_light_gray_text {
-    color: $light_gray_color !important;
+  color: $light_gray_color !important;
 }
 .ms_black_text {
-    color: $black_text_color !important;
+  color: $black_text_color !important;
 }
 .ms_text_premium {
-    color: $premium_color !important;
+  color: $premium_color !important;
 }
 
-.ms_border_primary{
-    border: 1px solid $main_darker2_color!important;
+.ms_border_primary {
+  border: 1px solid $main_darker2_color !important;
 }
 
 .ms_svg_main_color {
-    width: 1.7rem;
-    filter: brightness(0) saturate(100%) invert(56%) sepia(39%) saturate(859%)
-        hue-rotate(140deg) brightness(81%) contrast(100%);
+  width: 1.7rem;
+  filter: brightness(0) saturate(100%) invert(56%) sepia(39%) saturate(859%)
+    hue-rotate(140deg) brightness(81%) contrast(100%);
 }
