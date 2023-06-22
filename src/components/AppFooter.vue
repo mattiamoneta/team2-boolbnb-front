@@ -134,6 +134,11 @@ export default {
       © 2023 Copyright: Boolbnb
     </div>
     <!-- Copyright -->
+
+    <!-- Scroll-Top -->
+    <button class="btn show" id="btnScrollTop">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
   </footer>
 </template>
 

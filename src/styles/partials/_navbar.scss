@@ -124,6 +124,7 @@ a.offcanvas-btn i{
 
 
 /* Fixed nav */
+
 .navbar-top-fix{
     margin-top: 72px;
   }
@@ -147,6 +148,8 @@ a.offcanvas-btn i{
   }
 
 
+
+
   /* Custom Menu */
 
   .navbar-toggler{
@@ -154,11 +157,27 @@ a.offcanvas-btn i{
   }
 
 
-  .ms-toggler.line-1,
-  .ms-toggler.line-2,
-  .ms-toggler.line-3{
-    background-color: black;
-    height: 3px;
-    width: 20px;
-    width: 100%;
+
+  .navbar-toggler .line-1,
+  .navbar-toggler .line-2,
+  .navbar-toggler .line-3{
+    background-color: $main_darker2_color;
+    width: 28px;
+    height: 4px;
+    margin: 6px 0px;
+    transition: opacity $transition_fast, transform $transition_fast, width $transition_fast;
+    border-radius: 5px;
+  }
+
+  .navbar-toggler:hover .line-1{
+    transform: translateY(10px) rotate(-180deg) ;
+    opacity: 0;
+  }
+
+  .navbar-toggler:hover .line-2{
+    transform: rotate(360deg) ;
+  }
+
+  .navbar-toggler:hover .line-3{
+    transform: translateY(-10px) rotate(270deg);
   }
