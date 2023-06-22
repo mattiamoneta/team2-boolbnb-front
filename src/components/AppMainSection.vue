@@ -28,7 +28,6 @@ export default {
             {{ title }}
           </h2>
         </div>
-      </div>
       <!-- End Title -->
 
       <!-- Component Row -->
