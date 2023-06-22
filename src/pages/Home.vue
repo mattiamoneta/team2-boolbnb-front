@@ -11,6 +11,8 @@ export default {
   components: {
     MainSearchbar,
     AppMainSection,
+    TheySaySection,
+    AppCard,
   },
   data() {
     return {
@@ -41,6 +43,10 @@ export default {
     <AppMainSection title="In Evidenza" theme="dark"> </AppMainSection>
 
     <AppMainSection title="Offriamo i servizi migliori" theme="dark">
+    </AppMainSection>
+
+    <AppMainSection title="Offriamo i servizi migliori">
+      <TheySaySection />
     </AppMainSection>
   </main>
 </template>
