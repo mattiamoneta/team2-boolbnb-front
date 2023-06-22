@@ -27,18 +27,16 @@
                 </h2>
             </div>
         </div>
-        <!-- End Title -->
+      </div>
+      <!-- End Title -->
 
-        <!-- Component Row -->
-        <div class="row">
-            <slot>
-            </slot>
-        </div>
-        <!-- End Row -->
+      <!-- Component Row -->
+      <div class="row">
+        <slot> </slot>
+      </div>
+      <!-- End Row -->
     </div>
   </section>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
