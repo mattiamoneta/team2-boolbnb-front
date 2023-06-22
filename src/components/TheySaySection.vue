@@ -11,19 +11,18 @@ export default {
   <!-- section they say -->
   <section id="they_say">
     <div class="container">
-      <h2 class="ms_section_title text-center">Dicono di noi</h2>
-      <div class="ms_magazine_logos d-flex justify-content-around">
-        <img src="img/dicono_di_noi/techcrunch.png" alt="Techcrunch logo" />
+      <div class="ms_magazine_logos d-flex justify-content-between">
+        <img src="../assets/they_say/techcrunch.png" alt="Techcrunch logo" />
         <img
-          src="./img/dicono_di_noi/business-insider.png"
+          src="../assets/they_say/business-insider.png"
           alt="Business Insider logo"
         />
         <img
-          src="img/dicono_di_noi/the-new-york-times.png"
+          src="../assets/they_say/the-new-york-times.png"
           alt="The New York Times logo"
         />
-        <img src="img/dicono_di_noi/forbes.png" alt="Forbes logo" />
-        <img src="img/dicono_di_noi/usa-today.png" alt="USA Today logo" />
+        <img src="../assets/they_say/forbes.png" alt="Forbes logo" />
+        <img src="../assets/they_say/usa-today.png" alt="USA Today logo" />
       </div>
     </div>
   </section>
@@ -31,4 +30,12 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/colors" as *;
+
+.ms_magazine_logos {
+  img {
+    max-height: 2rem;
+    filter: brightness(0);
+    opacity: 50%;
+  }
+}
 </style>

@@ -45,7 +45,7 @@ export default {
     <AppMainSection title="Offriamo i servizi migliori" theme="dark">
     </AppMainSection>
 
-    <AppMainSection title="Offriamo i servizi migliori">
+    <AppMainSection title="Dicono di noi" align="center">
       <TheySaySection />
     </AppMainSection>
   </main>
