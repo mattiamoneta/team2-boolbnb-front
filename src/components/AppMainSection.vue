@@ -8,7 +8,9 @@
         },
         props: {
             title: String,
+            align: String,
             theme: String
+
         }
 
     }
@@ -20,7 +22,7 @@
         <!-- Title -->
         <div class="row">
             <div class="col">   
-                <h2 class="ms_section_title font-semibold" :class="theme == 'dark' ? 'ms_border_dark' : ''">
+                <h2 class="ms_section_title font-semibold" :class="[theme == 'dark' ? 'ms_border_dark' : '', align == 'center' ? 'text-center' : '']" >
                     {{ title }}
                 </h2>
             </div>
