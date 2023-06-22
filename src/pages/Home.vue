@@ -5,6 +5,7 @@ import MainSearchbar from "../components/MainSearchbar.vue";
 import AppMainSection from "../components/AppMainSection.vue";
 import AppCard from "../components/AppCard.vue";
 import TheySaySection from "../components/TheySaySection.vue";
+import AppFeatureSection from "../components/AppFeatureSection.vue";
 
 export default {
   name: "TheHome",
@@ -13,6 +14,8 @@ export default {
     AppMainSection,
     TheySaySection,
     AppCard,
+    AppFeatureSection
+    
   },
   data() {
     return {
@@ -44,8 +47,9 @@ export default {
       <AppCard v-for="n in 4" />
     </AppMainSection>
 
-    <AppMainSection title="Offriamo i servizi migliori" theme="dark">
-    </AppMainSection>
+    <div class="container-fluid ms-bg-light">
+      <AppFeatureSection/>
+    </div>
 
     <AppMainSection title="Dicono di noi" align="center">
       <TheySaySection />

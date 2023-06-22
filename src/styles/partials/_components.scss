@@ -291,6 +291,42 @@ label.card-radio {
 }
 
 
+/* Scroll-Top Button */
+
+#btnScrollTop{
+    opacity: 0;
+    position: fixed;
+    right: 40px;
+    bottom: -60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    transition: transform $transition_fast, opacity $transition_fast, border $transition_fast;
+    background-color: $main_darker2_color;
+    border: 1px solid $main_darker2_color;
+
+}
+
+#btnScrollTop i{
+    transition: transform $transition_fast;
+    color: white;
+}
+
+#btnScrollTop:hover{
+  border: 1px solid $main_color;
+}
+
+#btnScrollTop:hover i{
+    transform: translateY(-10px);
+}
+
+#btnScrollTop.show{
+    opacity: 1;
+    transform: translateY(-100px);
+
+
+}
+
 //OTHER
 
 

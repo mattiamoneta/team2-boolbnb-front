@@ -3,11 +3,8 @@
         name: 'AppHeader',
         data(){
             return{
-
+             
             }
-        },
-        methods: {
-
         }
     }
 </script>
@@ -20,9 +17,9 @@
             <a class="navbar-brand fw-bolder ms_text_main_darker" href="#">Boolbnb</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <div class="ms-toggler line-1"></div>
-                <div class="ms-toggler line-2"></div>
-                <div class="ms-toggler line-3"></div>
+                <div class="line-1"></div>
+                <div class="line-2"></div>
+                <div class="line-3"></div>
             </button>
 
             <div class="offcanvas offcanvas-end z-foreground" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
