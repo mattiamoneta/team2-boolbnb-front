@@ -20,10 +20,12 @@
             <a class="navbar-brand fw-bolder ms_text_main_darker" href="#">Boolbnb</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <div class="ms-toggler line-1"></div>
+                <div class="ms-toggler line-2"></div>
+                <div class="ms-toggler line-3"></div>
             </button>
 
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end z-foreground" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title font-secondary" id="offcanvasNavbarLabel">Menu</h5>
