@@ -3,12 +3,14 @@ import { store } from "../store";
 
 import MainSearchbar from "../components/MainSearchbar.vue";
 import AppMainSection from "../components/AppMainSection.vue";
+import AppCard from "../components/AppCard.vue";
 
 export default {
   name: "TheHome",
   components: {
     MainSearchbar,
-    AppMainSection
+    AppMainSection,
+    AppCard
   },
   data() {
     return {
@@ -36,13 +38,19 @@ export default {
 
     <div class="searchbar-fix"></div>
 
+    <!-- In Evidenza -->
     <AppMainSection title="In Evidenza" theme="dark">
-        
-    </AppMainSection>
+      
+      <AppCard />
 
+    </AppMainSection>
+    <!-- End In Evidenza -->
+
+    <!-- Servizi -->
     <AppMainSection title="Offriamo i servizi migliori" theme="dark">
         
-      </AppMainSection>
+    </AppMainSection>
+    <!-- End Servizi -->
   
 
   </main>
