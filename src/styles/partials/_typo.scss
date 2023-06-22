@@ -2,11 +2,13 @@
 $font-serif: "Lora", serif;
 $font-sans-serif: "Montserrat", sans-serif;
 
+
 *,
 html,
 
 body{
     font-family: $font-sans-serif;
+    text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3,

@@ -3,6 +3,10 @@
 
 /* NAVBAR */
 
+.nav-link.small-link{
+    font-size: .9rem!important;
+}
+
 .nav-link.user-dropdown{
     border: 1px solid rgb(228, 228, 228);
     border-radius: 25px;
@@ -67,3 +71,4 @@ a.offcanvas-btn{
 a.offcanvas-btn i{
     font-weight: 2rem!important;
 }
+
