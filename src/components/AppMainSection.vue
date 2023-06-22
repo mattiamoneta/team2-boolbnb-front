@@ -27,7 +27,6 @@
                 </h2>
             </div>
         </div>
-      </div>
       <!-- End Title -->
 
       <!-- Component Row -->
