@@ -16,6 +16,11 @@ const router = createRouter({
       name: 'search',
       component: ApartmentsList,
       props: true
+    },{
+      path: '/apartment',
+      name: 'apartment',
+      component: ApartmentCard,
+      props: true
     }
 
   ],

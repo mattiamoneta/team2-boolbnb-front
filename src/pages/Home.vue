@@ -20,13 +20,22 @@ export default {
   data() {
     return {
       store,
-    };
+      scrollPos: 0
+    }
   },
+    methods:{
+        handleScroll(){
+            this.scrollPos = window.scrollY;
+        }
+    },
+    created(){
+        window.addEventListener('scroll', this.handleScroll);
+    }
 };
 </script>
 
 <template>
-  <main>
+  <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
     <!-- jumbotron -->
     <div id="jumbotron" class="p-5">
       <div class="ms_overlay">
