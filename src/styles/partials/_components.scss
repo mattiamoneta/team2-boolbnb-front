@@ -350,9 +350,11 @@ label.card-radio {
 
 /* Apartments Search Results */
 
-.apartment-card {
-  max-height: 260px !important;
-}
+  .fixed-box{
+    position: relative;
+    height: 80vh;
+    overflow-y: auto!important;
+  }
 
 .fixed-box {
   position: relative;
