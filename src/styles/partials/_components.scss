@@ -360,9 +360,14 @@ label.card-radio {
 
 
   .fixed-box{
+    position: relative;
     height: 60vh;
     overflow-y: auto!important;
   }
+
+
   //OTHER
 
-
+iframe{
+    border: 0!important;
+}
