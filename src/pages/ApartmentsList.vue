@@ -22,11 +22,11 @@ export default {
   }, mounted() {
     console.log(this.$route.query.indirizzo);
     const selectedAddress = this.$route.query.indirizzo;
-    if (this.$route.query.indirizzo != "") {
-      fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)
+    if (selectedAddress != "") {
+      fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)//cerca i dati (quindi anche lat e long) dell'indirizzo passato dall'input della home
         .then(response => response.json())
         .then(data => {
-          if (data && data.results && data.results.length > 0) {
+          if (data && data.results && data.results.length > 0) { //se sono stati trovati dei risultati
             const latitude = data.results[0].position.lat;
             const longitude = data.results[0].position.lon;
 
@@ -68,22 +68,24 @@ export default {
       <ApartmentsSearchBar />
     </div>
     <!-- End Search Bar -->
-   
-   
-      <div class="row">
+
+
+    <div class="row">
       <!-- Results -->
       <div class="col-12 col-lg-5">
         <div class="fixed-box pe-4 py-3">
-        <ApartmentResultCard v-for="i in 5" />
+          <ApartmentResultCard v-for="i in 5" />
         </div>
       </div>
       <!-- End Results -->
 
       <!-- Map -->
       <div class="col-7 max-fixed d-none d-lg-block">
-          
+
         <div class="card  d-block rounded-4 overflow-hidden border-1 h-100">
-          <iframe class="map-frame" width="100%" height="100%" frameBorder="0" src="https://www.openstreetmap.org/export/embed.html?bbox=9.02132034301758%2C45.41267141842337%2C9.357776641845705%2C45.51693278828882&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+          <iframe class="map-frame" width="100%" height="100%" frameBorder="0"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=9.02132034301758%2C45.41267141842337%2C9.357776641845705%2C45.51693278828882&amp;layer=mapnik"
+            style="border: 1px solid black"></iframe>
         </div>
       </div>
       <!-- End Map -->
