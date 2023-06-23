@@ -27,11 +27,9 @@ export default {
     <div class="row mt-4">
       <div class="col">
         <h2 class="ms_section_title font-semibold">
-          Risultati per "
-          <span class="font-primary fw-bolder ms_text_main_darker"
+          Risultati per "<span class="font-primary fw-bolder ms_text_main_darker"
             >Lorem ipsum</span
-          >
-          "
+          >"
         </h2>
       </div>
     </div>

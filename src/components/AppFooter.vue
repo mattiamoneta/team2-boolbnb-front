@@ -2,9 +2,27 @@
 export default {
   name: "AppFooter",
   data() {
-    return {};
+    return {
+      scrollPos : 0,
+      endPagePos: 0
+    }
   },
-  methods: {},
+  methods:{
+          handleScroll(){
+            this.scrollPos = window.scrollY;
+            this.endPagePos = document.body.scrollHeight - window.innerHeight;
+          },
+          pageScrollTop(){
+              window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+          });
+          }
+  },
+  created(){
+      window.addEventListener('scroll', this.handleScroll);
+  }
+
 };
 </script>
 
@@ -136,7 +154,7 @@ export default {
     <!-- Copyright -->
 
     <!-- Scroll-Top -->
-    <button class="btn show" id="btnScrollTop">
+    <button class="btn" :class="scrollPos >= endPagePos ? 'show' : ''" id="btnScrollTop" @click="pageScrollTop()">
       <i class="fa-solid fa-arrow-up"></i>
     </button>
   </footer>

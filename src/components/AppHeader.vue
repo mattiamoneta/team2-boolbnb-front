@@ -3,8 +3,16 @@
         name: 'AppHeader',
         data(){
             return{
-             
+                scrollPos : 0
             }
+        },
+        methods:{
+            handleScroll(){
+                this.scrollPos = window.scrollY;
+            }
+        },
+        created(){
+            window.addEventListener('scroll', this.handleScroll);
         }
     }
 </script>
@@ -12,7 +20,7 @@
 <template>
    <header>
      <!-- Navbar -->
-     <nav class="navbar navbar-expand-lg ms-bg-light-gradient py-lg-0">
+     <nav class="navbar navbar-expand-lg ms-bg-light-gradient py-lg-0" :class="scrollPos > 230 ? 'fixed-top navbar-float-animation' : ''">
         <div class="container">
             <a class="navbar-brand fw-bolder ms_text_main_darker" href="#">Boolbnb</a>
 
