@@ -14,22 +14,23 @@ export default {
   data() {
     return {
       store,
-      scrollPos:0
+      scrollPos:0,
+      retApartmnets: {}
     };
   },
-    methods:{
-        handleScroll(){
-            this.scrollPos = window.scrollY;
-        }
-    },
-    created(){
-        window.addEventListener('scroll', this.handleScroll);
-    },
-  components: {
+  methods:{
+      handleScroll(){
+          this.scrollPos = window.scrollY;
+      }
+  },
+  created(){
+      window.addEventListener('scroll', this.handleScroll);
+  },
+   components: {
     ApartmentResultCard,
     ApartmentsSearchBar,
   }, mounted() {
-    console.log(this.$route.query.indirizzo);
+    // console.log(this.$route.query.indirizzo);
     const selectedAddress = this.$route.query.indirizzo;
     if (this.$route.query.indirizzo != "") {
       fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)
@@ -42,8 +43,9 @@ export default {
             axios.get(`${this.store.baseUrl}/api/apartments`)
               .then(response => {
                 const apartments = response.data.results; //tutti gli appartamenti del DB
-                console.log(apartments);
-                console.log("lat: " + latitude + ",lon: " + longitude);
+                this.retApartmnets = response.data.results;
+                // console.log(apartments);
+                // console.log("lat: " + latitude + ",lon: " + longitude);
               })
               .catch(error => {
                 console.error(error);
@@ -65,9 +67,13 @@ export default {
     <div class="row mt-4">
       <div class="col">
         <h2 class="ms_section_title font-semibold">
-          Risultati per "<span class="font-primary fw-bolder ms_text_main_darker"
-            >Lorem ipsum</span
-          >"
+          Risultati per <span>&#34;</span>
+          <span class="font-primary fw-bolder ms_text_main_darker" v-if="this.$route.query.indirizzo != null">
+            {{ this.$route.query.indirizzo }}
+          </span>
+          <span class="font-primary fw-bolder ms_text_main_darker" v-else>
+            Nessun Risultato
+          </span><span>&#34;</span>
         </h2>
       </div>
     </div>
@@ -75,16 +81,16 @@ export default {
     <!-- Search Bar -->
     <div class="row">
       <!-- !!!SEARCH BAR QUI!!! -->
-      <ApartmentsSearchBar />
+      <ApartmentsSearchBar/>
     </div>
     <!-- End Search Bar -->
    
    
-      <div class="row">
+      <div class="row" v-if="this.$route.query.indirizzo != null">
       <!-- Results -->
       <div class="col-12 col-lg-5">
         <div class="fixed-box pe-4 py-3">
-        <ApartmentResultCard v-for="i in 5" />
+          <ApartmentResultCard v-for="singleApartment in retApartmnets.data" :objApartment="singleApartment"/>
         </div>
       </div>
       <!-- End Results -->
@@ -97,6 +103,14 @@ export default {
         </div>
       </div>
       <!-- End Map -->
+    </div>
+
+    <div class="row py-5 text-center" v-else>
+         <div class="col-6 mx-auto my-5">
+            <h4 class="fw-bolder fw-secondary text-muted mb-4">:(</h4>
+            <h4 class="fw-semibold">Nessun risultato</h4>
+            <p class="small">Sembra che non siano stati trovati appartamenti disponibili. Prova con una zona o un periodo di soggiorno differente.</p>
+         </div>
     </div>
 
 
