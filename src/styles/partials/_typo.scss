@@ -10,6 +10,7 @@ body {
   font-family: $font-sans-serif;
   text-rendering: optimizeLegibility;
   color: $black_text_color;
+  scroll-behavior: smooth;
 }
 
 h1,
@@ -47,3 +48,9 @@ h6 {
 .ms_section_title.ms_border_dark {
   border-bottom: 1px solid #868e96;
 }
+
+
+.xsmall{
+  font-size: .7rem;
+}
+

@@ -121,3 +121,64 @@ a.offcanvas-btn i{
     font-weight: 2rem!important;
 }
 
+
+
+/* Fixed nav */
+
+  .navbar-top-fix{
+      padding-top: 72px!important;
+    }
+  
+  .navbar-float-animation{
+    animation: navbar-slide-in .3s ease;
+    background-color: rgba(white, .7)!important;
+    backdrop-filter: blur(3px);
+    -webkit-box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.18); 
+    box-shadow: 0px 5px 15px 5px rgba(0,0,0,0.05);
+  }
+  
+  @keyframes navbar-slide-in {
+    0%{
+      top: -72px;
+    }
+  
+    100%{
+      top: 0px;
+    }
+  }
+
+
+
+
+  /* Custom Menu */
+
+  .navbar-toggler{
+    border: none!important;
+  }
+
+
+
+  .navbar-toggler .line-1,
+  .navbar-toggler .line-2,
+  .navbar-toggler .line-3{
+    background-color: $main_darker2_color;
+    width: 28px;
+    height: 4px;
+    margin: 6px 0px;
+    transition: opacity $transition_fast, transform $transition_fast, width $transition_fast;
+    border-radius: 5px;
+  }
+
+  .navbar-toggler:hover .line-1{
+    transform: translateY(10px) rotate(-180deg) ;
+    opacity: 0;
+  }
+
+  .navbar-toggler:hover .line-2{
+    transform: rotate(360deg) ;
+  }
+
+  .navbar-toggler:hover .line-3{
+    transform: translateY(-10px) rotate(270deg);
+  }
+

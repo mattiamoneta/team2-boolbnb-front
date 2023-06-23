@@ -4,13 +4,18 @@ import { store } from "../store";
 import MainSearchbar from "../components/MainSearchbar.vue";
 import AppMainSection from "../components/AppMainSection.vue";
 import AppCard from "../components/AppCard.vue";
+import TheySaySection from "../components/TheySaySection.vue";
+import AppFeatureSection from "../components/AppFeatureSection.vue";
 
 export default {
   name: "TheHome",
   components: {
     MainSearchbar,
     AppMainSection,
-    AppCard
+    TheySaySection,
+    AppCard,
+    AppFeatureSection
+    
   },
   data() {
     return {
@@ -38,21 +43,17 @@ export default {
 
     <div class="searchbar-fix"></div>
 
-    <!-- In Evidenza -->
     <AppMainSection title="In Evidenza" theme="dark">
-      
-      <AppCard />
-
+      <AppCard v-for="n in 4" />
     </AppMainSection>
-    <!-- End In Evidenza -->
 
-    <!-- Servizi -->
-    <AppMainSection title="Offriamo i servizi migliori" theme="dark">
-        
+    <div class="container-fluid ms-bg-light">
+      <AppFeatureSection/>
+    </div>
+
+    <AppMainSection title="Dicono di noi" align="center">
+      <TheySaySection />
     </AppMainSection>
-    <!-- End Servizi -->
-  
-
   </main>
 </template>
 
@@ -62,6 +63,8 @@ export default {
 #jumbotron {
   height: 30rem;
   background-color: lightgray;
+  background-image: url("../assets/hero-bg.jpg");
+
   background-size: cover;
   background-position: center;
   position: relative;

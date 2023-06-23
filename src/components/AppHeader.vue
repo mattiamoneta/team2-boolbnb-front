@@ -3,11 +3,16 @@
         name: 'AppHeader',
         data(){
             return{
-
+                scrollPos : 0
             }
         },
-        methods: {
-
+        methods:{
+            handleScroll(){
+                this.scrollPos = window.scrollY;
+            }
+        },
+        created(){
+            window.addEventListener('scroll', this.handleScroll);
         }
     }
 </script>
@@ -15,15 +20,17 @@
 <template>
    <header>
      <!-- Navbar -->
-     <nav class="navbar navbar-expand-lg ms-bg-light-gradient py-lg-0">
+     <nav class="navbar navbar-expand-lg ms-bg-light-gradient py-lg-0" :class="scrollPos > 230 ? 'fixed-top navbar-float-animation' : ''">
         <div class="container">
             <a class="navbar-brand fw-bolder ms_text_main_darker" href="#">Boolbnb</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <div class="line-1"></div>
+                <div class="line-2"></div>
+                <div class="line-3"></div>
             </button>
 
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end z-foreground" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title font-secondary" id="offcanvasNavbarLabel">Menu</h5>
@@ -34,7 +41,7 @@
                     
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item mx-lg-3">
-                            <a class="ms-nav-link py-4" aria-current="page" href="#">Chi Siamo</a>
+                            <a class="ms-nav-link py-4" aria-current="page" href="#" :to="{ name: 'search' }">Chi Siamo</a>
                         </li>
                         <li class="nav-item mx-lg-3">
                             <a class="ms-nav-link py-4" aria-current="page" href="#">Supporto</a>
