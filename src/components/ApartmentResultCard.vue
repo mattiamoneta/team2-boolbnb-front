@@ -44,7 +44,7 @@
             
         },
         props: {
-            objApartment: Array
+            objApartment: Object
         }
     }
 </script>
