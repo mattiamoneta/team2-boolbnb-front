@@ -8,12 +8,13 @@ export default {
       store,
       address: '',
       suggestions: [],
+      suggestionNumber: 6
     };
   },
   methods: {
     handleInput() {
       if (this.address.length > 2) {
-        fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(this.address)}.json?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH&language=it-IT`)
+        fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(this.address)}.json?key=${this.store.apiKey}&language=it-IT&limit=${this.suggestionNumber}`)
           .then(response => response.json())
           .then(data => {
             this.suggestions = data.results;
@@ -28,18 +29,18 @@ export default {
     selectAddress(suggestion) {
       this.address = suggestion.address.freeformAddress;
       this.suggestions = [];
-    }, submitForm() {
+    },
+    submitForm() {
       const selectedAddress = this.address;
-      const apiKey = "ZPskuspkrrcmchd9ut4twltuw96h5bWH";
 
-      fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${apiKey}`)
+      fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)
         .then(response => response.json())
         .then(data => {
           if (data && data.results && data.results.length > 0) {
             const latitude = data.results[0].position.lat;
             const longitude = data.results[0].position.lon;
 
-            axios.get('http://localhost:8000/api/apartments')
+            axios.get(`${this.store.baseUrl}/api/apartments`)
               .then(response => {
                 const apartments = response.data.results; //tutti gli appartamenti del DB
                 console.log(apartments);
