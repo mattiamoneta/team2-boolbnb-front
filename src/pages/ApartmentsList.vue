@@ -1,15 +1,15 @@
 <script>
-import MainSearchbar from "../components/MainSearchbar.vue";
+import AppSearchBar from "../components/AppSearchBar.vue";
 import AppMainSection from "../components/AppMainSection.vue";
 import AppCard from "../components/AppCard.vue";
 import TheySaySection from "../components/TheySaySection.vue";
 import AppFeatureSection from "../components/AppFeatureSection.vue";
 import ApartmentResultCard from "../components/ApartmentResultCard.vue";
-import ApartmentsSearchBar from "../components/ApartmentsSearchBar.vue";
 
 import { store } from "../store";
 import axios from 'axios';
 export default {
+
   name: "ApartmentsList",
   data() {
     return {
@@ -21,41 +21,47 @@ export default {
   methods:{
       handleScroll(){
           this.scrollPos = window.scrollY;
+      },
+
+      onLoadSearch(){
+              const urlQueryAddress = this.$route.query.indirizzo;
+
+              if (urlQueryAddress != "") {
+                fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(urlQueryAddress)}.json?key=${this.store.apiKey}`)//cerca i dati (quindi anche lat e long) dell'indirizzo passato dall'input della home
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data && data.results && data.results.length > 0) { //se sono stati trovati dei risultati
+                      const latitude = data.results[0].position.lat;
+                      const longitude = data.results[0].position.lon;
+
+                      axios.get(`${this.store.baseUrl}/api/apartments`)
+                        .then(response => {
+                          const apartments = response.data.results; //tutti gli appartamenti del DB
+                          this.retApartmnets = response.data.results;
+
+                          this.store.searchResults = response.data.results.data;
+
+                        })
+                        .catch(error => {
+                          console.error(error);
+                        });
+                    }
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+              }
       }
   },
   created(){
       window.addEventListener('scroll', this.handleScroll);
   },
+  mounted(){
+    this.onLoadSearch();
+  },  
    components: {
     ApartmentResultCard,
-    ApartmentsSearchBar,
-  }, mounted() {
-    // console.log(this.$route.query.indirizzo);
-    const selectedAddress = this.$route.query.indirizzo;
-    if (selectedAddress != "") {
-      fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)//cerca i dati (quindi anche lat e long) dell'indirizzo passato dall'input della home
-        .then(response => response.json())
-        .then(data => {
-          if (data && data.results && data.results.length > 0) { //se sono stati trovati dei risultati
-            const latitude = data.results[0].position.lat;
-            const longitude = data.results[0].position.lon;
-
-            axios.get(`${this.store.baseUrl}/api/apartments`)
-              .then(response => {
-                const apartments = response.data.results; //tutti gli appartamenti del DB
-                this.retApartmnets = response.data.results;
-                // console.log(apartments);
-                // console.log("lat: " + latitude + ",lon: " + longitude);
-              })
-              .catch(error => {
-                console.error(error);
-              });
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
+    AppSearchBar
   }
 
 };
@@ -81,7 +87,11 @@ export default {
     <!-- Search Bar -->
     <div class="row">
       <!-- !!!SEARCH BAR QUI!!! -->
-      <ApartmentsSearchBar/>
+        <div class="col-12">
+          <div class="card card-tile d-block rounded-4 mb-4 apartment-card p-2 ps-3">
+            <AppSearchBar/>
+          </div>
+        </div>
     </div>
     <!-- End Search Bar -->
    
@@ -90,7 +100,8 @@ export default {
       <!-- Results -->
       <div class="col-12 col-lg-5">
         <div class="fixed-box pe-4 py-3">
-          <ApartmentResultCard v-for="singleApartment in retApartmnets.data" :objApartment="singleApartment"/>
+          <!-- <ApartmentResultCard v-for="singleApartment in retApartmnets.data" :objApartment="singleApartment"/> -->
+          <ApartmentResultCard v-for="singleApartment in store.searchResults" :objApartment="singleApartment"/>
         </div>
       </div>
       <!-- End Results -->

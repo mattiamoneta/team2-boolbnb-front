@@ -1,7 +1,7 @@
 <script>
 import { store } from "../store";
 
-import MainSearchbar from "../components/MainSearchbar.vue";
+import AppSearchBar from "../components/AppSearchBar.vue";
 import AppMainSection from "../components/AppMainSection.vue";
 import AppCard from "../components/AppCard.vue";
 import TheySaySection from "../components/TheySaySection.vue";
@@ -10,7 +10,7 @@ import AppFeatureSection from "../components/AppFeatureSection.vue";
 export default {
   name: "TheHome",
   components: {
-    MainSearchbar,
+    AppSearchBar,
     AppMainSection,
     TheySaySection,
     AppCard,
@@ -48,7 +48,19 @@ export default {
       </div>
     </div>
 
-    <MainSearchbar />
+    <!-- Search Bar -->
+  <div class="position-relative">
+    <div class="container p-3 rounded-4 bg-white position-absolute top-0 start-50 translate-middle">
+
+      <div class="rounded-3 ps-3 border w-100">
+          <AppSearchBar />
+      </div>
+      
+    </div>
+  </div>
+    <!-- End Search Bar -->
+
+
 
     <div class="searchbar-fix"></div>
 
