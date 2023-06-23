@@ -8,6 +8,7 @@ import ApartmentResultCard from "../components/ApartmentResultCard.vue";
 import ApartmentsSearchBar from "../components/ApartmentsSearchBar.vue";
 
 import { store } from "../store";
+import axios from 'axios';
 export default {
   name: "ApartmentsList",
   data() {
@@ -18,7 +19,34 @@ export default {
   components: {
     ApartmentResultCard,
     ApartmentsSearchBar,
-  },
+  }, mounted() {
+    console.log(this.$route.query.indirizzo);
+    const selectedAddress = this.$route.query.indirizzo;
+    if (this.$route.query.indirizzo != "") {
+      fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.results && data.results.length > 0) {
+            const latitude = data.results[0].position.lat;
+            const longitude = data.results[0].position.lon;
+
+            axios.get(`${this.store.baseUrl}/api/apartments`)
+              .then(response => {
+                const apartments = response.data.results; //tutti gli appartamenti del DB
+                console.log(apartments);
+                console.log("lat: " + latitude + ",lon: " + longitude);
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }
+
 };
 </script>
 
@@ -28,9 +56,7 @@ export default {
       <div class="col">
         <h2 class="ms_section_title font-semibold">
           Risultati per "
-          <span class="font-primary fw-bolder ms_text_main_darker"
-            >Lorem ipsum</span
-          >
+          <span class="font-primary fw-bolder ms_text_main_darker">Lorem ipsum</span>
           "
         </h2>
       </div>
