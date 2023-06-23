@@ -243,6 +243,11 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    performSearch(){
+      
+    }
+  }
 };
 </script>
 
