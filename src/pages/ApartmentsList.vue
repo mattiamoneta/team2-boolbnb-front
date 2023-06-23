@@ -18,19 +18,21 @@ export default {
   components: {
     ApartmentResultCard,
     ApartmentsSearchBar,
-  },
+  }, mounted() {
+    console.log(this.$route.params.indirizzo);
+  }
+
 };
 </script>
 
 <template>
+  <h1>{{ this.$route.params.indirizzo }}</h1>
   <div class="container py-5">
     <div class="row mt-4">
       <div class="col">
         <h2 class="ms_section_title font-semibold">
           Risultati per "
-          <span class="font-primary fw-bolder ms_text_main_darker"
-            >Lorem ipsum</span
-          >
+          <span class="font-primary fw-bolder ms_text_main_darker">Lorem ipsum</span>
           "
         </h2>
       </div>
