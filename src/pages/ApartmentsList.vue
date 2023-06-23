@@ -14,8 +14,17 @@ export default {
   data() {
     return {
       store,
+      scrollPos:0
     };
   },
+    methods:{
+        handleScroll(){
+            this.scrollPos = window.scrollY;
+        }
+    },
+    created(){
+        window.addEventListener('scroll', this.handleScroll);
+    },
   components: {
     ApartmentResultCard,
     ApartmentsSearchBar,
@@ -51,7 +60,8 @@ export default {
 </script>
 
 <template>
-  <div class="container py-5">
+  <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
+    <div class="container py-5">
     <div class="row mt-4">
       <div class="col">
         <h2 class="ms_section_title font-semibold">
@@ -93,6 +103,7 @@ export default {
 
 
   </div>
+  </main>
 </template>
 
 <style lang="scss" scoped></style>

@@ -112,6 +112,7 @@
     font-size: 1.5rem;
 }
 
+
 .btn.ms-btn::after {
 
     font-family: "Font Awesome 5 Free";
@@ -370,4 +371,19 @@ label.card-radio {
 
 iframe{
     border: 0!important;
+}
+
+
+.underlined{
+    position: relative;
+}
+
+input.underlined:focus::after{
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 10px;
+    height: 30px;
+    width: 90%;
+    background-color: red;
 }
