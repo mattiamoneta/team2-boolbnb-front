@@ -4,7 +4,7 @@
 /* CONTROLS */
 
 .card-tile {
-    transition: transform $transition_fast, box-shadow $transition_fast;
+  transition: transform $transition_fast, box-shadow $transition_fast;
 }
 
 // .card-tile:hover {
@@ -15,79 +15,79 @@
 // }
 
 .card-tile.drop-shadow-sm:hover {
-    -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-    cursor: pointer;
+  -webkit-box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 .card-tile.drop-shadow-md:hover {
-    -webkit-box-shadow: 0px 4px 15px 6px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 4px 15px 6px rgba(0, 0, 0, 0.1);
-    transform: translateY(-3px);
-    cursor: pointer;
+  -webkit-box-shadow: 0px 4px 15px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 15px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  cursor: pointer;
 }
 
 .card-tile.drop-shadow-lg:hover {
-    -webkit-box-shadow: 0px 4px 15px 9px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 4px 15px 9px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-    cursor: pointer;
+  -webkit-box-shadow: 0px 4px 15px 9px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 15px 9px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  cursor: pointer;
 }
 
 .card-tile:hover .rounded-icon.animated i {
-    transform: translateX(-50px);
+  transform: translateX(-50px);
 }
 
 .card-tile:hover .rounded-icon.animated::after {
-    transform: translateX(-50px);
+  transform: translateX(-50px);
 }
 
 /* Icons */
 
 .rounded-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    font-size: 1.5rem;
-    color: white;
-    transition: transform $transition_fast;
-    overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  color: white;
+  transition: transform $transition_fast;
+  overflow: hidden;
 }
 
 .rounded-icon i {
-    transition: transform $transition_fast;
+  transition: transform $transition_fast;
 }
 
 .rounded-icon.animated::after {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f054";
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    top: 0;
-    right: -50px;
-    transition: transform $transition_fast;
-    font-size: 0.8rem;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f054";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  top: 0;
+  right: -50px;
+  transition: transform $transition_fast;
+  font-size: 0.8rem;
 }
 
 .ms_premium_icon {
-    height: 2rem;
-    width: 2rem;
-    border-radius: 0.5rem;
-    background-color: $premium_color;
-    text-align: center;
-    line-height: 2rem;
-    color: $black_text_color;
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.5rem;
+  background-color: $premium_color;
+  text-align: center;
+  line-height: 2rem;
+  color: $black_text_color;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
 }
 
 /* Buttons */
@@ -97,280 +97,273 @@
 */
 
 .btn.ms-btn {
-    position: relative;
-    transition: padding $transition_fast, background-color $transition_fast, box-shadow $transition_fast,  color $transition_fast;
-    overflow: hidden;
+  position: relative;
+  transition: padding $transition_fast, background-color $transition_fast,
+    box-shadow $transition_fast, color $transition_fast;
+  overflow: hidden;
 }
 
 .btn.ms-btn-sm {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 .btn.ms-btn-md {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 .btn.ms-btn-lg {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 
 .btn.ms-btn::after {
-
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f054";
-    position: absolute;
-    top: auto;
-    right: -20px;
-    transition: transform $transition_fast;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f054";
+  position: absolute;
+  top: auto;
+  right: -20px;
+  transition: transform $transition_fast;
 }
 
 .btn.ms-btn:hover:after {
-    right:  10px;
+  right: 10px;
 }
 
 .btn.ms-btn:hover {
-    -webkit-box-shadow: 0px 2px 15px -6px $main_darker2_color;
-    box-shadow: 0px 2px 15px -6px $main_darker2_color;
-    background-color: #fff;
-    border: 1px solid $main_darker2_color;
-    color: $main_darker2_color;
-    padding-right: 30px !important;
+  -webkit-box-shadow: 0px 2px 15px -6px $main_darker2_color;
+  box-shadow: 0px 2px 15px -6px $main_darker2_color;
+  background-color: #fff;
+  border: 1px solid $main_darker2_color;
+  color: $main_darker2_color;
+  padding-right: 30px !important;
 }
 
 /* Blue Outline */
 
 .btn.ms-btn-outline-primary {
-    background-color: transparent;
-    border: 1px solid $main_darker_color;
-    color: $main_darker_color;
+  background-color: transparent;
+  border: 1px solid $main_darker_color;
+  color: $main_darker_color;
 }
 
 .btn.ms-btn-outline-primary:hover {
-    background-color: $main_darker2_color;
-    border: 1px solid $main_darker2_color;
-    color: white;
+  background-color: $main_darker2_color;
+  border: 1px solid $main_darker2_color;
+  color: white;
 }
 
 /* Black Outline */
 
 .btn.ms-btn-outline-black {
-    background-color: transparent;
-    border: 1px solid $black_text_color;
-    color: $black_text_color;
+  background-color: transparent;
+  border: 1px solid $black_text_color;
+  color: $black_text_color;
 }
 
 .btn.ms-btn-outline-black:hover {
-    background-color: $black_text_color;
-    border: 1px solid $black_text_color;
-    color: white!important;
+  background-color: $black_text_color;
+  border: 1px solid $black_text_color;
+  color: white !important;
 }
 
 /* Blue Button */
 
 .btn.ms-btn-primary {
-    background-color: $main_darker2_color;
-    border: 1px solid $main_darker_color;
-    color: white;
+  background-color: $main_darker2_color;
+  border: 1px solid $main_darker_color;
+  color: white;
 }
 
 .btn.ms-btn-primary:hover {
-    background-color: transparent;
-    border: 1px solid $main_darker2_color;
-    color: $main_darker2_color;
+  background-color: transparent;
+  border: 1px solid $main_darker2_color;
+  color: $main_darker2_color;
 }
 
 /* Yellow Button */
 
 .btn.ms-btn-premium {
-    border: 1px solid $premium_color;
-    background-color: $premium_color;
-    color: $black_text_color;
+  border: 1px solid $premium_color;
+  background-color: $premium_color;
+  color: $black_text_color;
 }
 
 /* Button Textual */
 
 .btn.ms-btn-textual-primary {
-    position: relative;
-    overflow: hidden;
-    color: white;
-    text-decoration: none;
-    font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
 .btn.ms-btn-textual-primary.arrow::after {
-    position: absolute;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f054";
-    right: -20px;
-    height: 20px;
-    width: 20px;
-    transition: transform $transition_fast, opacity $transition_fast, right $transition_fast;
-    opacity: 0;
+  position: absolute;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f054";
+  right: -20px;
+  height: 20px;
+  width: 20px;
+  transition: transform $transition_fast, opacity $transition_fast,
+    right $transition_fast;
+  opacity: 0;
 }
 
 .btn.ms-btn-textual-primary:hover {
-    background-color: $main_darker_color;
-    color: white;
+  background-color: $main_darker_color;
+  color: white;
 }
 
 .btn.ms-btn-textual-primary:hover.arrow::after {
-    right: 0px;
-    opacity: 1;
+  right: 0px;
+  opacity: 1;
 }
 
-
-.btn.ms-btn-textual-primary.active{
-    background-color: $main_darker_color;
-    border: 1px solid $main_darker_color;
-    color: white;
+.btn.ms-btn-textual-primary.active {
+  background-color: $main_darker_color;
+  border: 1px solid $main_darker_color;
+  color: white;
 }
 
 //CARD MESSAGE YELLOW INFO
 
 .ms_speech {
-    color: $black_text_color;
-    font-weight: 600;
-    text-align: center;
-    font-size: 0.8rem;
-    background: $premium_color;
-    position: relative;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    max-width: 300px;
-    transition: all 0.3s ease;
+  color: $black_text_color;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.8rem;
+  background: $premium_color;
+  position: relative;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  max-width: 300px;
+  transition: all 0.3s ease;
 }
 
 .ms_speech::after {
-    content: "";
-    border: 15px solid transparent;
-    position: absolute;
+  content: "";
+  border: 15px solid transparent;
+  position: absolute;
 }
 
 .ms_bottom.ms_speech::after {
-    //freccina giù
-    border-top-color: $premium_color;
-    border-bottom: 0;
+  //freccina giù
+  border-top-color: $premium_color;
+  border-bottom: 0;
 
-    bottom: -10px;
-    left: 80%;
-    margin-left: -20px;
+  bottom: -10px;
+  left: 80%;
+  margin-left: -20px;
 }
 
-
 /* Sponsorship Page */
-.sponsorship-middle-badge{
-    font-size: 1rem;
+.sponsorship-middle-badge {
+  font-size: 1rem;
 }
 
 .card-radio-element:checked + .card-radio-content {
-    box-shadow: 0 0 1px 5px $main_darker_color;
+  box-shadow: 0 0 1px 5px $main_darker_color;
 }
 
 .card-radio-element {
-    display: none;
+  display: none;
 }
 
 .card-radio-content:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 label.card-radio {
-    width: 100%;
+  width: 100%;
 }
 
-.number-badge{
-    display: inline-block;
-    background-color: $main_darker_color;
-    padding: 1px;
-    font-size: .8rem;
-    color: white;
-    font-weight: bold;
-    width: 20px;
-    height: 100%;
-    border-radius: 25px;
+.number-badge {
+  display: inline-block;
+  background-color: $main_darker_color;
+  padding: 1px;
+  font-size: 0.8rem;
+  color: white;
+  font-weight: bold;
+  width: 20px;
+  height: 100%;
+  border-radius: 25px;
 }
-
 
 /* Scroll-Top Button */
 
-#btnScrollTop{
-    opacity: 0;
-    position: fixed;
-    right: 40px;
-    bottom: -60px;
-    width: 60px;
-    height: 60px;
-    border-radius: 60px;
-    transition: transform $transition_fast, opacity $transition_fast, border $transition_fast;
-    background-color: $main_darker2_color;
-    border: 1px solid $main_darker2_color;
-
+#btnScrollTop {
+  opacity: 0;
+  position: fixed;
+  right: 40px;
+  bottom: -60px;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+  transition: transform $transition_fast, opacity $transition_fast,
+    border $transition_fast;
+  background-color: $main_darker2_color;
+  border: 1px solid $main_darker2_color;
 }
 
-#btnScrollTop i{
-    transition: transform $transition_fast;
-    color: white;
+#btnScrollTop i {
+  transition: transform $transition_fast;
+  color: white;
 }
 
-#btnScrollTop:hover{
+#btnScrollTop:hover {
   border: 1px solid $main_color;
 }
 
-#btnScrollTop:hover i{
-    transform: translateY(-10px);
+#btnScrollTop:hover i {
+  transform: translateY(-10px);
 }
 
-#btnScrollTop.show{
-    opacity: 1;
-    transform: translateY(-100px);
-
-
+#btnScrollTop.show {
+  opacity: 1;
+  transform: translateY(-100px);
 }
 
-  /* Track Bar */
+/* Track Bar */
 
-  /* width */
-  ::-webkit-scrollbar {
-    width: 9px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border: 2px solid white;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #c4cbcb;
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: $main_darker2_color;
-  }
+/* width */
+::-webkit-scrollbar {
+  width: 9px;
+}
 
-  /* Apartments Search Results */
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border: 2px solid white;
+}
 
-  .apartment-card{
-    max-height: 260px!important;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c4cbcb;
+  border-radius: 10px;
+}
 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $main_darker2_color;
+}
 
+/* Apartments Search Results */
 
-  .fixed-box{
-    position: relative;
-    height: 70vh;
-    overflow-y: auto!important;
-  }
+.apartment-card {
+  max-height: 260px !important;
+}
 
+.fixed-box {
+  position: relative;
+  height: 70vh;
+  overflow-y: auto !important;
+}
 
-  //OTHER
+//OTHER
 
-iframe{
-    border: 0!important;
+iframe {
+  border: 0 !important;
 }
 
 

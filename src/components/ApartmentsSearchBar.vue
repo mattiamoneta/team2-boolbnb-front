@@ -16,14 +16,15 @@
           placeholder="Cerca una località"
         />
         <!-- Button trigger modal -->
+
         <button
           type="button"
           class="btn ms-btn-outline-black me-2 d-flex align-items-center"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
-          <i class="fa-solid fa-filter me-1"></i>
-          <span>Filtri</span>
+          <!-- <i class="fa-solid fa-filter me-1"></i> -->
+          Filtri
         </button>
         <button class="btn ms-btn-outline-primary" type="submit">Cerca</button>
       </form>
@@ -32,7 +33,7 @@
 
   <!-- Modal -->
   <div
-    class="modal fade ms-modal ms_gray_color"
+    class="modal fade ms_gray_color"
     id="exampleModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
@@ -56,7 +57,7 @@
             <!-- principali -->
             <div class="col-6 mt-5 pe-4">
               <h6
-                class="text-uppercase font-semibold mb-5 ms_text_main_darker2"
+                class="text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing"
               >
                 Principali
               </h6>
@@ -103,7 +104,7 @@
             <!-- Caratteristiche -->
             <div class="col-6 mt-5 ps-4">
               <h6
-                class="text-uppercase font-semibold mb-5 ms_text_main_darker2"
+                class="text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing"
               >
                 Caratteristiche
               </h6>
@@ -149,7 +150,11 @@
 
             <!-- Servizi -->
             <div class="col-12 mt-5 ms_text_main_darker2">
-              <h6 class="text-uppercase font-semibold mb-5">Servizi</h6>
+              <h6
+                class="text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing"
+              >
+                Servizi
+              </h6>
               <ul class="list-unstyled row flex-wrap gy-3">
                 <li class="d-flex align-items-center gap-2 col-5">
                   <input
