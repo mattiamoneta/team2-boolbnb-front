@@ -16,6 +16,7 @@
           placeholder="Cerca una località"
         />
         <!-- Button trigger modal -->
+
         <button
           type="button"
           class="btn ms-btn-outline-black me-2 d-flex align-items-center"
@@ -23,7 +24,7 @@
           data-bs-target="#exampleModal"
         >
           <i class="fa-solid fa-filter me-1"></i>
-          <span>Filtri</span>
+          Filtri
         </button>
         <button class="btn ms-btn-outline-primary" type="submit">Cerca</button>
       </form>
@@ -32,7 +33,7 @@
 
   <!-- Modal -->
   <div
-    class="modal fade ms-modal ms_gray_color"
+    class="modal fade ms_gray_color"
     id="exampleModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
