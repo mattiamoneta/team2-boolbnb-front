@@ -8,7 +8,9 @@ import ApartmentResultCard from "../components/ApartmentResultCard.vue";
 
 import { store } from "../store";
 import axios from 'axios';
+
 export default {
+
 
   name: "ApartmentsList",
   data() {
@@ -19,46 +21,61 @@ export default {
     };
   },
   methods:{
+      /* Salva la posizione corrente dello scroll */
       handleScroll(){
           this.scrollPos = window.scrollY;
       },
 
-      onLoadSearch(){
-              const urlQueryAddress = this.$route.query.indirizzo;
+      
+      performSearch(){
 
-              if (urlQueryAddress != "") {
-                fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(urlQueryAddress)}.json?key=${this.store.apiKey}`)//cerca i dati (quindi anche lat e long) dell'indirizzo passato dall'input della home
-                  .then(response => response.json())
-                  .then(data => {
-                    if (data && data.results && data.results.length > 0) { //se sono stati trovati dei risultati
-                      const latitude = data.results[0].position.lat;
-                      const longitude = data.results[0].position.lon;
+        if(this.store.queryAddress == ''){
+          this.store.queryAddress = this.$route.query.indirizzo;
+        }
 
-                      axios.get(`${this.store.baseUrl}/api/apartments`)
-                        .then(response => {
-                          const apartments = response.data.results; //tutti gli appartamenti del DB
-                          this.retApartmnets = response.data.results;
+         if(this.store.queryAddress != ""){
+          axios.get(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(this.store.queryAddress)}.json?key=${this.store.apiKey}`)
+          .then(response =>{
 
-                          this.store.searchResults = response.data.results.data;
+              const retVal = response.data.results;
+              if(retVal.length > 0){ // Se ci sono risultati
 
-                        })
-                        .catch(error => {
-                          console.error(error);
-                        });
-                    }
+                  /* Ottengo latitudine e longitudine dell'indirizzo */
+                 const lat = retVal[0].position.lat;
+                 const long = retVal[0].position.lon;
+
+          
+
+                  /* Ottengo tutti gli appartamenti dalle API Laravel */
+                  axios.get(`${this.store.baseUrl}/api/apartments`)
+                  .then(response => {
+
+                    this.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
+
                   })
                   .catch(error => {
                     console.error(error);
                   });
+
               }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+         }
       }
   },
   created(){
+      /* Intercetta lo scroll del mouse */
       window.addEventListener('scroll', this.handleScroll);
   },
-  mounted(){
-    this.onLoadSearch();
+  updated(){
+    this.performSearch();
   },  
+  mounted(){
+    this.performSearch();
+  },
+
    components: {
     ApartmentResultCard,
     AppSearchBar
@@ -96,12 +113,11 @@ export default {
     <!-- End Search Bar -->
    
    
-      <div class="row" v-if="this.$route.query.indirizzo != null">
+    <div class="row" v-if="this.$route.query.indirizzo != ''">
       <!-- Results -->
       <div class="col-12 col-lg-5">
         <div class="fixed-box pe-4 py-3">
-          <!-- <ApartmentResultCard v-for="singleApartment in retApartmnets.data" :objApartment="singleApartment"/> -->
-          <ApartmentResultCard v-for="singleApartment in store.searchResults" :objApartment="singleApartment"/>
+          <ApartmentResultCard v-for="singleApartment in retApartmnets" :objApartment="singleApartment"/>
         </div>
       </div>
       <!-- End Results -->
