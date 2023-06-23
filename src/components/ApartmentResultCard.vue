@@ -3,7 +3,7 @@
     <div class="card card-tile flat-shadow d-block rounded-4 overflow-hidden drop-shadow-sm mb-4 apartment-card">
         <div class="row">
             <div class="col-5">
-                <img src="https://picsum.photos/400/400" alt="" class="w-100">
+                <img src="https://picsum.photos/400/400" alt="" class="w-100 h-100">
             </div>
             <div class="col-7">
                 <div class="card-body py-4 h-100">
