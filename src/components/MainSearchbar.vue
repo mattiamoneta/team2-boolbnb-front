@@ -31,6 +31,7 @@ export default {
       this.suggestions = [];
     },
     submitForm() {
+
       const selectedAddress = this.address;
 
       fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)
@@ -49,11 +50,13 @@ export default {
               .catch(error => {
                 console.error(error);
               });
+            this.$router.push('/another-page')
           }
         })
         .catch(error => {
           console.error(error);
         });
+
     },
   },
 };
@@ -64,7 +67,8 @@ export default {
   <div class="position-relative">
     <div class="container p-3 rounded-3 bg-white position-absolute top-0 start-50 translate-middle">
       <div class="border p-2 rounded ps-3">
-        <form class="d-flex justify-content-center align-items-center" role="search" @submit.prevent="submitForm">
+        <form class="d-flex justify-content-center align-items-center" role="search"
+          action="http://localhost:5173/search">
           <div>
             <i class="fa-solid fa-magnifying-glass ms_light_gray_text"></i>
           </div>
@@ -76,7 +80,7 @@ export default {
                 suggestion.address.freeformAddress }}</li>
             </ul>
           </div>
-          <button class="btn ms-btn-outline-primary" type="submit">
+          <button class="btn ms-btn-outline-primary" type="submit" @click="submitForm">
             Cerca
           </button>
         </form>
