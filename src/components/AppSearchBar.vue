@@ -6,72 +6,42 @@ export default {
   data() {
     return {
       store,
-      address: '',
-      suggestions: [],
-      suggestionNumber: 6
+      queryAddress: '',
+      querySuggestionsLimit: 6,
+      querySuggestions: []
     };
   },
   methods: {
+
+    /* Chiamata API real-time durante la digitazione */
     handleInput() {
-      if (this.address.length > 2) {
-        fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(this.address)}.json?key=${this.store.apiKey}&language=it-IT&limit=${this.suggestionNumber}`)
-          .then(response => response.json())
-          .then(data => {
-            this.suggestions = data.results;
-          })
-          .catch(error => {
+
+      if(this.store.queryAddress.length > 2){
+        axios.get(`https://api.tomtom.com/search/2/search/${encodeURIComponent(this.store.queryAddress)}.json?key=${this.store.apiKey}&language=it-IT&limit=${this.store.querySuggestionsLimit}`)
+        .then(response => {
+          this.store.querySuggestions = response.data.results;
+        })
+        .catch(error => {
             console.error(error);
-          });
-      } else {
-        this.suggestions = [];
+        });
+      }else{
+        this.querySuggestions = []; //Cancella dropdown se niente elementi
       }
     },
 
+
+    /* Imposta il valore selezionato dal dropdown */
     selectAddress(suggestion) {
-      this.address = suggestion.address.freeformAddress;
-      this.suggestions = [];
+      this.store.queryAddress = suggestion.address.freeformAddress;
+      this.store.querySuggestions = [];
     }, 
-    
+
+
+    /* Blocca il submit, effettua la ricerca e rimanda alla pagina di risultati */
     handleSubmit(event) {
-      event.preventDefault(); // Evita il comportamento predefinito del modulo
-
-      this.performSearch();
-
-      const selectedAddress = this.address;
-      this.$router.push({ name: 'search', query: { indirizzo: selectedAddress } })
-    },
-
-      performSearch(){
-
-            const selectedAddress = this.address;
-
-            if (selectedAddress != "") {
-              fetch(`https://api.tomtom.com/search/2/geocode/${encodeURIComponent(selectedAddress)}.json?key=${this.store.apiKey}`)//cerca i dati (quindi anche lat e long) dell'indirizzo passato dall'input della home
-                .then(response => response.json())
-                .then(data => {
-                  if (data && data.results && data.results.length > 0) { //se sono stati trovati dei risultati
-                    const latitude = data.results[0].position.lat;
-                    const longitude = data.results[0].position.lon;
-
-                    axios.get(`${this.store.baseUrl}/api/apartments`)
-                      .then(response => {
-                        const apartments = response.data.results; //tutti gli appartamenti del DB
-                        this.retApartmnets = response.data.results;
-
-                        this.store.searchResults = response.data.results.data;
-                        console.log(this.store.searchResults);
-            
-                      })
-                      .catch(error => {
-                        console.error(error);
-                      });
-                  }
-                })
-                .catch(error => {
-                  console.error(error);
-                });
-            }
-        }
+      event.preventDefault();   // Evita il comportamento predefinito del modulo
+      this.$router.push({ name: 'search', query: { indirizzo: this.store.queryAddress } }) // Redirect alla pagina dei risultati
+    }
   }
 };
 </script>
@@ -86,12 +56,11 @@ export default {
       </span>
 
       <div class="flex-grow-1">
-        <input class="form-control rounded-0 border-0 fw-semibold" type="search" placeholder="Cerca una località"
-          v-model="address" @input="handleInput" />
+        <input class="form-control rounded-0 border-0 fw-semibold" type="search" placeholder="Cerca una località" v-model="store.queryAddress" @input="handleInput" />
 
           <!-- Dropdown -->
-          <ul v-if="suggestions.length" class="dropdown-menu w-80 show">
-            <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectAddress(suggestion)" class="dropdown-item">
+          <ul v-if="store.querySuggestions.length" class="dropdown-menu w-80 show">
+            <li v-for="suggestion in store.querySuggestions" :key="suggestion.id" @click="selectAddress(suggestion)" class="dropdown-item">
               <i class="fa-sharp fa-solid fa-location-dot me-1 small ms_text_main_darker"></i>
               {{suggestion.address.freeformAddress }}
             </li>
@@ -100,7 +69,7 @@ export default {
 
       </div>
 
-      <button class="btn ms-btn ms-btn-outline-primary py-3">
+      <button class="btn ms-btn ms-btn-outline-primary py-3" type="submit">
         Cerca
       </button>
   </div>
