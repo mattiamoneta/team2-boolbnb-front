@@ -161,7 +161,7 @@
 .btn.ms-btn-outline-black:hover {
     background-color: $black_text_color;
     border: 1px solid $black_text_color;
-    color: white;
+    color: white!important;
 }
 
 /* Blue Button */
@@ -337,11 +337,13 @@ label.card-radio {
   /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
+    border: 2px solid white;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #c4cbcb;
+    border-radius: 10px;
   }
   
   /* Handle on hover */
@@ -355,6 +357,12 @@ label.card-radio {
     max-height: 260px!important;
   }
 
-//OTHER
+
+
+  .fixed-box{
+    height: 60vh;
+    overflow-y: auto!important;
+  }
+  //OTHER
 
 
