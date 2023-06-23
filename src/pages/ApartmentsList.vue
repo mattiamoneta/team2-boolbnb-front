@@ -42,17 +42,23 @@ export default {
       <ApartmentsSearchBar />
     </div>
     <!-- End Search Bar -->
-    <div class="row">
+   
+   
+      <div class="row">
       <!-- Results -->
-      <div class="col-7">
+      <div class="col-12 col-lg-7">
+        <div class="fixed-box">
         <ApartmentResultCard v-for="i in 5" />
+        </div>
       </div>
       <!-- End Results -->
 
       <!-- Map -->
-      <div class="col-5 max-fixed">MAPPA QUI</div>
+      <div class="col-5 max-fixed d-none d-lg-block">MAPPA QUI</div>
       <!-- End Map -->
     </div>
+
+
   </div>
 </template>
 
