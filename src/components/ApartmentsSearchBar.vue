@@ -155,21 +155,21 @@
                   <input
                     class="text form-check-input"
                     type="checkbox"
-                    id="facility"
-                    name="facility"
+                    id="facility-wifi"
+                    name="facility-wifi"
                     role="switch"
                   />
-                  <label for="facility">Wi-fi</label>
+                  <label for="facility-wifi">Wi-fi</label>
                 </li>
                 <li class="d-flex align-items-center gap-2 col-5">
                   <input
                     class="text form-check-input"
                     type="checkbox"
-                    id="facility"
-                    name="facility"
+                    id="facility-parking"
+                    name="facility-parking"
                     role="switch"
                   />
-                  <label for="facility">Posto macchina</label>
+                  <label for="facility-parking">Posto macchina</label>
                 </li>
                 <li class="d-flex align-items-center gap-2 col-5">
                   <input
@@ -185,31 +185,31 @@
                   <input
                     class="text form-check-input"
                     type="checkbox"
-                    id="facility"
-                    name="facility"
+                    id="facility-portineria"
+                    name="facility-portineria"
                     role="switch"
                   />
-                  <label for="facility">Portineria</label>
+                  <label for="facility-portineria">Portineria</label>
                 </li>
                 <li class="d-flex align-items-center gap-2 col-5">
                   <input
                     class="text form-check-input"
                     type="checkbox"
-                    id="facility"
-                    name="facility"
+                    id="facility-sauna"
+                    name="facility-sauna"
                     role="switch"
                   />
-                  <label for="facility">Sauna</label>
+                  <label for="facility-sauna">Sauna</label>
                 </li>
                 <li class="d-flex align-items-center gap-2 col-5">
                   <input
                     class="text form-check-input"
                     type="checkbox"
-                    id="facility"
-                    name="facility"
+                    id="facility-beach"
+                    name="facility-beach"
                     role="switch"
                   />
-                  <label for="facility">Vista Mare</label>
+                  <label for="facility-beach">Vista Mare</label>
                 </li>
               </ul>
             </div>
