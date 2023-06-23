@@ -31,16 +31,20 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/colors" as *;
 
-.ms_magazine_logos {
-  img {
-    max-height: 2rem;
-    filter: brightness(0);
-    opacity: 50%;
-    transition: all 0.4s ease;
+#they_say {
+  margin-top: 1rem;
 
-    &:hover {
-      filter: brightness(1);
-      opacity: 1;
+  .ms_magazine_logos {
+    img {
+      max-height: 2rem;
+      filter: brightness(0);
+      opacity: 50%;
+      transition: all 0.4s ease;
+
+      &:hover {
+        filter: brightness(1);
+        opacity: 1;
+      }
     }
   }
 }

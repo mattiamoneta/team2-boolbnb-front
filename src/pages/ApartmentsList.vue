@@ -13,55 +13,47 @@ export default {
   data() {
     return {
       store,
-    }
+    };
   },
   components: {
     ApartmentResultCard,
-    ApartmentsSearchBar
-  }
+    ApartmentsSearchBar,
+  },
 };
 </script>
 
 <template>
-
-
-    <div class="container py-5">
-
-      <div class="row mt-4">
-        <div class="col">
-          <h2 class="ms_section_title font-semibold">
-            Risultati per "
-            <span class="font-primary fw-bolder ms_text_main_darker">Lorem ipsum</span>
-            "
-          </h2>
-        </div>
-      </div>
-
-      <!-- Search Bar -->
-      <div class="row">
-        <!-- !!!SEARCH BAR QUI!!! -->
-        <ApartmentsSearchBar/>
-
-      </div>
-      <!-- End Search Bar -->
-      <div class="row">
-
-        <!-- Results -->
-        <div class="col-7">
-            <ApartmentResultCard v-for="i in 5"/>
-        </div>
-        <!-- End Results -->
-
-
-        <!-- Map -->
-        <div class="col-5 max-fixed">
-            MAPPA QUI
-        </div>
-        <!-- End Map -->
-
+  <div class="container py-5">
+    <div class="row mt-4">
+      <div class="col">
+        <h2 class="ms_section_title font-semibold">
+          Risultati per "
+          <span class="font-primary fw-bolder ms_text_main_darker"
+            >Lorem ipsum</span
+          >
+          "
+        </h2>
       </div>
     </div>
 
+    <!-- Search Bar -->
+    <div class="row">
+      <!-- !!!SEARCH BAR QUI!!! -->
+      <ApartmentsSearchBar />
+    </div>
+    <!-- End Search Bar -->
+    <div class="row">
+      <!-- Results -->
+      <div class="col-7">
+        <ApartmentResultCard v-for="i in 5" />
+      </div>
+      <!-- End Results -->
+
+      <!-- Map -->
+      <div class="col-5 max-fixed">MAPPA QUI</div>
+      <!-- End Map -->
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

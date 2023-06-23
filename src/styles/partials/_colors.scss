@@ -1,5 +1,6 @@
 /* COLORS */
 $light_gray_color: #adb5bd;
+$gray_color: #495057;
 $black_text_color: #343a40;
 $main_color: #e3fafc;
 $main_darker_color: #1098ad;
@@ -32,8 +33,14 @@ $premium_color: #fcc419;
 .ms_text_main_darker {
   color: $main_darker_color !important;
 }
+.ms_text_main_darker2 {
+  color: $main_darker2_color !important;
+}
 .ms_light_gray_text {
   color: $light_gray_color !important;
+}
+.ms_gray_color {
+  color: $gray_color;
 }
 .ms_black_text {
   color: $black_text_color !important;
@@ -46,7 +53,7 @@ $premium_color: #fcc419;
   border: 1px solid $main_darker2_color !important;
 }
 
-.ms_border_right_primary{
+.ms_border_right_primary {
   border-right: 1px solid $main_darker2_color !important;
 }
 
