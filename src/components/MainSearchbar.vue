@@ -33,7 +33,7 @@ export default {
       event.preventDefault(); // Evita il comportamento predefinito del modulo
 
       const selectedAddress = this.address;
-      this.$router.push({ name: 'search', params: { indirizzo: 'selectedAddress' } })
+      this.$router.push({ name: 'search', query: { indirizzo: selectedAddress } })
     }
   }
 };

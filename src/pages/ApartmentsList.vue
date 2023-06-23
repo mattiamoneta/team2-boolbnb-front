@@ -19,14 +19,13 @@ export default {
     ApartmentResultCard,
     ApartmentsSearchBar,
   }, mounted() {
-    console.log(this.$route.params.indirizzo);
+    console.log(this.$route.query.indirizzo);
   }
 
 };
 </script>
 
 <template>
-  <h1>{{ this.$route.params.indirizzo }}</h1>
   <div class="container py-5">
     <div class="row mt-4">
       <div class="col">
