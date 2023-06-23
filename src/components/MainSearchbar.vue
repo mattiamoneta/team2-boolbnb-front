@@ -59,8 +59,10 @@ export default {
 
                   <!-- Dropdown -->
                   <ul v-if="suggestions.length" class="dropdown-menu w-80 show">
-                    <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectAddress(suggestion)" class="dropdown-item">{{
-                      suggestion.address.freeformAddress }}</li>
+                    <li v-for="suggestion in suggestions" :key="suggestion.id" @click="selectAddress(suggestion)" class="dropdown-item">
+                      <i class="fa-sharp fa-solid fa-location-dot me-1 small ms_text_main_darker"></i>
+                      {{suggestion.address.freeformAddress }}
+                    </li>
                   </ul>
                   <!-- End Dropdown -->
 
