@@ -64,7 +64,7 @@ export default {
                   <img src="https://picsum.photos/2000/500" alt="" class="w-100 card-img-top object-fit-cover apartment-cover-image">
                   <div class="card-body mt-4 p-4">
                    
-                    <div class="row pb-2 mb-5 border-bottom">
+                    <div class="row pb-3 mb-5 border-bottom mt-4">
                      <div class="col-10">
                         <h2 class="font-semibold">
                           Appartamento Bello Bello
