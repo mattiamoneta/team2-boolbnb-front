@@ -20,6 +20,13 @@ export default {
       retApartmnets: {}
     };
   },
+  watch: {
+    '$route'(to, from) {
+      if (to.query.indirizzo !== from.query.indirizzo) {
+        this.performSearch();
+      }
+    },
+  },
   methods:{
       /* Salva la posizione corrente dello scroll */
       handleScroll(){
@@ -70,7 +77,7 @@ export default {
       window.addEventListener('scroll', this.handleScroll);
   },
   updated(){
-    this.performSearch();
+    // this.performSearch();
   },  
   mounted(){
     this.performSearch();
@@ -105,9 +112,8 @@ export default {
     <div class="row">
       <!-- !!!SEARCH BAR QUI!!! -->
         <div class="col-12">
-          <div class="card card-tile d-block rounded-4 mb-4 apartment-card p-2 ps-3">
-            <AppSearchBar/>
-          </div>
+
+                <AppSearchBar :showFilters="true"/>
         </div>
     </div>
     <!-- End Search Bar -->

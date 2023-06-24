@@ -52,9 +52,9 @@ export default {
   <div class="position-relative">
     <div class="container p-3 rounded-4 bg-white position-absolute top-0 start-50 translate-middle">
 
-      <div class="rounded-3 ps-3 border w-100">
-          <AppSearchBar />
-      </div>
+
+          <AppSearchBar :showFilters="false"/>
+
       
     </div>
   </div>

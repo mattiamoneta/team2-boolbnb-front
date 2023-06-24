@@ -145,6 +145,17 @@
   color: $main_darker_color;
 }
 
+.btn.ms-btn-outline-primary span,
+.btn.ms-btn-outline-primary i {
+
+  color: $main_darker_color;
+}
+
+.btn.ms-btn-outline-primary:hover span,
+.btn.ms-btn-outline-primary:hover i {
+  color: white;
+}
+
 .btn.ms-btn-outline-primary:hover {
   background-color: $main_darker2_color;
   border: 1px solid $main_darker2_color;
@@ -156,6 +167,12 @@
 .btn.ms-btn-outline-black {
   background-color: transparent;
   border: 1px solid $black_text_color;
+  color: $black_text_color;
+}
+
+.btn.ms-btn-outline-black span,
+.btn.ms-btn-outline-black i {
+
   color: $black_text_color;
 }
 
@@ -173,9 +190,21 @@
   color: white;
 }
 
+.btn.ms-btn-primary span,
+.btn.ms-btn-primary i {
+
+  color: white;
+}
+
+
 .btn.ms-btn-primary:hover {
   background-color: transparent;
   border: 1px solid $main_darker2_color;
+  color: $main_darker2_color;
+}
+
+.btn.ms-btn-primary:hover span,
+.btn.ms-btn-primary:hover i {
   color: $main_darker2_color;
 }
 
@@ -187,7 +216,7 @@
   color: $black_text_color;
 }
 
-/* Button Textual */
+/* Button Textual Primary */
 
 .btn.ms-btn-textual-primary {
   position: relative;
@@ -195,6 +224,11 @@
   color: white;
   text-decoration: none;
   font-size: 0.9rem;
+}
+
+.btn.ms-btn-textual-primary:hover span,
+.btn.ms-btn-textual-primary:hover i{
+  color: white;
 }
 
 .btn.ms-btn-textual-primary.arrow::after {
@@ -221,6 +255,52 @@
 }
 
 .btn.ms-btn-textual-primary.active {
+  background-color: $main_darker_color;
+  border: 1px solid $main_darker_color;
+  color: white;
+}
+
+
+/* Button Textual Secondary */
+
+.btn.ms-btn-textual-outline {
+  position: relative;
+  overflow: hidden;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.btn.ms-btn-textual-outline:hover span,
+.btn.ms-btn-textual-outline:hover i{
+  color: $main_darker2_color;
+  transition: color $transition_fast;
+}
+
+.btn.ms-btn-textual-outline.arrow::after {
+  position: absolute;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f054";
+  right: -20px;
+  height: 20px;
+  width: 20px;
+  transition: transform $transition_fast, opacity $transition_fast,
+    right $transition_fast;
+  opacity: 0;
+}
+
+.btn.ms-btn-textual-outline:hover {
+  background-color: white;
+  color: $main_darker_color;
+}
+
+.btn.ms-btn-textual-outline:hover.arrow::after {
+  right: 0px;
+  opacity: 1;
+}
+
+.btn.ms-btn-textual-outline.active {
   background-color: $main_darker_color;
   border: 1px solid $main_darker_color;
   color: white;
