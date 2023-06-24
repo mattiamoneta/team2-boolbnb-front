@@ -2,32 +2,16 @@
 export default {
   name: "AppFooter",
   data() {
-    return {
-      scrollPos : 0,
-      endPagePos: 0
-    }
+    return {};
   },
-  methods:{
-          handleScroll(){
-            this.scrollPos = window.scrollY;
-            this.endPagePos = document.body.scrollHeight - window.innerHeight;
-          },
-          pageScrollTop(){
-              window.scrollTo({
-              top: 0,
-              behavior: "smooth"
-          });
-          }
-  },
-  created(){
-      window.addEventListener('scroll', this.handleScroll);
-  }
-
+  methods: {},
 };
 </script>
 
 <template>
-  <footer class="text-center text-lg-start bg-light text-muted font-secondary">
+  <footer
+    class="text-center text-lg-start bg-light text-muted font-secondary xmedium"
+  >
     <!-- FOOTER-TOP -->
     <div class="footer-top container">
       <!-- Section: Social media -->
@@ -81,8 +65,8 @@ export default {
               Boolbnb
             </h5>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem
-              ipsum dolor sit amet, consectetur adipisicing elit.
+              Pianifica il tuo viaggio perfetto con Boolbnb: scopri, prenota e
+              goditi il mondo!
             </p>
           </div>
           <!-- Grid column -->
@@ -90,18 +74,22 @@ export default {
           <!-- Grid column -->
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Prodotti</h6>
+            <h6
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+            >
+              Ospitare
+            </h6>
             <p>
-              <a href="#!" class="text-reset">Angular</a>
+              <a href="#!" class="text-reset">Apri un Boolbnb</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">React</a>
+              <a href="#!" class="text-reset">BoolCover per gli host</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Vue</a>
+              <a href="#!" class="text-reset">Come ospitare</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Laravel</a>
+              <a href="#!" class="text-reset">Forum community</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -109,18 +97,22 @@ export default {
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">link utili</h6>
+            <h6
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+            >
+              Assistenza
+            </h6>
             <p>
-              <a href="#!" class="text-reset">Pricing</a>
+              <a href="#!" class="text-reset">Centro Assistenza</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Settings</a>
+              <a href="#!" class="text-reset">BoolCover</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Orders</a>
+              <a href="#!" class="text-reset">Accessibilità per tutti</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Help</a>
+              <a href="#!" class="text-reset">Opzioni di cancellazione</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -128,8 +120,15 @@ export default {
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">contatti</h6>
-            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+            <h6
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+            >
+              contatti
+            </h6>
+            <p class="d-flex">
+              <i class="fas fa-home me-3"></i>
+              <span>Via Marmotta 12, 00042, Roma</span>
+            </p>
             <p>
               <i class="fas fa-envelope me-3"></i>
               info@example.com
@@ -154,7 +153,7 @@ export default {
     <!-- Copyright -->
 
     <!-- Scroll-Top -->
-    <button class="btn" :class="scrollPos >= endPagePos ? 'show' : ''" id="btnScrollTop" @click="pageScrollTop()">
+    <button class="btn show" id="btnScrollTop">
       <i class="fa-solid fa-arrow-up"></i>
     </button>
   </footer>
