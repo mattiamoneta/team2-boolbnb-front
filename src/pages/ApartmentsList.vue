@@ -20,6 +20,13 @@ export default {
       retApartmnets: {}
     };
   },
+  watch: {
+    '$route'(to, from) {
+      if (to.query.indirizzo !== from.query.indirizzo) {
+        this.performSearch();
+      }
+    },
+  },
   methods:{
       /* Salva la posizione corrente dello scroll */
       handleScroll(){
@@ -70,7 +77,7 @@ export default {
       window.addEventListener('scroll', this.handleScroll);
   },
   updated(){
-    this.performSearch();
+    // this.performSearch();
   },  
   mounted(){
     this.performSearch();
