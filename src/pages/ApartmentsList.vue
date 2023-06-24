@@ -257,9 +257,9 @@ export default {
         <div class="col-7 max-fixed d-none d-lg-block">
 
           <div class="card  d-block rounded-4 overflow-hidden border-1 h-100">
-            <iframe class="map-frame" width="100%" height="100%" frameBorder="0"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=9.02132034301758%2C45.41267141842337%2C9.357776641845705%2C45.51693278828882&amp;layer=mapnik"
-              style="border: 1px solid black"></iframe>
+            <img
+              src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
+              alt="">
           </div>
         </div>
         <!-- End Map -->
