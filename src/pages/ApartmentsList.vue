@@ -112,9 +112,8 @@ export default {
     <div class="row">
       <!-- !!!SEARCH BAR QUI!!! -->
         <div class="col-12">
-          <div class="card card-tile d-block rounded-4 mb-4 apartment-card p-2 ps-3">
-            <AppSearchBar/>
-          </div>
+
+                <AppSearchBar :showFilters="true"/>
         </div>
     </div>
     <!-- End Search Bar -->
