@@ -17,7 +17,7 @@ const router = createRouter({
       component: ApartmentsList,
       props: true
     },{
-      path: '/apartment',
+      path: '/apartment/:id',
       name: 'apartment',
       component: ApartmentCard,
       props: true
