@@ -5,5 +5,6 @@ export const store = reactive({
   apiKey: "ZPskuspkrrcmchd9ut4twltuw96h5bWH",
   queryAddress: '',
   querySuggestionsLimit: 6,
-  querySuggestions: []
+  querySuggestions: [],
+  radius: 20
 });
