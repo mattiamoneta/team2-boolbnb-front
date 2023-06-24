@@ -1,9 +1,5 @@
 <script>
 import AppSearchBar from "../components/AppSearchBar.vue";
-import AppMainSection from "../components/AppMainSection.vue";
-import AppCard from "../components/AppCard.vue";
-import TheySaySection from "../components/TheySaySection.vue";
-import AppFeatureSection from "../components/AppFeatureSection.vue";
 import ApartmentResultCard from "../components/ApartmentResultCard.vue";
 
 import { store } from "../store";
@@ -94,7 +90,9 @@ export default {
 <template>
   <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
+
     <div class="row mt-4">
+
       <div class="col">
         <h2 class="ms_section_title font-semibold">
           Risultati per <span>&#34;</span>
@@ -106,6 +104,7 @@ export default {
           </span><span>&#34;</span>
         </h2>
       </div>
+
     </div>
 
     <!-- Search Bar -->
@@ -123,7 +122,7 @@ export default {
       <!-- Results -->
       <div class="col-12 col-lg-5">
         <div class="fixed-box pe-4 py-3">
-          <ApartmentResultCard v-for="singleApartment in retApartmnets" :objApartment="singleApartment"/>
+          <ApartmentResultCard v-for="singleApartment in retApartmnets" :objApartment="singleApartment" hrefURI="/apartment"/>
         </div>
       </div>
       <!-- End Results -->
