@@ -48,7 +48,6 @@ export default {
     },
     /* cambia il valore di store.radius se viene modificato il range */
     changeRadius() {
-      console.log(this.radius);
       this.store.radius = this.radius;
     }
   }
@@ -101,11 +100,11 @@ export default {
       <div class="col-10 text-end">
 
       </div>
-      <div> <!-- RANGE per il radius -->
+      <!-- RANGE per il radius -->
+      <div>
         <input type="range" v-model="radius" id="kilometres" name="kilometres" min="1" max="100" step=" 1"
           @change="changeRadius">
-        <label for="kilometres">Km raggio</label>
-        <h1 id="valueDisplay">{{ radius }}</h1>
+        <h6>Raggio {{ radius }}Km</h6>
       </div>
     </div>
     <!-- End Inline Filters -->

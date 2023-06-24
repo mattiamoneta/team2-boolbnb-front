@@ -50,8 +50,9 @@ export default {
 
 
 
-              /* Ottengo tutti gli appartamenti dalle API Laravel */
-              //http://localhost:8000/api/apartments/search/39.516982/14.721096/20000
+              /* Ottengo tutti gli appartamenti  dalle API Laravel entro il raggio selezionato.
+              *  this.store.radius è in km quindi moltiplico per 1000 per averlo in metri
+              */
               axios.post(`${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}`)
                 .then(response => {
 
@@ -79,6 +80,8 @@ export default {
   },
   mounted() {
     this.performSearch();
+
+    //funzione che viene lanciata quando store.radius viene aggiornata nello store.js
     this.$watch(
       () => store.radius,
       (newValue, oldValue) => {
