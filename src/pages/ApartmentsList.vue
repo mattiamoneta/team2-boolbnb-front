@@ -28,8 +28,120 @@ export default {
     handleScroll() {
       this.scrollPos = window.scrollY;
     },
+    //funzione che transforma lat e lon in numeri accettabili dall'url della mappa
+    latLonToTileZXY(lat, lon, zoomLevel) {
 
+      const MIN_ZOOM_LEVEL = 0
 
+      const MAX_ZOOM_LEVEL = 22
+
+      const MIN_LAT = -85.051128779807
+
+      const MAX_LAT = 85.051128779806
+
+      const MIN_LON = -180.0
+
+      const MAX_LON = 180.0
+
+      if (
+
+        zoomLevel == undefined ||
+
+        isNaN(zoomLevel) ||
+
+        zoomLevel < MIN_ZOOM_LEVEL ||
+
+        zoomLevel > MAX_ZOOM_LEVEL
+
+      ) {
+
+        throw new Error(
+
+          "Zoom level value is out of range [" +
+
+          MIN_ZOOM_LEVEL.toString() +
+
+          ", " +
+
+          MAX_ZOOM_LEVEL.toString() +
+
+          "]"
+
+        )
+
+      }
+
+      if (lat == undefined || isNaN(lat) || lat < MIN_LAT || lat > MAX_LAT) {
+
+        throw new Error(
+
+          "Latitude value is out of range [" +
+
+          MIN_LAT.toString() +
+
+          ", " +
+
+          MAX_LAT.toString() +
+
+          "]"
+
+        )
+
+      }
+
+      if (lon == undefined || isNaN(lon) || lon < MIN_LON || lon > MAX_LON) {
+
+        throw new Error(
+
+          "Longitude value is out of range [" +
+
+          MIN_LON.toString() +
+
+          ", " +
+
+          MAX_LON.toString() +
+
+          "]"
+
+        )
+
+      }
+
+      let z = Math.trunc(zoomLevel)
+
+      let xyTilesCount = Math.pow(2, z)
+
+      let x = Math.trunc(Math.floor(((lon + 180.0) / 360.0) * xyTilesCount))
+
+      let y = Math.trunc(
+
+        Math.floor(
+
+          ((1.0 -
+
+            Math.log(
+
+              Math.tan((lat * Math.PI) / 180.0) +
+
+              1.0 / Math.cos((lat * Math.PI) / 180.0)
+
+            ) /
+
+            Math.PI) /
+
+            2.0) *
+
+          xyTilesCount
+
+        )
+
+      )
+
+      return z.toString() + "/" + x.toString() + "/" + y.toString()
+    },
+    newMap() {
+      return `https://a.api.tomtom.com/map/1/tile/basic/main/${latLonToTileZXY(45.4641943, 9.1896346, 8)}.png?key=${this.store.apiKey}=512`
+    },
     performSearch() {
 
       if (this.store.queryAddress == '') {
@@ -145,9 +257,9 @@ export default {
         <div class="col-7 max-fixed d-none d-lg-block">
 
           <div class="card  d-block rounded-4 overflow-hidden border-1 h-100">
-            <iframe class="map-frame" width="100%" height="100%" frameBorder="0"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=9.02132034301758%2C45.41267141842337%2C9.357776641845705%2C45.51693278828882&amp;layer=mapnik"
-              style="border: 1px solid black"></iframe>
+            <img
+              src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
+              alt="">
           </div>
         </div>
         <!-- End Map -->
