@@ -280,6 +280,26 @@ export default {
                     </div>
                   </div>
                   <!-- End Services Row -->
+
+                  <!-- Map -->
+                  <div class="row-mb-5">
+                    <div
+                      class="xsmall text-uppercase fw-bolder mb-4 ms_text_main_darker2"
+                    >
+                      MAPPA
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card card-tile rounded-2 d-block">
+                          <img
+                                src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
+                                alt=""
+                              />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Map -->
                 </div>
                 <!-- End LEFT SIDE: Apartment details -->
 
