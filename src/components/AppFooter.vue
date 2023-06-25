@@ -4,20 +4,21 @@ export default {
   data() {
     return {
       scrollPos: 0,
-      bottomPage: 1
+      bottomPage: 1,
     };
   },
   methods: {
     handlePositions() {
       this.scrollPos = window.scrollY;
-      this.bottomPage = document.documentElement.scrollHeight - window.innerHeight;
+      this.bottomPage =
+        document.documentElement.scrollHeight - window.innerHeight;
     },
-    scrollToTop(){
+    scrollToTop() {
       window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    }
+        top: 0,
+        behavior: "smooth",
+      });
+    },
   },
   created() {
     window.addEventListener("scroll", this.handlePositions);
@@ -59,9 +60,6 @@ export default {
           </a>
           <a href="#" class="text-reset">
             <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="#" class="text-reset">
-            <i class="fab fa-github"></i>
           </a>
         </div>
         <!-- Right -->
@@ -170,7 +168,12 @@ export default {
     <!-- Copyright -->
 
     <!-- Scroll-Top -->
-    <button class="btn" :class="scrollPos == bottomPage ? 'show' : ''" id="btnScrollTop" @click="scrollToTop">
+    <button
+      class="btn"
+      :class="scrollPos == bottomPage ? 'show' : ''"
+      id="btnScrollTop"
+      @click="scrollToTop"
+    >
       <i class="fa-solid fa-arrow-up"></i>
     </button>
   </footer>
