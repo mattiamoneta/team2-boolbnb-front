@@ -147,6 +147,9 @@ export default {
           });
       }
     },
+    isObjectEmpty(obj) {
+      return Object.keys(obj).length === 0;
+    },
   },
   created() {
     /* Intercetta lo scroll del mouse */
@@ -168,11 +171,7 @@ export default {
       }
     );
   },
-  computed: {
-    isObjectEmpty() {
-      return Object.keys(this.store.filteredApartments).length === 0;
-    },
-  },
+
   components: {
     ApartmentResultCard,
     AppSearchBar,
@@ -213,19 +212,13 @@ export default {
         <!-- Results -->
         <div class="col-12 col-lg-5">
           <div class="fixed-box pe-4 py-3">
-            <ApartmentResultCard
-              v-for="singleApartment in store.retApartmnets"
-              v-if="isObjectEmpty"
-              :objApartment="singleApartment"
-              hrefURI="/apartment"
-            />
-            <ApartmentResultCard
-              v-else
-              v-for="(singleApartment, key) in store.filteredApartments"
-              :key="key"
-              :objApartment="singleApartment"
-              hrefURI="/apartment"
-            />
+            <div>
+              <ApartmentResultCard
+                v-for="singleApartment in store.retApartmnets"
+                :objApartment="singleApartment"
+                hrefURI="/apartment"
+              />
+            </div>
           </div>
         </div>
         <!-- End Results -->

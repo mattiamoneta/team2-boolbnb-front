@@ -10,20 +10,6 @@ export default {
       querySuggestionsLimit: 6,
       querySuggestions: [],
       radius: 20,
-      price: 0,
-      meters: 0,
-      available: 0,
-      beds: 0,
-      bedrooms: 0,
-      bathrooms: 0,
-      checkboxOptions: [
-        { id: 1, label: "Wi-fi", checked: false },
-        { id: 2, label: "Posto Macchina", checked: false },
-        { id: 3, label: "Piscina", checked: false },
-        { id: 4, label: "Portineria", checked: false },
-        { id: 5, label: "Sauna", checked: false },
-        { id: 6, label: "Vista Mare", checked: false },
-      ],
       showModal: false,
     };
   },
@@ -71,35 +57,7 @@ export default {
     changeRadius() {
       this.store.radius = this.radius;
     },
-    //filtra gli appartamenti
-    filterApartments() {
-      for (const key in this.store.retApartmnets) {
-        const item = this.store.filteredApartments[key];
 
-        if ((item.price = this.price)) {
-          this.store.filteredApartments.push("item");
-        }
-        if ((item.size_m2 = this.meters)) {
-          this.store.filteredApartments.push("item");
-        }
-        if ((item.available = this.available)) {
-          this.store.filteredApartments.push("item");
-        }
-        if ((item.beds = this.beds)) {
-          this.store.filteredApartments.push("item");
-        }
-        if ((item.bedrooms = this.bedrooms)) {
-          this.store.filteredApartments.push("item");
-        }
-        if ((item.bathrooms = this.bathrooms)) {
-          this.store.filteredApartments.push("item");
-        }
-
-        item.facilities.forEach((facility) => {});
-      }
-
-      this.closeModal();
-    },
     openModal() {
       this.showModal = true;
     },
@@ -229,7 +187,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="price"
                     name="price"
-                    v-model="price"
+                    v-model="store.price"
                   />
                 </li>
                 <li
@@ -241,7 +199,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="size_m2"
                     name="size_m2"
-                    v-model="meters"
+                    v-model="store.size_m2"
                   />
                 </li>
                 <li
@@ -254,7 +212,7 @@ export default {
                     id="available"
                     name="available"
                     role="switch"
-                    v-model="available"
+                    v-model="store.available"
                   />
                 </li>
               </ul>
@@ -277,7 +235,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="beds"
                     name="beds"
-                    v-model="beds"
+                    v-model="store.beds"
                   />
                 </li>
                 <li
@@ -289,7 +247,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="bedrooms"
                     name="bedrooms"
-                    v-model="bedrooms"
+                    v-model="store.bedrooms"
                   />
                 </li>
                 <li
@@ -301,7 +259,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="bathrooms"
                     name="bathrooms"
-                    v-model="bathrooms"
+                    v-model="store.bathrooms"
                   />
                 </li>
               </ul>
@@ -316,7 +274,7 @@ export default {
               </h6>
               <ul class="list-unstyled row flex-wrap gy-3">
                 <li
-                  v-for="option in checkboxOptions"
+                  v-for="option in store.checkboxOptions"
                   :key="option.id"
                   class="d-flex align-items-center gap-2 col-5"
                 >
@@ -343,7 +301,7 @@ export default {
           <button
             type="button"
             class="btn ms-btn-outline-primary"
-            @click="filterApartments"
+            @click="closeModal"
           >
             <i class="fa-solid fa-arrow-rotate-right me-1"></i>
             Aggiorna Risultati
