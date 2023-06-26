@@ -17,7 +17,12 @@
 
       <div class="col-7">
         <div class="card-body py-4 h-100">
-          <div class="xsmall text-uppercase fw-bolder">milano, italia</div>
+          <div class="xsmall text-uppercase fw-bolder">
+            {{ objApartment['city'] }}
+            <span>,</span>
+            {{ objApartment['country'] }}
+
+          </div>
           <h4 class="mb-5">{{ objApartment["title"] }}</h4>
 
           <div class="row h-100">

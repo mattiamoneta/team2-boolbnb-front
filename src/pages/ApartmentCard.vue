@@ -39,6 +39,7 @@ export default {
   mounted() {
     const id = this.$route.params.id;
     //this.getApartmentDetails(id); // In attesa di SHOW nelle API */
+    
   },
 };
 </script>
@@ -291,10 +292,12 @@ export default {
                     <div class="row">
                       <div class="col-12">
                         <div class="card card-tile rounded-2 d-block">
-                          <img
+                          <!-- <img
                                 src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
                                 alt=""
-                              />
+                              /> -->
+
+                              <iframe width="100%" height="300px"  src="https://www.openstreetmap.org/export/embed.html?bbox=8.659973144531252%2C45.31352900692261%2C9.45304870605469%2C45.60875385718798&amp;layer=mapnik" style="border: 1px solid black"></iframe>
                         </div>
                       </div>
                     </div>

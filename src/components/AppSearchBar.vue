@@ -11,6 +11,13 @@ export default {
       querySuggestions: [],
       radius: 20,
       showModal: false,
+      filters: {
+        price: 0,
+        beds: 0,
+        meters: 0,
+        bathrooms: 0,
+        rooms: 0
+      }
     };
   },
   props: {
@@ -39,6 +46,17 @@ export default {
       }
     },
 
+    getAllFacilities(){
+        axios.get(`${this.store.baseUrl}/api/facilities/`)
+        .then(response => {
+            this.checkboxOptions = response.data.results;
+            console.log(this.checkboxOptions);
+        })
+        .catch(error => {
+          console.error(error);
+        })
+    },
+
     /* Imposta il valore selezionato dal dropdown */
     selectAddress(suggestion) {
       this.store.queryAddress = suggestion.address.freeformAddress;
@@ -50,7 +68,13 @@ export default {
       event.preventDefault(); // Evita il comportamento predefinito del modulo
       this.$router.push({
         name: "search",
-        query: { indirizzo: this.store.queryAddress },
+        query: {  indirizzo: this.store.queryAddress,
+          
+                  price: this.filters.price,
+                  beds: this.filters.beds,
+                  meters: this.filters.meters,
+                  rooms: this.filters.rooms,
+                  bathrooms: this.filters.bathrooms },
       }); // Redirect alla pagina dei risultati
     },
     /* cambia il valore di store.radius se viene modificato il range */
@@ -65,6 +89,9 @@ export default {
       this.showModal = false;
     },
   },
+  mounted(){
+    this.getAllFacilities();
+  }
 };
 </script>
 
@@ -73,7 +100,7 @@ export default {
     class="card card-tile border-0 d-block rounded-4 mb-4 apartment-card p-2"
   >
     <div class="rounded-3 ps-3 border w-100">
-      <form class="row align-items-center" role="search" @submit="handleSubmit">
+      <form class="row align-items-center" role="search" @submit="handleSubmit" id="searchForm">
         <!-- Input Group -->
         <div class="input-group d-flex w-100 align-items-center">
           <span>
@@ -181,13 +208,13 @@ export default {
                 <li
                   class="mt-3 d-flex align-items-center justify-content-between"
                 >
-                  <label for="price">Prezzo (min)</label>
+                  <label for="price">Prezzo (max)</label>
                   <input
                     type="text"
                     class="border rounded ms_w_30"
                     id="price"
                     name="price"
-                    v-model="store.price"
+                    v-model="this.filters.price"
                   />
                 </li>
                 <li
@@ -199,7 +226,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="size_m2"
                     name="size_m2"
-                    v-model="store.size_m2"
+                    v-model="this.filters.meters"
                   />
                 </li>
                 <li
@@ -235,7 +262,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="beds"
                     name="beds"
-                    v-model="store.beds"
+                    v-model="this.filters.beds"
                   />
                 </li>
                 <li
@@ -247,7 +274,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="bedrooms"
                     name="bedrooms"
-                    v-model="store.bedrooms"
+                    v-model="this.filters.rooms"
                   />
                 </li>
                 <li
@@ -259,7 +286,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="bathrooms"
                     name="bathrooms"
-                    v-model="store.bathrooms"
+                    v-model="this.filters.bathrooms"
                   />
                 </li>
               </ul>
@@ -276,7 +303,7 @@ export default {
                 <li
                   v-for="option in store.checkboxOptions"
                   :key="option.id"
-                  class="d-flex align-items-center gap-2 col-5"
+                  class="d-flex align-items-center gap-2 col-6"
                 >
                   <input
                     class="text form-check-input"
@@ -284,7 +311,8 @@ export default {
                     type="checkbox"
                     role="switch"
                   />
-                  <label>{{ option.label }}</label>
+                  <i :class="option.icon" class="me-2"></i>
+                  <label>{{ option.name }}</label>
                 </li>
               </ul>
             </div>
@@ -298,11 +326,7 @@ export default {
           >
             Annulla
           </button>
-          <button
-            type="button"
-            class="btn ms-btn-outline-primary"
-            @click="closeModal"
-          >
+          <button type="submit" value="Submit" form="searchForm" class="btn ms-btn-outline-primary"   data-bs-dismiss="modal">
             <i class="fa-solid fa-arrow-rotate-right me-1"></i>
             Aggiorna Risultati
           </button>
