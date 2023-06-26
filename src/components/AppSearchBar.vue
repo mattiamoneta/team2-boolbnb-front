@@ -172,10 +172,10 @@ export default {
         </button>
       </div>
       <div class="col-10">
-       <div class="h-100">
+       <div class="h-100 d-flex align-items-center">
         <span class="xsmall me-2 text-uppercase fw-bold">Distanza</span>
         <input
-          class="align-middle ms-range-primary"
+          class="ms-range-primary"
           type="range"
           v-model="radius"
           id="kilometres"

@@ -9,6 +9,7 @@ export default {
   name: "ApartmentCard",
   data() {
     return {
+      store,
       scrollPos: 0,
       apartmentDetails: null,
     };
@@ -18,6 +19,20 @@ export default {
     AppFormVue,
   },
   methods: {
+     //funzione di creazione mappa
+     createMap() {
+      var map = tt.map({
+
+        key: this.store.apiKey,
+
+        container: 'map-div-details',
+
+        center: { lng: 9.1900, lat: 45.4642 },
+
+        zoom: 12
+
+      });
+    },
     handleScroll() {
       this.scrollPos = window.scrollY;
     },
@@ -40,7 +55,7 @@ export default {
   },
   mounted() {
     const id = this.$route.params.id;
-    //this.getApartmentDetails(id); // In attesa di SHOW nelle API */
+    this.createMap();
   },
 };
 </script>
@@ -293,10 +308,7 @@ export default {
                     <div class="row">
                       <div class="col-12">
                         <div class="card card-tile rounded-2 d-block">
-                          <img
-                            src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
-                            alt=""
-                          />
+                          <div id="map-div-details"></div>
                         </div>
                       </div>
                     </div>
