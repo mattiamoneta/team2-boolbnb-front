@@ -10,8 +10,10 @@ export default {
   methods: {
     handlePositions() {
       this.scrollPos = window.scrollY;
-      this.bottomPage =
-        document.documentElement.scrollHeight - window.innerHeight;
+      this.bottomPage = document.documentElement.scrollHeight - window.innerHeight;
+      console.log(window.scrollY);
+      console.log(document.documentElement.scrollHeight - window.innerHeight);
+      console.log(this.bottomPage);
     },
     scrollToTop() {
       window.scrollTo({
@@ -164,18 +166,15 @@ export default {
       style="background-color: rgba(0, 0, 0, 0.05)"
     >
       © 2023 Copyright: Boolbnb
+
+          <!-- Scroll-Top -->
+          <button class="" :class="scrollPos == bottomPage ? 'show' : ''" id="btnScrollTop" @click="scrollToTop">
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
     </div>
     <!-- Copyright -->
 
-    <!-- Scroll-Top -->
-    <button
-      class="btn"
-      :class="scrollPos == bottomPage ? 'show' : ''"
-      id="btnScrollTop"
-      @click="scrollToTop"
-    >
-      <i class="fa-solid fa-arrow-up"></i>
-    </button>
+
   </footer>
 </template>
 
@@ -184,12 +183,15 @@ export default {
 
 footer {
   margin-top: 8rem;
+  position: relative;
 
   .footer-top i {
     color: $main_darker2_color;
   }
 
   .footer-bottom {
+
+    
     a {
       text-decoration: none;
     }
