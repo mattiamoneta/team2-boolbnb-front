@@ -11,6 +11,7 @@ export default {
     return {
       store,
       scrollPos: 0,
+      filters: []
       //retApartmnets: {},
     };
   },
@@ -103,10 +104,18 @@ export default {
         8
       )}.png?key=${this.store.apiKey}=512`;
     },
+
     performSearch() {
       if (this.store.queryAddress == "") {
         this.store.queryAddress = this.$route.query.indirizzo;
       }
+
+      this.filters.push = this.$route.query.price;
+      this.filters.push = this.$route.query.beds;   
+      this.filters.push = this.$route.query.meters;
+      this.filters.push = this.$route.query.rooms;   
+      this.filters.push = this.$route.query.bathrooms;
+
 
       if (this.store.queryAddress != "") {
         axios
@@ -123,24 +132,56 @@ export default {
               /* Ottengo latitudine e longitudine dell'indirizzo */
               const lat = retVal[0].position.lat;
               const long = retVal[0].position.lon;
-              console.log(`${lat}/${long}/${this.store.radius * 1000}`);
+
+              console.log(retVal);
+
+
+              // console.log(`${lat}/${long}/${this.store.radius * 1000}`);
 
               /* Ottengo tutti gli appartamenti  dalle API Laravel entro il raggio selezionato.
                *  this.store.radius è in km quindi moltiplico per 1000 per averlo in metri
                */
+
+               let base = `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/`;
+
+               this.filters.forEach(value => {
+                    console.log(value);
+                    base += `/${value}/`
+                    
+               });
+
+
               axios
                 .post(
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${
-                    this.store.radius * 1000
-                  }`
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
+
+                  this.store.retApartmnets.forEach((value, index) => {
+
+                    axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
+                    .then((response) => {
+
+                        value.city = response.data.addresses[0].address.municipality;
+                        value.country = response.data.addresses[0].address.country;
+                    })
+                    .catch(error => {
+                      console.error(error);
+                    });
+                  });
                 })
                 .catch((error) => {
                   console.error(error);
                 });
+
             }
+
+
+            /* Ottengo la location esatta */
+
+        
+
           })
           .catch((error) => {
             console.error(error);
@@ -233,10 +274,12 @@ export default {
         <!-- Map -->
         <div class="col-7 max-fixed d-none d-lg-block">
           <div class="card d-block rounded-4 overflow-hidden border-1 h-100">
-            <img
+            <!-- <img
               :src="newMap"
               alt=""
-            />
+            /> -->
+
+            <iframe frameborder="0" width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox=8.659973144531252%2C45.31352900692261%2C9.45304870605469%2C45.60875385718798&amp;layer=mapnik"></iframe>
           </div>
         </div>
         <!-- End Map -->
