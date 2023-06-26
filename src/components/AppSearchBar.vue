@@ -13,11 +13,11 @@ export default {
       radius: 20,
       showModal: false,
       apartmentFilter: {
-        price: 0,
-        beds: 0,
-        meters: 0,
-        bathrooms: 0,
-        rooms: 0
+        price: null,
+        beds: 1,
+        meters: 1,
+        bathrooms: 1,
+        rooms: 1
       },
       servicesFilter: {}
     };
@@ -223,7 +223,7 @@ export default {
                 >
                   <label for="price">Prezzo (max)</label>
                   <input
-                    type="text"
+                    type="number"
                     class="border rounded ms_w_30"
                     id="price"
                     name="price"
