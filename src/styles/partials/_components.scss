@@ -415,6 +415,32 @@ label.card-radio {
   box-shadow: 0px 12px 15px -7px rgba(0,0,0,0.20);
 }
 
+.dropdown-search li:active{
+  background-color: $main_color!important;
+  color: black!important;
+}
+
+/* Switch */
+
+
+.form-switch input:checked{
+  background-color: $main_darker2_color!important;
+  border: $main_darker2_color!important;
+}
+
+/* Checkboxes */
+
+input[type="checkbox"],
+input[type="checkbox"]::after,
+input[type="checkbox"]::before{
+  transition: all $transition_fast!important;
+}
+
+input[type="checkbox"]:checked{
+  background-color: $main_darker2_color!important;
+  border: $main_darker2_color!important;
+}
+
 
 /* Scroll-Top Button */
 

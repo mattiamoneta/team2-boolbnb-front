@@ -227,7 +227,7 @@ export default {
                   <label for="price">Prezzo (max)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="price"
                     name="price"
                     v-model="this.apartmentFilter.price"
@@ -239,7 +239,7 @@ export default {
                   <label for="size_m2">Metratura (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="size_m2"
                     name="size_m2"
                     v-model="this.apartmentFilter.meters"
@@ -275,7 +275,7 @@ export default {
                   <label for="beds">Letti (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="beds"
                     name="beds"
                     v-model="this.apartmentFilter.beds"
@@ -287,7 +287,7 @@ export default {
                   <label for="bedrooms">Stanze (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="bedrooms"
                     name="bedrooms"
                     v-model="this.apartmentFilter.rooms"
@@ -299,7 +299,7 @@ export default {
                   <label for="bathrooms">Bagni (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="bathrooms"
                     name="bathrooms"
                     v-model="this.apartmentFilter.bathrooms"
