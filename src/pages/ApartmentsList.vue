@@ -234,7 +234,7 @@ export default {
         <div class="col-7 max-fixed d-none d-lg-block">
           <div class="card d-block rounded-4 overflow-hidden border-1 h-100">
             <img
-              src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
+              :src="newMap"
               alt=""
             />
           </div>
