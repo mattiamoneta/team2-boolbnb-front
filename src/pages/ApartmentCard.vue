@@ -1,5 +1,6 @@
 <script>
 import AppSearchBar from "../components/AppSearchBar.vue";
+import AppFormVue from "../components/AppForm.vue";
 
 import { store } from "../store";
 import axios from "axios";
@@ -14,6 +15,7 @@ export default {
   },
   components: {
     AppSearchBar,
+    AppFormVue,
   },
   methods: {
     handleScroll() {
@@ -39,7 +41,6 @@ export default {
   mounted() {
     const id = this.$route.params.id;
     //this.getApartmentDetails(id); // In attesa di SHOW nelle API */
-    
   },
 };
 </script>
@@ -292,12 +293,10 @@ export default {
                     <div class="row">
                       <div class="col-12">
                         <div class="card card-tile rounded-2 d-block">
-                          <!-- <img
-                                src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
-                                alt=""
-                              /> -->
-
-                              <iframe width="100%" height="300px"  src="https://www.openstreetmap.org/export/embed.html?bbox=8.659973144531252%2C45.31352900692261%2C9.45304870605469%2C45.60875385718798&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+                          <img
+                            src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
+                            alt=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -308,7 +307,7 @@ export default {
 
                 <!-- RIGHT SIDE: Contacts -->
                 <div class="col-4 border-start">
-                  <h5 class="text-center fw-bold">Contatti</h5>
+                  <AppFormVue />
                 </div>
                 <!-- End RIGHT SIDE: Contacts -->
               </div>
