@@ -33,8 +33,7 @@ export default {
           .get(
             `https://api.tomtom.com/search/2/search/${encodeURIComponent(
               this.store.queryAddress
-            )}.json?key=${this.store.apiKey}&language=it-IT&limit=${
-              this.store.querySuggestionsLimit
+            )}.json?key=${this.store.apiKey}&language=it-IT&limit=${this.store.querySuggestionsLimit
             }`
           )
           .then((response) => {
@@ -48,13 +47,13 @@ export default {
       }
     },
 
-    getAllFacilities(){
-        axios.get(`${this.store.baseUrl}/api/facilities/`)
+    getAllFacilities() {
+      axios.get(`${this.store.baseUrl}/api/facilities/`)
         .then(response => {
-            this.checkboxOptions = response.data.results;
-            this.checkboxOptions.forEach(item =>{
-              item.checked = false;
-            });
+          this.checkboxOptions = response.data.results;
+          this.checkboxOptions.forEach(item => {
+            item.checked = false;
+          });
 
         })
         .catch(error => {
@@ -102,16 +101,14 @@ export default {
       this.showModal = false;
     },
   },
-  mounted(){
+  mounted() {
     this.getAllFacilities();
   }
 };
 </script>
 
 <template>
-  <div
-    class="card card-tile border-0 d-block rounded-4 mb-4 apartment-card p-2"
-  >
+  <div class="card card-tile border-0 d-block rounded-4 mb-4 apartment-card p-2">
     <div class="rounded-3 ps-3 border w-100">
       <form class="row align-items-center" role="search" @submit="handleSubmit" id="searchForm">
         <!-- Input Group -->
@@ -121,28 +118,14 @@ export default {
           </span>
 
           <div class="flex-grow-1">
-            <input
-              class="form-control rounded-0 border-0 fw-semibold"
-              type="search"
-              placeholder="Cerca una località"
-              v-model="store.queryAddress"
-              @input="handleInput"
-            />
+            <input class="form-control rounded-0 border-0 fw-semibold" type="search" placeholder="Cerca una località"
+              v-model="store.queryAddress" @input="handleInput" />
 
             <!-- Dropdown -->
-            <ul
-              v-if="store.querySuggestions.length"
-              class="dropdown-menu w-80 show"
-            >
-              <li
-                v-for="suggestion in store.querySuggestions"
-                :key="suggestion.id"
-                @click="selectAddress(suggestion)"
-                class="dropdown-item"
-              >
-                <i
-                  class="fa-sharp fa-solid fa-location-dot me-1 small ms_text_main_darker"
-                ></i>
+            <ul v-if="store.querySuggestions.length" class="dropdown-menu w-80 show">
+              <li v-for="suggestion in store.querySuggestions" :key="suggestion.id" @click="selectAddress(suggestion)"
+                class="dropdown-item">
+                <i class="fa-sharp fa-solid fa-location-dot me-1 small ms_text_main_darker"></i>
                 {{ suggestion.address.freeformAddress }}
               </li>
             </ul>
@@ -159,31 +142,17 @@ export default {
     <!-- Inline Filters -->
     <div class="row filters py-3" v-if="showFilters == true">
       <div class="col-2">
-        <button
-          class="btn ms-btn ms-btn-textual-outline btn-sm"
-          data-bs-toggle="modal"
-          data-bs-target="#filtersModal"
-          @click="openModal"
-        >
+        <button class="btn ms-btn ms-btn-textual-outline btn-sm" data-bs-toggle="modal" data-bs-target="#filtersModal"
+          @click="openModal">
           <i class="fa-solid fa-filter me-2 align-middle"></i>
-          <span class="xsmall text-uppercase fw-bold align-middle"
-            >filtra risultati</span
-          >
+          <span class="xsmall text-uppercase fw-bold align-middle">filtra risultati</span>
         </button>
       </div>
       <div class="col-10 text-end"></div>
       <!-- RANGE per il radius -->
       <div>
-        <input
-          type="range"
-          v-model="radius"
-          id="kilometres"
-          name="kilometres"
-          min="1"
-          max="100"
-          step=" 1"
-          @change="changeRadius"
-        />
+        <input type="range" v-model="radius" id="kilometres" name="kilometres" min="1" max="100" step=" 1"
+          @change="changeRadius" />
         <h6>Raggio {{ radius }}Km</h6>
       </div>
     </div>
@@ -191,139 +160,71 @@ export default {
   </div>
 
   <!-- Modal -->
-  <div
-    if="showModal"
-    class="modal fade ms_gray_color"
-    id="filtersModal"
-    tabindex="-1"
-    aria-labelledby="filtersModalLabel"
-    aria-hidden="true"
-  >
+  <div if="showModal" class="modal fade ms_gray_color" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body position-relative">
-          <button
-            type="button"
-            class="btn-close position-absolute top-0 end-0 m-3"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"
+            aria-label="Close"></button>
 
           <div class="row justify-content-between p-4">
             <!-- principali -->
             <div class="col-6 mt-4 pe-4">
-              <h6
-                class="xsmall text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing"
-              >
+              <h6 class="xsmall text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing">
                 Principali
               </h6>
               <ul class="list-unstyled">
-                <li
-                  class="mt-3 d-flex align-items-center justify-content-between"
-                >
+                <li class="mt-3 d-flex align-items-center justify-content-between">
                   <label for="price">Prezzo (max)</label>
-                  <input
-                    type="text"
-                    class="border rounded ms_w_30"
-                    id="price"
-                    name="price"
-                    v-model="this.apartmentFilter.price"
-                  />
+                  <input type="text" class="border rounded ms_w_30" id="price" name="price"
+                    v-model="this.apartmentFilter.price" />
                 </li>
-                <li
-                  class="mt-3 d-flex align-items-center justify-content-between"
-                >
+                <li class="mt-3 d-flex align-items-center justify-content-between">
                   <label for="size_m2">Metratura (min)</label>
-                  <input
-                    type="number"
-                    class="border rounded ms_w_30"
-                    id="size_m2"
-                    name="size_m2"
-                    v-model="this.apartmentFilter.meters"
-                  />
+                  <input type="number" class="border rounded ms_w_30" id="size_m2" name="size_m2"
+                    v-model="this.apartmentFilter.meters" />
                 </li>
-                <li
-                  class="mt-3 form-switch p-0 d-flex align-items-center justify-content-between"
-                >
+                <li class="mt-3 form-switch p-0 d-flex align-items-center justify-content-between">
                   <label for="available">Disponibile</label>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="available"
-                    name="available"
-                    role="switch"
-                    v-model="store.available"
-                  />
+                  <input class="form-check-input" type="checkbox" id="available" name="available" role="switch"
+                    v-model="store.available" />
                 </li>
               </ul>
             </div>
 
             <!-- Caratteristiche -->
             <div class="col-6 mt-4 ps-4">
-              <h6
-                class="xsmall text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing"
-              >
+              <h6 class="xsmall text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing">
                 Caratteristiche
               </h6>
               <ul class="list-unstyled">
-                <li
-                  class="mt-3 d-flex align-items-center justify-content-between"
-                >
+                <li class="mt-3 d-flex align-items-center justify-content-between">
                   <label for="beds">Letti (min)</label>
-                  <input
-                    type="number"
-                    class="border rounded ms_w_30"
-                    id="beds"
-                    name="beds"
-                    v-model="this.apartmentFilter.beds"
-                  />
+                  <input type="number" class="border rounded ms_w_30" id="beds" name="beds"
+                    v-model="this.apartmentFilter.beds" />
                 </li>
-                <li
-                  class="mt-3 d-flex align-items-center justify-content-between"
-                >
+                <li class="mt-3 d-flex align-items-center justify-content-between">
                   <label for="bedrooms">Stanze (min)</label>
-                  <input
-                    type="number"
-                    class="border rounded ms_w_30"
-                    id="bedrooms"
-                    name="bedrooms"
-                    v-model="this.apartmentFilter.rooms"
-                  />
+                  <input type="number" class="border rounded ms_w_30" id="bedrooms" name="bedrooms"
+                    v-model="this.apartmentFilter.rooms" />
                 </li>
-                <li
-                  class="mt-3 d-flex align-items-center justify-content-between"
-                >
+                <li class="mt-3 d-flex align-items-center justify-content-between">
                   <label for="bathrooms">Bagni (min)</label>
-                  <input
-                    type="number"
-                    class="border rounded ms_w_30"
-                    id="bathrooms"
-                    name="bathrooms"
-                    v-model="this.apartmentFilter.bathrooms"
-                  />
+                  <input type="number" class="border rounded ms_w_30" id="bathrooms" name="bathrooms"
+                    v-model="this.apartmentFilter.bathrooms" />
                 </li>
               </ul>
             </div>
 
             <!-- Servizi -->
             <div class="col-12 mt-5 ms_text_main_darker2">
-              <h6
-                class="xsmall text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing"
-              >
+              <h6 class="xsmall text-uppercase mb-5 ms_text_main_darker2 font-semibold font-secondary letter_spacing">
                 Servizi
               </h6>
               <ul class="list-unstyled row flex-wrap gy-3">
-                <li
-                  v-for="option in checkboxOptions"
-                  :key="option.id"
-                  class="d-flex align-items-center gap-2 col-6"
-                >
-                  <input
-                    class="text form-check-input"
-                    v-model="option.checked"
-                    type="checkbox"
-                    role="switch"
-                  />
+                <li v-for="option in checkboxOptions" :key="option.id" class="d-flex align-items-center gap-2 col-6">
+                  <input class="text form-check-input" v-model="option.checked" type="checkbox" role="switch" />
                   <i :class="option.icon" class="me-2"></i>
                   <label>{{ option.name }}</label>
                 </li>
@@ -332,14 +233,12 @@ export default {
           </div>
         </div>
         <div class="modal-footer d-flex justify-content-between">
-          <button
-            type="button"
-            class="border-0 bg-white text-decoration-underline ms_text_main_darker"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="border-0 bg-white text-decoration-underline ms_text_main_darker"
+            data-bs-dismiss="modal">
             Annulla
           </button>
-          <button type="submit" value="Submit" form="searchForm" class="btn ms-btn-outline-primary"   data-bs-dismiss="modal">
+          <button type="submit" value="Submit" form="searchForm" class="btn ms-btn-outline-primary"
+            data-bs-dismiss="modal">
             <i class="fa-solid fa-arrow-rotate-right me-1"></i>
             Aggiorna Risultati
           </button>

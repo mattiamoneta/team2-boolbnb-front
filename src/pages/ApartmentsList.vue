@@ -57,11 +57,10 @@ export default {
 
 
               axios
-                .post(
-                  // `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000
-                  // }`
+                .get(
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}`
 
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
+                  //`${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
@@ -69,14 +68,14 @@ export default {
                   this.store.retApartmnets.forEach((value, index) => {
 
                     axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
-                    .then((response) => {
+                      .then((response) => {
 
                         value.city = response.data.addresses[0].address.municipality;
                         value.country = response.data.addresses[0].address.country;
-                    })
-                    .catch(error => {
-                      console.error(error);
-                    });
+                      })
+                      .catch(error => {
+                        console.error(error);
+                      });
                   });
                 })
                 .catch((error) => {
@@ -88,7 +87,7 @@ export default {
 
             /* Ottengo la location esatta */
 
-        
+
 
           })
           .catch((error) => {
