@@ -11,9 +11,6 @@ export default {
     handlePositions() {
       this.scrollPos = window.scrollY;
       this.bottomPage = document.documentElement.scrollHeight - window.innerHeight;
-      console.log(window.scrollY);
-      console.log(document.documentElement.scrollHeight - window.innerHeight);
-      console.log(this.bottomPage);
     },
     scrollToTop() {
       window.scrollTo({
