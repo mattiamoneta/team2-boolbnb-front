@@ -11,6 +11,7 @@ export default {
     return {
       store,
       scrollPos: 0,
+      filters: []
       //retApartmnets: {},
     };
   },
@@ -26,87 +27,17 @@ export default {
     handleScroll() {
       this.scrollPos = window.scrollY;
     },
-    //funzione che transforma lat e lon in numeri accettabili dall'url della mappa
-    latLonToTileZXY(lat, lon, zoomLevel) {
-      const MIN_ZOOM_LEVEL = 0;
-
-      const MAX_ZOOM_LEVEL = 22;
-
-      const MIN_LAT = -85.051128779807;
-
-      const MAX_LAT = 85.051128779806;
-
-      const MIN_LON = -180.0;
-
-      const MAX_LON = 180.0;
-
-      if (
-        zoomLevel == undefined ||
-        isNaN(zoomLevel) ||
-        zoomLevel < MIN_ZOOM_LEVEL ||
-        zoomLevel > MAX_ZOOM_LEVEL
-      ) {
-        throw new Error(
-          "Zoom level value is out of range [" +
-            MIN_ZOOM_LEVEL.toString() +
-            ", " +
-            MAX_ZOOM_LEVEL.toString() +
-            "]"
-        );
-      }
-
-      if (lat == undefined || isNaN(lat) || lat < MIN_LAT || lat > MAX_LAT) {
-        throw new Error(
-          "Latitude value is out of range [" +
-            MIN_LAT.toString() +
-            ", " +
-            MAX_LAT.toString() +
-            "]"
-        );
-      }
-
-      if (lon == undefined || isNaN(lon) || lon < MIN_LON || lon > MAX_LON) {
-        throw new Error(
-          "Longitude value is out of range [" +
-            MIN_LON.toString() +
-            ", " +
-            MAX_LON.toString() +
-            "]"
-        );
-      }
-
-      let z = Math.trunc(zoomLevel);
-
-      let xyTilesCount = Math.pow(2, z);
-
-      let x = Math.trunc(Math.floor(((lon + 180.0) / 360.0) * xyTilesCount));
-
-      let y = Math.trunc(
-        Math.floor(
-          ((1.0 -
-            Math.log(
-              Math.tan((lat * Math.PI) / 180.0) +
-                1.0 / Math.cos((lat * Math.PI) / 180.0)
-            ) /
-              Math.PI) /
-            2.0) *
-            xyTilesCount
-        )
-      );
-
-      return z.toString() + "/" + x.toString() + "/" + y.toString();
-    },
-    newMap() {
-      return `https://a.api.tomtom.com/map/1/tile/basic/main/${latLonToTileZXY(
-        45.4641943,
-        9.1896346,
-        8
-      )}.png?key=${this.store.apiKey}=512`;
-    },
     performSearch() {
       if (this.store.queryAddress == "") {
         this.store.queryAddress = this.$route.query.indirizzo;
       }
+
+      this.filters.push = this.$route.query.price;
+      this.filters.push = this.$route.query.beds;   
+      this.filters.push = this.$route.query.meters;
+      this.filters.push = this.$route.query.rooms;   
+      this.filters.push = this.$route.query.bathrooms;
+
 
       if (this.store.queryAddress != "") {
         axios
@@ -123,24 +54,57 @@ export default {
               /* Ottengo latitudine e longitudine dell'indirizzo */
               const lat = retVal[0].position.lat;
               const long = retVal[0].position.lon;
-              console.log(`${lat}/${long}/${this.store.radius * 1000}`);
+
+              console.log(retVal);
+
+
+              // console.log(`${lat}/${long}/${this.store.radius * 1000}`);
 
               /* Ottengo tutti gli appartamenti  dalle API Laravel entro il raggio selezionato.
                *  this.store.radius è in km quindi moltiplico per 1000 per averlo in metri
                */
+
+               let base = `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/`;
+
+               this.filters.forEach(value => {
+                    console.log(value);
+                    base += `/${value}/`
+                    
+               });
+
+
               axios
                 .post(
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${
-                    this.store.radius * 1000
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000
                   }`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
+
+                  this.store.retApartmnets.forEach((value, index) => {
+
+                    axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
+                    .then((response) => {
+
+                        value.city = response.data.addresses[0].address.municipality;
+                        value.country = response.data.addresses[0].address.country;
+                    })
+                    .catch(error => {
+                      console.error(error);
+                    });
+                  });
                 })
                 .catch((error) => {
                   console.error(error);
                 });
+
             }
+
+
+            /* Ottengo la location esatta */
+
+        
+
           })
           .catch((error) => {
             console.error(error);
@@ -150,6 +114,20 @@ export default {
     isObjectEmpty(obj) {
       return Object.keys(obj).length === 0;
     },
+    //funzione di creazione mappa
+    createMap() {
+      var map = tt.map({
+
+        key: this.store.apiKey,
+
+        container: 'map-div',
+
+        center: { lng: 9.1900, lat: 45.4642 },
+
+        zoom: 12
+
+      });
+    }
   },
   created() {
     /* Intercetta lo scroll del mouse */
@@ -161,6 +139,8 @@ export default {
   mounted() {
     this.performSearch();
 
+    this.createMap();
+
     //funzione che viene lanciata quando store.radius viene aggiornata nello store.js
     this.$watch(
       () => store.radius,
@@ -171,6 +151,7 @@ export default {
       }
     );
   },
+
 
   components: {
     ApartmentResultCard,
@@ -186,15 +167,11 @@ export default {
         <div class="col">
           <h2 class="ms_section_title font-semibold">
             Risultati per <span>&#34;</span>
-            <span
-              class="font-primary fw-bolder ms_text_main_darker"
-              v-if="this.$route.query.indirizzo != null"
-            >
+            <span class="font-primary fw-bolder ms_text_main_darker" v-if="this.$route.query.indirizzo != null">
               {{ this.$route.query.indirizzo }}
             </span>
             <span class="font-primary fw-bolder ms_text_main_darker" v-else>
-              Nessun Risultato </span
-            ><span>&#34;</span>
+              Nessun Risultato </span><span>&#34;</span>
           </h2>
         </div>
       </div>
@@ -213,11 +190,8 @@ export default {
         <div class="col-12 col-lg-5">
           <div class="fixed-box pe-4 py-3">
             <div>
-              <ApartmentResultCard
-                v-for="singleApartment in store.retApartmnets"
-                :objApartment="singleApartment"
-                hrefURI="/apartment"
-              />
+              <ApartmentResultCard v-for="singleApartment in store.retApartmnets" :objApartment="singleApartment"
+                hrefURI="/apartment" />
             </div>
           </div>
         </div>
@@ -226,10 +200,7 @@ export default {
         <!-- Map -->
         <div class="col-7 max-fixed d-none d-lg-block">
           <div class="card d-block rounded-4 overflow-hidden border-1 h-100">
-            <img
-              src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
-              alt=""
-            />
+            <div id="map-div"></div>
           </div>
         </div>
         <!-- End Map -->
@@ -249,4 +220,9 @@ export default {
   </main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#map-div {
+  width: 100vw;
+  height: 100vh;
+}
+</style>
