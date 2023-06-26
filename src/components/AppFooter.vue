@@ -70,7 +70,7 @@ export default {
 
     <!-- Section: Links  -->
     <section class="">
-      <div class="footer-bottom container text-center text-md-start mt-5">
+      <div class="footer-bottom container text-center text-md-start mt-5 pb-5 mb-5">
         <div class="row">
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
