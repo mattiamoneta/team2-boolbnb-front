@@ -60,3 +60,7 @@ h6 {
 .letter_spacing {
   letter-spacing: 1px;
 }
+
+.placeholder_smaller::placeholder {
+  font-size: 0.9rem;
+}

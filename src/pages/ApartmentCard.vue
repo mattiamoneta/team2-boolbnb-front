@@ -1,5 +1,6 @@
 <script>
 import AppSearchBar from "../components/AppSearchBar.vue";
+import AppFormVue from "../components/AppForm.vue";
 
 import { store } from "../store";
 import axios from "axios";
@@ -14,6 +15,7 @@ export default {
   },
   components: {
     AppSearchBar,
+    AppFormVue,
   },
   methods: {
     handleScroll() {
@@ -292,9 +294,9 @@ export default {
                       <div class="col-12">
                         <div class="card card-tile rounded-2 d-block">
                           <img
-                                src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
-                                alt=""
-                              />
+                            src="https://a.api.tomtom.com/map/1/tile/basic/main/8/134/91.png?key=ZPskuspkrrcmchd9ut4twltuw96h5bWH=512"
+                            alt=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -305,7 +307,7 @@ export default {
 
                 <!-- RIGHT SIDE: Contacts -->
                 <div class="col-4 border-start">
-                  <h5 class="text-center fw-bold">Contatti</h5>
+                  <AppFormVue />
                 </div>
                 <!-- End RIGHT SIDE: Contacts -->
               </div>

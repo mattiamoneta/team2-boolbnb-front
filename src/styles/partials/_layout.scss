@@ -1,27 +1,28 @@
 /* LAYOUT */
 
-
 /* width */
 
-.w-80{
-    width: 80%!important;
+.w-80 {
+  width: 80% !important;
 }
 
-.ms_w_30{
-    width: 30%!important;
+.ms_w_30 {
+  width: 30% !important;
 }
 
-.cover-image{
-    height: 150px;
-    object-fit: cover;
+.ms_w_90 {
+  width: 90% !important;
 }
 
-
-.searchbar-fix{
-    margin-bottom: 4.5em;
+.cover-image {
+  height: 150px;
+  object-fit: cover;
 }
 
+.searchbar-fix {
+  margin-bottom: 4.5em;
+}
 
-.z-foreground{
-    z-index: 998;
+.z-foreground {
+  z-index: 998;
 }

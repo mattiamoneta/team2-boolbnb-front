@@ -43,6 +43,10 @@
   transform: translateX(-50px);
 }
 
+.shadow_only {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
 /* Icons */
 
 .rounded-icon {
@@ -113,7 +117,6 @@
   font-size: 1.5rem;
 }
 
-
 .btn.ms-btn::after {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -147,7 +150,6 @@
 
 .btn.ms-btn-outline-primary span,
 .btn.ms-btn-outline-primary i {
-
   color: $main_darker_color;
 }
 
@@ -172,7 +174,6 @@
 
 .btn.ms-btn-outline-black span,
 .btn.ms-btn-outline-black i {
-
   color: $black_text_color;
 }
 
@@ -192,10 +193,8 @@
 
 .btn.ms-btn-primary span,
 .btn.ms-btn-primary i {
-
   color: white;
 }
-
 
 .btn.ms-btn-primary:hover {
   background-color: transparent;
@@ -227,7 +226,7 @@
 }
 
 .btn.ms-btn-textual-primary:hover span,
-.btn.ms-btn-textual-primary:hover i{
+.btn.ms-btn-textual-primary:hover i {
   color: white;
 }
 
@@ -260,7 +259,6 @@
   color: white;
 }
 
-
 /* Button Textual Secondary */
 
 .btn.ms-btn-textual-outline {
@@ -272,7 +270,7 @@
 }
 
 .btn.ms-btn-textual-outline:hover span,
-.btn.ms-btn-textual-outline:hover i{
+.btn.ms-btn-textual-outline:hover i {
   color: $main_darker2_color;
   transition: color $transition_fast;
 }
@@ -430,11 +428,11 @@ label.card-radio {
 
 /* Apartments Search Results */
 
-  .fixed-box{
-    position: relative;
-    height: 80vh;
-    overflow-y: auto!important;
-  }
+.fixed-box {
+  position: relative;
+  height: 80vh;
+  overflow-y: auto !important;
+}
 
 .fixed-box {
   position: relative;
@@ -448,17 +446,16 @@ iframe {
   border: 0 !important;
 }
 
-
-.underlined{
-    position: relative;
+.underlined {
+  position: relative;
 }
 
-input.underlined:focus::after{
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 10px;
-    height: 30px;
-    width: 90%;
-    background-color: red;
+input.underlined:focus::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 10px;
+  height: 30px;
+  width: 90%;
+  background-color: red;
 }
