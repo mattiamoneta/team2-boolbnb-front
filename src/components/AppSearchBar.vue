@@ -112,7 +112,7 @@ export default {
   <div
     class="card card-tile border-0 d-block rounded-4 mb-4 apartment-card p-2"
   >
-    <div class="rounded-3 ps-3 border w-100">
+    <div class="rounded-3 ps-3 ms-border-search w-100">
       <form class="row align-items-center" role="search" @submit="handleSubmit" id="searchForm">
         <!-- Input Group -->
         <div class="input-group d-flex w-100 align-items-center">
@@ -122,7 +122,7 @@ export default {
 
           <div class="flex-grow-1">
             <input
-              class="form-control rounded-0 border-0 fw-semibold"
+              class="form-control rounded-0 border-0 fw-semibold ms-search-field shadow-none"
               type="search"
               placeholder="Cerca una località"
               v-model="store.queryAddress"
@@ -131,8 +131,8 @@ export default {
 
             <!-- Dropdown -->
             <ul
-              v-if="store.querySuggestions.length"
-              class="dropdown-menu w-80 show"
+              class="dropdown-menu w-80 dropdown-search"
+              :class="store.queryAddress.length > 2 && store.querySuggestions.length > 2 ? 'show' : ''"
             >
               <li
                 v-for="suggestion in store.querySuggestions"
@@ -171,10 +171,11 @@ export default {
           >
         </button>
       </div>
-      <div class="col-10 text-end"></div>
-      <!-- RANGE per il radius -->
-      <div>
+      <div class="col-10">
+       <div class="h-100">
+        <span class="xsmall me-2 text-uppercase fw-bold">Distanza</span>
         <input
+          class="align-middle ms-range-primary"
           type="range"
           v-model="radius"
           id="kilometres"
@@ -184,8 +185,10 @@ export default {
           step=" 1"
           @change="changeRadius"
         />
-        <h6>Raggio {{ radius }}Km</h6>
+        <label for="kilometres" class="xsmall text-uppercase fw-bold ms-3 d-inline-block fixed-label ms_text_main_darker2">{{ radius }}KM</label>
+       </div>
       </div>
+      <!-- RANGE per il radius -->
     </div>
     <!-- End Inline Filters -->
   </div>
