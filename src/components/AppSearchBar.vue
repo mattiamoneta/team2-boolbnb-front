@@ -10,16 +10,6 @@ export default {
       querySuggestionsLimit: 6,
       querySuggestions: [],
       radius: 20,
-      available: 0,
-
-      // price: 0,
-      // meters: 0,
-      // beds: 0,
-      // bedrooms: 0,
-      // bathrooms: 0,
-
-
-      checkboxOptions: null,
       showModal: false,
       filters: {
         price: 0,
@@ -92,10 +82,12 @@ export default {
       this.store.radius = this.radius;
     },
 
-    filtersUriBuilder(){
-
-    }
-    
+    openModal() {
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
+    },
   },
   mounted(){
     this.getAllFacilities();
@@ -247,7 +239,7 @@ export default {
                     id="available"
                     name="available"
                     role="switch"
-                    v-model="available"
+                    v-model="store.available"
                   />
                 </li>
               </ul>
@@ -309,7 +301,7 @@ export default {
               </h6>
               <ul class="list-unstyled row flex-wrap gy-3">
                 <li
-                  v-for="option in checkboxOptions"
+                  v-for="option in store.checkboxOptions"
                   :key="option.id"
                   class="d-flex align-items-center gap-2 col-6"
                 >

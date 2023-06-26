@@ -27,84 +27,6 @@ export default {
     handleScroll() {
       this.scrollPos = window.scrollY;
     },
-    //funzione che transforma lat e lon in numeri accettabili dall'url della mappa
-    latLonToTileZXY(lat, lon, zoomLevel) {
-      const MIN_ZOOM_LEVEL = 0;
-
-      const MAX_ZOOM_LEVEL = 22;
-
-      const MIN_LAT = -85.051128779807;
-
-      const MAX_LAT = 85.051128779806;
-
-      const MIN_LON = -180.0;
-
-      const MAX_LON = 180.0;
-
-      if (
-        zoomLevel == undefined ||
-        isNaN(zoomLevel) ||
-        zoomLevel < MIN_ZOOM_LEVEL ||
-        zoomLevel > MAX_ZOOM_LEVEL
-      ) {
-        throw new Error(
-          "Zoom level value is out of range [" +
-            MIN_ZOOM_LEVEL.toString() +
-            ", " +
-            MAX_ZOOM_LEVEL.toString() +
-            "]"
-        );
-      }
-
-      if (lat == undefined || isNaN(lat) || lat < MIN_LAT || lat > MAX_LAT) {
-        throw new Error(
-          "Latitude value is out of range [" +
-            MIN_LAT.toString() +
-            ", " +
-            MAX_LAT.toString() +
-            "]"
-        );
-      }
-
-      if (lon == undefined || isNaN(lon) || lon < MIN_LON || lon > MAX_LON) {
-        throw new Error(
-          "Longitude value is out of range [" +
-            MIN_LON.toString() +
-            ", " +
-            MAX_LON.toString() +
-            "]"
-        );
-      }
-
-      let z = Math.trunc(zoomLevel);
-
-      let xyTilesCount = Math.pow(2, z);
-
-      let x = Math.trunc(Math.floor(((lon + 180.0) / 360.0) * xyTilesCount));
-
-      let y = Math.trunc(
-        Math.floor(
-          ((1.0 -
-            Math.log(
-              Math.tan((lat * Math.PI) / 180.0) +
-                1.0 / Math.cos((lat * Math.PI) / 180.0)
-            ) /
-              Math.PI) /
-            2.0) *
-            xyTilesCount
-        )
-      );
-
-      return z.toString() + "/" + x.toString() + "/" + y.toString();
-    },
-    newMap() {
-      return `https://a.api.tomtom.com/map/1/tile/basic/main/${latLonToTileZXY(
-        45.4641943,
-        9.1896346,
-        8
-      )}.png?key=${this.store.apiKey}=512`;
-    },
-
     performSearch() {
       if (this.store.queryAddress == "") {
         this.store.queryAddress = this.$route.query.indirizzo;
@@ -153,7 +75,8 @@ export default {
 
               axios
                 .post(
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}`
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000
+                  }`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
@@ -188,6 +111,23 @@ export default {
           });
       }
     },
+    isObjectEmpty(obj) {
+      return Object.keys(obj).length === 0;
+    },
+    //funzione di creazione mappa
+    createMap() {
+      var map = tt.map({
+
+        key: this.store.apiKey,
+
+        container: 'map-div',
+
+        center: { lng: 9.1900, lat: 45.4642 },
+
+        zoom: 12
+
+      });
+    }
   },
   created() {
     /* Intercetta lo scroll del mouse */
@@ -199,6 +139,8 @@ export default {
   mounted() {
     this.performSearch();
 
+    this.createMap();
+
     //funzione che viene lanciata quando store.radius viene aggiornata nello store.js
     this.$watch(
       () => store.radius,
@@ -209,11 +151,8 @@ export default {
       }
     );
   },
-  computed: {
-    isObjectEmpty() {
-      return Object.keys(this.store.filteredApartments).length === 0;
-    },
-  },
+
+
   components: {
     ApartmentResultCard,
     AppSearchBar,
@@ -228,15 +167,11 @@ export default {
         <div class="col">
           <h2 class="ms_section_title font-semibold">
             Risultati per <span>&#34;</span>
-            <span
-              class="font-primary fw-bolder ms_text_main_darker"
-              v-if="this.$route.query.indirizzo != null"
-            >
+            <span class="font-primary fw-bolder ms_text_main_darker" v-if="this.$route.query.indirizzo != null">
               {{ this.$route.query.indirizzo }}
             </span>
             <span class="font-primary fw-bolder ms_text_main_darker" v-else>
-              Nessun Risultato </span
-            ><span>&#34;</span>
+              Nessun Risultato </span><span>&#34;</span>
           </h2>
         </div>
       </div>
@@ -254,19 +189,10 @@ export default {
         <!-- Results -->
         <div class="col-12 col-lg-5">
           <div class="fixed-box pe-4 py-3">
-            <ApartmentResultCard
-              v-for="singleApartment in store.retApartmnets"
-              v-if="isObjectEmpty"
-              :objApartment="singleApartment"
-              hrefURI="/apartment"
-            />
-            <ApartmentResultCard
-              v-else
-              v-for="(singleApartment, key) in store.filteredApartments"
-              :key="key"
-              :objApartment="singleApartment"
-              hrefURI="/apartment"
-            />
+            <div>
+              <ApartmentResultCard v-for="singleApartment in store.retApartmnets" :objApartment="singleApartment"
+                hrefURI="/apartment" />
+            </div>
           </div>
         </div>
         <!-- End Results -->
@@ -274,12 +200,7 @@ export default {
         <!-- Map -->
         <div class="col-7 max-fixed d-none d-lg-block">
           <div class="card d-block rounded-4 overflow-hidden border-1 h-100">
-            <!-- <img
-              :src="newMap"
-              alt=""
-            /> -->
-
-            <iframe frameborder="0" width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox=8.659973144531252%2C45.31352900692261%2C9.45304870605469%2C45.60875385718798&amp;layer=mapnik"></iframe>
+            <div id="map-div"></div>
           </div>
         </div>
         <!-- End Map -->
@@ -299,4 +220,9 @@ export default {
   </main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#map-div {
+  width: 100vw;
+  height: 100vh;
+}
+</style>
