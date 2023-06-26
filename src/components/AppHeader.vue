@@ -103,6 +103,7 @@ export default {
     </nav>
     <!-- End Navbar -->
   </header>
+  
 </template>
 
 <style scoped lang="scss"></style>
