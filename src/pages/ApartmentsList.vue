@@ -48,8 +48,6 @@ export default {
               const lat = retVal[0].position.lat;
               const long = retVal[0].position.lon;
 
-              console.log(retVal);
-
 
               // console.log(`${lat}/${long}/${this.store.radius * 1000}`);
 
@@ -63,8 +61,7 @@ export default {
                   // `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000
                   // }`
 
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000
-                  }/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}`
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti

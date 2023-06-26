@@ -52,6 +52,10 @@ export default {
         axios.get(`${this.store.baseUrl}/api/facilities/`)
         .then(response => {
             this.checkboxOptions = response.data.results;
+            this.checkboxOptions.forEach(item =>{
+              item.checked = false;
+            });
+
         })
         .catch(error => {
           console.error(error);
@@ -75,7 +79,13 @@ export default {
           beds: this.apartmentFilter.beds,
           meters: this.apartmentFilter.meters,
           rooms: this.apartmentFilter.rooms,
-          bathrooms: this.apartmentFilter.bathrooms
+          bathrooms: this.apartmentFilter.bathrooms,
+          amn_wifi: this.checkboxOptions[0].checked,
+          amn_car: this.checkboxOptions[1].checked,
+          amn_pool: this.checkboxOptions[2].checked,
+          amn_door: this.checkboxOptions[3].checked,
+          amn_sauna: this.checkboxOptions[4].checked,
+          amn_water: this.checkboxOptions[5].checked,
 
         },
       }); // Redirect alla pagina dei risultati
