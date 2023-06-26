@@ -9,15 +9,17 @@ export default {
       queryAddress: "",
       querySuggestionsLimit: 6,
       querySuggestions: [],
+      checkboxOptions: null,
       radius: 20,
       showModal: false,
-      filters: {
+      apartmentFilter: {
         price: 0,
         beds: 0,
         meters: 0,
         bathrooms: 0,
         rooms: 0
-      }
+      },
+      servicesFilter: {}
     };
   },
   props: {
@@ -50,7 +52,6 @@ export default {
         axios.get(`${this.store.baseUrl}/api/facilities/`)
         .then(response => {
             this.checkboxOptions = response.data.results;
-            console.log(this.checkboxOptions);
         })
         .catch(error => {
           console.error(error);
@@ -68,13 +69,15 @@ export default {
       event.preventDefault(); // Evita il comportamento predefinito del modulo
       this.$router.push({
         name: "search",
-        query: {  indirizzo: this.store.queryAddress,
-          
-                  price: this.filters.price,
-                  beds: this.filters.beds,
-                  meters: this.filters.meters,
-                  rooms: this.filters.rooms,
-                  bathrooms: this.filters.bathrooms },
+        query: {
+          indirizzo: this.store.queryAddress,
+          price: this.apartmentFilter.price,
+          beds: this.apartmentFilter.beds,
+          meters: this.apartmentFilter.meters,
+          rooms: this.apartmentFilter.rooms,
+          bathrooms: this.apartmentFilter.bathrooms
+
+        },
       }); // Redirect alla pagina dei risultati
     },
     /* cambia il valore di store.radius se viene modificato il range */
@@ -214,7 +217,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="price"
                     name="price"
-                    v-model="this.filters.price"
+                    v-model="this.apartmentFilter.price"
                   />
                 </li>
                 <li
@@ -226,7 +229,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="size_m2"
                     name="size_m2"
-                    v-model="this.filters.meters"
+                    v-model="this.apartmentFilter.meters"
                   />
                 </li>
                 <li
@@ -262,7 +265,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="beds"
                     name="beds"
-                    v-model="this.filters.beds"
+                    v-model="this.apartmentFilter.beds"
                   />
                 </li>
                 <li
@@ -274,7 +277,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="bedrooms"
                     name="bedrooms"
-                    v-model="this.filters.rooms"
+                    v-model="this.apartmentFilter.rooms"
                   />
                 </li>
                 <li
@@ -286,7 +289,7 @@ export default {
                     class="border rounded ms_w_30"
                     id="bathrooms"
                     name="bathrooms"
-                    v-model="this.filters.bathrooms"
+                    v-model="this.apartmentFilter.bathrooms"
                   />
                 </li>
               </ul>
@@ -301,7 +304,7 @@ export default {
               </h6>
               <ul class="list-unstyled row flex-wrap gy-3">
                 <li
-                  v-for="option in store.checkboxOptions"
+                  v-for="option in checkboxOptions"
                   :key="option.id"
                   class="d-flex align-items-center gap-2 col-6"
                 >

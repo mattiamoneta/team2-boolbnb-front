@@ -32,13 +32,6 @@ export default {
         this.store.queryAddress = this.$route.query.indirizzo;
       }
 
-      this.filters.push = this.$route.query.price;
-      this.filters.push = this.$route.query.beds;   
-      this.filters.push = this.$route.query.meters;
-      this.filters.push = this.$route.query.rooms;   
-      this.filters.push = this.$route.query.bathrooms;
-
-
       if (this.store.queryAddress != "") {
         axios
           .get(
@@ -64,19 +57,14 @@ export default {
                *  this.store.radius è in km quindi moltiplico per 1000 per averlo in metri
                */
 
-               let base = `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/`;
-
-               this.filters.forEach(value => {
-                    console.log(value);
-                    base += `/${value}/`
-                    
-               });
-
 
               axios
                 .post(
+                  // `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000
+                  // }`
+
                   `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000
-                  }`
+                  }/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
