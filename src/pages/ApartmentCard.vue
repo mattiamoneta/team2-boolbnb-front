@@ -22,7 +22,9 @@ export default {
       this.scrollPos = window.scrollY;
     },
 
-    getApartmentDetails(id) {
+    getApartmentDetails() {
+      const id = this.$route.params.id;
+
       axios
         .get(`${this.store.baseUrl}/api/apartment/${id}`)
         .then((response) => {
@@ -39,8 +41,7 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   mounted() {
-    const id = this.$route.params.id;
-    //this.getApartmentDetails(id); // In attesa di SHOW nelle API */
+    this.getApartmentDetails();
   },
 };
 </script>

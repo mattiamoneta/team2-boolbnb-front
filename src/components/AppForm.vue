@@ -20,8 +20,10 @@ export default {
       this.success = false;
       this.sending = true;
 
+      const id = this.$route.params.id;
+
       axios
-        .post(`${this.store.baseUrl}/api/apartment/:id`, {
+        .post(`${this.store.baseUrl}/api/apartment/${id}`, {
           name: this.name,
           email: this.email,
           message: this.message,
@@ -69,7 +71,7 @@ export default {
     <!-- form bottom -->
     <div class="w-100 px-4 xmedium">
       <!-- form -->
-      <form @submit.prevent="sendForm()">
+      <form @submit.prevent="sendForm(apartment.id)">
         <!-- nome -->
         <div class="mb-4">
           <label for="name" class="form-label font-semibold"
