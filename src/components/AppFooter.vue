@@ -140,15 +140,15 @@ export default {
               contatti
             </h6>
             <p class="d-flex">
-              <i class="fas fa-home me-3"></i>
+              <i class="fas fa-home me-3 ms_text_main_darker "></i>
               <span>Via Marmotta 12, 00042, Roma</span>
             </p>
             <p>
-              <i class="fas fa-envelope me-3"></i>
+              <i class="fas fa-envelope me-3 ms_text_main_darker"></i>
               info@example.com
             </p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+            <p><i class="fas fa-phone me-3 ms_text_main_darker"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print me-3 ms_text_main_darker"></i> + 01 234 567 89</p>
           </div>
           <!-- Grid column -->
         </div>

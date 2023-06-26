@@ -36,7 +36,7 @@ export default {
         </router-link>
 
         <button
-          class="navbar-toggler"
+          class="navbar-toggler shadow-none"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
