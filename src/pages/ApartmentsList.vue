@@ -33,6 +33,7 @@ export default {
     },
     performSearch() {
 
+      this.loading = true;
       this.generateMap = false;
 
       if (this.store.queryAddress == "") {
