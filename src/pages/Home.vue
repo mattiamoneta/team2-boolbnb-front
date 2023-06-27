@@ -6,6 +6,7 @@ import AppMainSection from "../components/AppMainSection.vue";
 import AppCard from "../components/AppCard.vue";
 import TheySaySection from "../components/TheySaySection.vue";
 import AppFeatureSection from "../components/AppFeatureSection.vue";
+import AppLoader from "../components/AppLoader.vue";
 
 export default {
   name: "TheHome",
@@ -14,13 +15,15 @@ export default {
     AppMainSection,
     TheySaySection,
     AppCard,
-    AppFeatureSection
+    AppFeatureSection,
+    AppLoader
     
   },
   data() {
     return {
       store,
-      scrollPos: 0
+      scrollPos: 0,
+      loading: true
     }
   },
     methods:{
@@ -30,11 +33,15 @@ export default {
     },
     created(){
         window.addEventListener('scroll', this.handleScroll);
+    },
+    mounted(){
+      this.loading = false;
     }
 };
 </script>
 
 <template>
+    <AppLoader v-if="loading"/>
   <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
     <!-- jumbotron -->
     <div id="jumbotron" class="p-5">

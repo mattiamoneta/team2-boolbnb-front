@@ -1,6 +1,7 @@
 <script>
 import AppSearchBar from "../components/AppSearchBar.vue";
 import AppFormVue from "../components/AppForm.vue";
+import AppLoader from "../components/AppLoader.vue";
 
 import { store } from "../store";
 import axios from "axios";
@@ -11,22 +12,24 @@ export default {
     return {
       store,
       scrollPos: 0,
-      apartmentDetails: null,
+      apartmentDetails: {},
+      loading: true
     };
   },
   components: {
     AppSearchBar,
     AppFormVue,
+    AppLoader
   },
   methods: {
     //funzione di creazione mappa
-    createMap() {
+    createMap(lat, long) {
       var map = tt.map({
         key: this.store.apiKey,
 
         container: "map-div-details",
 
-        center: { lng: 9.19, lat: 45.4642 },
+        center: { lng: long, lat: lat },
 
         zoom: 12,
       });
@@ -34,16 +37,31 @@ export default {
     handleScroll() {
       this.scrollPos = window.scrollY;
     },
+    getApartmentAddress(){
+      axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${this.apartmentDetails.latitude},${this.apartmentDetails.longitude}.json?key=${this.store.apiKey}`)
+          .then((response) => {
 
+            this.apartmentDetails.address = response.data.addresses[0].address.streetNameAndNumber;
+            this.apartmentDetails.city = response.data.addresses[0].address.municipality;
+            this.apartmentDetails.country = response.data.addresses[0].address.country;
+
+          })
+          .catch(error => {
+            console.error(error);
+      });
+    },
     getApartmentDetails() {
       const id = this.$route.params.id;
 
       axios
-        .get(`${this.store.baseUrl}/api/apartment/${id}`)
+        .get(`${this.store.baseUrl}/api/apartments/${id}`)
         .then((response) => {
           if (response.data.success == true) {
             this.apartmentDetails = response.data.results;
-            console.log(this.apartmentDetails);
+            console.log(this.apartmentDetails)
+            this.getApartmentAddress();
+            this.createMap(this.apartmentDetails.latitude, this.apartmentDetails.longitude);
+            this.loading = false;
           } else {
             console.error(response.data.error);
           }
@@ -55,12 +73,14 @@ export default {
   },
   mounted() {
     const id = this.$route.params.id;
-    this.createMap();
+    this.getApartmentDetails();
+
   },
 };
 </script>
 
 <template>
+    <AppLoader v-if="loading"/>
   <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <!-- Search Bar -->
@@ -75,20 +95,28 @@ export default {
         <div class="col">
           <div class="card card-tile rounded-4 flat-shadow overflow-hidden">
             <img
-              src="https://picsum.photos/2000/500"
+              :src="`${store.baseUrl}/storage/${apartmentDetails.cover_image}`"
               alt=""
               class="w-100 card-img-top object-fit-cover apartment-cover-image"
             />
             <div class="card-body mt-4 p-4">
               <div class="row pb-3 mb-5 border-bottom mt-4">
                 <div class="col-10">
-                  <h2 class="font-semibold">Appartamento Bello Bello</h2>
+                  <h2 class="font-semibold">
+                    {{ apartmentDetails.title }}
+                  </h2>
                 </div>
                 <div class="col-2 text-end">
-                  <div class="badge ms-bg-dark">
+                  <div class="badge ms-bg-dark" v-if="apartmentDetails.available == 0">
                     <i class="fa-solid fa-eye text-light me-2"></i>
                     <span class="xsmall text-uppercase fw-bolder text-light">
                       disponibile
+                    </span>
+                  </div>
+                  <div class="badge bg-light" v-else>
+                    <i class="fa-solid fa-ban text-muted me-2"></i>
+                    <span class="xsmall text-uppercase fw-bolder text-muted">
+                      non disponibile
                     </span>
                   </div>
                 </div>
@@ -103,13 +131,13 @@ export default {
                     <div class="col-6">
                       <!-- Provincia -->
                       <div class="xsmall text-uppercase fw-bolder mb-1">
-                        milano, italia
+                        {{ apartmentDetails.city }},{{ apartmentDetails.country }}
                       </div>
 
                       <!-- Indirizzo -->
                       <div class="text-muted">
                         <i class="fa-solid fa-location-pin text-muted me-1"></i>
-                        Via Roma, 3
+                        {{ apartmentDetails.address }}
                       </div>
                     </div>
                     <!-- End Address -->
@@ -118,7 +146,7 @@ export default {
                     <div class="col-6 text-end">
                       <h2 class="fw-bold mb-0">
                         <span class="small font-primary text-muted">€</span>
-                        220
+                        {{ apartmentDetails.price }}
                       </h2>
                       <div class="font-secondary xsmall text-muted fw-bold">
                         /notte
@@ -138,14 +166,7 @@ export default {
                     </div>
 
                     <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Praesentium voluptatum repudiandae recusandae! Aliquid,
-                      accusantium soluta? Enim inventore voluptatibus voluptates
-                      ducimus aliquid optio voluptatum vel quidem, quod
-                      obcaecati reiciendis nulla laboriosam recusandae.
-                      Distinctio dolores libero sit, delectus at ipsam voluptas
-                      id non veritatis amet ea unde suscipit ex maiores expedita
-                      earum.
+                      {{ apartmentDetails.description }}
                     </p>
                   </div>
                   <!-- End Description Row -->
@@ -166,7 +187,7 @@ export default {
                             <i class="fa-solid fa-door-open fs-5"></i>
                           </div>
                           <div>Stanze</div>
-                          <div class="amount fw-bold">2</div>
+                          <div class="amount fw-bold">{{ apartmentDetails.bedrooms }}</div>
                         </div>
                       </div>
                     </div>
@@ -179,7 +200,7 @@ export default {
                             <i class="fa-solid fa-bed fs-5"></i>
                           </div>
                           <div>Letti</div>
-                          <div class="amount fw-bold">3</div>
+                          <div class="amount fw-bold">{{ apartmentDetails.beds }}</div>
                         </div>
                       </div>
                     </div>
@@ -192,7 +213,7 @@ export default {
                             <i class="fa-solid fa-restroom fs-5"></i>
                           </div>
                           <div>Bagni</div>
-                          <div class="amount fw-bold">1</div>
+                          <div class="amount fw-bold">{{ apartmentDetails.bathrooms }}</div>
                         </div>
                       </div>
                     </div>
@@ -206,7 +227,7 @@ export default {
                           </div>
                           <div>Dimensione</div>
                           <div class="amount fw-bold">
-                            32
+                            {{ apartmentDetails.size_m2 }}
                             <span class="small"> m<sup>2</sup> </span>
                           </div>
                         </div>
@@ -224,65 +245,20 @@ export default {
                     </div>
 
                     <div class="row">
-                      <div class="col-4">
+                
+                    <div class="col-4" v-if="apartmentDetails.length > 0">
                         <ul class="list-unstyled">
-                          <li class="my-2">
-                            <i class="fa-solid fa-wifi me-1"></i>
-                            Wifi
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-car me-1"></i>
-                            Posto Macchina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water-ladder me-1"></i>
-                            Piscina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-door-open me-1"></i>
-                            Portineria
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-hot-tub-person me-1"></i>
-                            Sauna
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water me-1"></i>
-                            Vista Mare
+                          <li class="my-2" v-for="elem in apartmentDetails.facilities">
+                            <i :class="elem.icon"></i>
+                            {{ elem.name }}
                           </li>
                         </ul>
-                      </div>
-
-                      <div class="col-4">
-                        <ul class="list-unstyled">
-                          <li class="my-2">
-                            <i class="fa-solid fa-wifi me-1"></i>
-                            Wifi
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-car me-1"></i>
-                            Posto Macchina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water-ladder me-1"></i>
-                            Piscina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-door-open me-1"></i>
-                            Portineria
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-hot-tub-person me-1"></i>
-                            Sauna
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water me-1"></i>
-                            Vista Mare
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div class="col-4">
+                    </div>
+                    <div class="col" v-else>
+                        Nessun Servizio
+                    </div>
+                 
+                      <div class="col-4 offset-8">
                         <div class="card">
                           <div class="card-body">
                             <div
@@ -296,6 +272,7 @@ export default {
                       </div>
                     </div>
                   </div>
+
                   <!-- End Services Row -->
 
                   <!-- Map -->
