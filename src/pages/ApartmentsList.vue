@@ -11,7 +11,9 @@ export default {
     return {
       store,
       scrollPos: 0,
-      filters: []
+      filters: [],
+      currentLat: 0,
+      currentLong: 0
       //retApartmnets: {},
     };
   },
@@ -28,6 +30,7 @@ export default {
       this.scrollPos = window.scrollY;
     },
     performSearch() {
+
       if (this.store.queryAddress == "") {
         this.store.queryAddress = this.$route.query.indirizzo;
       }
@@ -47,6 +50,10 @@ export default {
               /* Ottengo latitudine e longitudine dell'indirizzo */
               const lat = retVal[0].position.lat;
               const long = retVal[0].position.lon;
+
+              this.currentLat = retVal[0].position.lat;
+              this.currentLong = retVal[0].position.lon;
+              
 
 
               // console.log(`${lat}/${long}/${this.store.radius * 1000}`);
@@ -80,16 +87,19 @@ export default {
                         console.error(error);
                       });
                   });
+
+                  this.createMap(this.currentLat, this.currentLong);
                 })
                 .catch((error) => {
                   console.error(error);
                 });
 
+            } else {
+              this.store.retApartmnets = [];
             }
 
 
             /* Ottengo la location esatta */
-
 
 
           })
@@ -102,14 +112,14 @@ export default {
       return Object.keys(obj).length === 0;
     },
     //funzione di creazione mappa
-    createMap() {
+    createMap(latitude, longitude) {
       var map = tt.map({
 
         key: this.store.apiKey,
 
         container: 'map-div',
 
-        center: { lng: 9.1900, lat: 45.4642 },
+        center: { lng: longitude, lat: latitude },
 
         zoom: 12
 
@@ -120,13 +130,8 @@ export default {
     /* Intercetta lo scroll del mouse */
     window.addEventListener("scroll", this.handleScroll);
   },
-  updated() {
-    // this.performSearch();
-  },
-  mounted() {
+  beforeMount(){
     this.performSearch();
-
-    this.createMap();
 
     //funzione che viene lanciata quando store.radius viene aggiornata nello store.js
     this.$watch(
@@ -136,10 +141,12 @@ export default {
           this.performSearch();
         }
       }
-    );
+);
   },
+  mounted() {
+    this.createMap(this.currentLat, this.currentLong);
 
-
+  },
   components: {
     ApartmentResultCard,
     AppSearchBar,
@@ -167,12 +174,12 @@ export default {
       <div class="row">
         <!-- !!!SEARCH BAR QUI!!! -->
         <div class="col-12">
-          <AppSearchBar :showFilters="true" />
+          <AppSearchBar :showFilters="true" :allowModal="store.retApartmnets.length > 0 ? true : false"/>
         </div>
       </div>
       <!-- End Search Bar -->
 
-      <div class="row" v-if="this.$route.query.indirizzo != ''">
+      <div class="row" v-show="this.$route.query.indirizzo != '' && this.store.retApartmnets.length > 0">
         <!-- Results -->
         <div class="col-12 col-lg-5">
           <div class="fixed-box pe-4 py-3">
@@ -193,7 +200,7 @@ export default {
         <!-- End Map -->
       </div>
 
-      <div class="row py-5 text-center" v-else>
+      <div class="row py-5 text-center" v-if="this.$route.query.indirizzo == '' && this.store.retApartmnets.length == 0">
         <div class="col-6 mx-auto my-5">
           <h4 class="fw-bolder fw-secondary text-muted mb-4">:(</h4>
           <h4 class="fw-semibold">Nessun risultato</h4>
@@ -209,7 +216,9 @@ export default {
 
 <style lang="scss" scoped>
 #map-div {
-  width: 100vw;
-  height: 100vh;
+
+  width: 100%;
+  height: 100%;
 }
+
 </style>

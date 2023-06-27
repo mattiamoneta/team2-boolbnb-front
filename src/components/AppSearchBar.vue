@@ -24,10 +24,11 @@ export default {
   },
   props: {
     showFilters: Boolean,
+    allowModal: Boolean
   },
   methods: {
     /* Chiamata API real-time durante la digitazione */
-    handleInput() {
+    handleInput() {      
       if (this.store.queryAddress.length > 2) {
         axios
           .get(
@@ -44,6 +45,7 @@ export default {
             console.error(error);
           });
       } else {
+
         this.querySuggestions = []; //Cancella dropdown se niente elementi
       }
     },
@@ -70,8 +72,10 @@ export default {
 
     /* Blocca il submit, effettua la ricerca e rimanda alla pagina di risultati */
     handleSubmit(event) {
+
       event.preventDefault(); // Evita il comportamento predefinito del modulo
-      this.$router.push({
+
+        this.$router.push({
         name: "search",
         query: {
           indirizzo: this.store.queryAddress,
@@ -89,6 +93,7 @@ export default {
 
         },
       }); // Redirect alla pagina dei risultati
+      
     },
     /* cambia il valore di store.radius se viene modificato il range */
     changeRadius() {
@@ -104,9 +109,6 @@ export default {
   },
   mounted(){
     this.getAllFacilities();
-  },
-  updated(){
-    console.log(this.apartmentFilter.price)
   }
 };
 </script>
@@ -163,7 +165,8 @@ export default {
     <div class="row filters py-3" v-if="showFilters == true">
       <div class="col-2">
         <button
-          class="btn ms-btn ms-btn-textual-outline btn-sm"
+          class="btn ms-btn ms-btn-textual-outline btn-sm "
+          :class="allowModal == false ? 'disabled' : ''"
           data-bs-toggle="modal"
           data-bs-target="#filtersModal"
           @click="openModal"
@@ -172,6 +175,7 @@ export default {
           <span class="xsmall text-uppercase fw-bold align-middle"
             >filtra risultati</span
           >
+
         </button>
       </div>
       <div class="col-10">
