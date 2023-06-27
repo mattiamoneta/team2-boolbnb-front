@@ -2,7 +2,7 @@ import { reactive } from "vue";
 
 export const store = reactive({
   baseUrl: "http://localhost:8000",
-  apiKey: "8WZyDOoy7ND8eeoGrJeUfxODvJmK39q7",
+  apiKey: "2bWSVIuiq0NssskVf6s2MVAdsQ6yPVdh",
   queryAddress: "",
   querySuggestionsLimit: 6,
   querySuggestions: [],
