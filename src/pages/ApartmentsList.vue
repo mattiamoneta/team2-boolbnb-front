@@ -195,7 +195,7 @@ export default {
         <!-- End Results -->
 
         <!-- Map -->
-        <div class="col-7 fixed-box d-none d-lg-block">
+        <div class="col-12 col-lg-7 fixed-box">
           <div class="card d-block rounded-4 overflow-hidden border-1 h-100">
             <div id="map-div"></div>
           </div>

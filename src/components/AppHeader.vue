@@ -46,7 +46,7 @@ export default {
         </button>
 
         <div
-          class="offcanvas offcanvas-end z-foreground"
+          class="offcanvas offcanvas-end z-foreground offcanvas-navbar"
           tabindex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
