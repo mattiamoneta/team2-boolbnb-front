@@ -14,10 +14,10 @@ export default {
       showModal: false,
       apartmentFilter: {
         price: null,
-        beds: 1,
-        meters: 1,
-        bathrooms: 1,
-        rooms: 1
+        beds: null,
+        meters: null,
+        bathrooms: null,
+        rooms: null
       },
       servicesFilter: {}
     };
@@ -75,11 +75,11 @@ export default {
         name: "search",
         query: {
           indirizzo: this.store.queryAddress,
-          price: this.apartmentFilter.price,
-          beds: this.apartmentFilter.beds,
-          meters: this.apartmentFilter.meters,
-          rooms: this.apartmentFilter.rooms,
-          bathrooms: this.apartmentFilter.bathrooms,
+          price: this.apartmentFilter.price != '' ? this.apartmentFilter.price : null,
+          beds: this.apartmentFilter.beds  != '' ? this.apartmentFilter.beds : null,
+          meters: this.apartmentFilter.meters  != '' ? this.apartmentFilter.meters : null,
+          rooms: this.apartmentFilter.rooms  != '' ? this.apartmentFilter.rooms : null,
+          bathrooms: this.apartmentFilter.bathrooms  != '' ? this.apartmentFilter.bathrooms : null,
           amn_wifi: this.checkboxOptions[0].checked,
           amn_car: this.checkboxOptions[1].checked,
           amn_pool: this.checkboxOptions[2].checked,
@@ -104,6 +104,9 @@ export default {
   },
   mounted(){
     this.getAllFacilities();
+  },
+  updated(){
+    console.log(this.apartmentFilter.price)
   }
 };
 </script>
