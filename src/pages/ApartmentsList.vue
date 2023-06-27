@@ -72,6 +72,9 @@ export default {
 
                         value.city = response.data.addresses[0].address.municipality;
                         value.country = response.data.addresses[0].address.country;
+                        value.address = response.data.addresses[0].address.streetNameAndNumber;
+
+                 
                       })
                       .catch(error => {
                         console.error(error);
