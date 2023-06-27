@@ -1,12 +1,9 @@
 <script>
-import { store } from "../store";
-
 export default {
   name: "AppHeader",
   data() {
     return {
       scrollPos: 0,
-      store
     };
   },
   methods: {
@@ -72,24 +69,28 @@ export default {
           <div class="offcanvas-body">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
               <li class="nav-item mx-lg-3">
-                <a
+                <router-link
+                  :to="{ name: 'about-us' }"
                   class="ms-nav-link py-4"
                   aria-current="page"
-                  href="#"
-                  :to="{ name: 'search' }"
-                  >Chi Siamo</a
                 >
+                  Chi Siamo
+                </router-link>
               </li>
               <li class="nav-item mx-lg-3">
-                <a class="ms-nav-link py-4" aria-current="page" href="#"
-                  >Supporto</a
+                <router-link
+                  :to="{ name: 'support' }"
+                  class="ms-nav-link py-4"
+                  aria-current="page"
                 >
+                  Supporto
+                </router-link>
               </li>
             </ul>
 
             <a
               id=""
-              :href="store.baseUrl"
+              href="#"
               class="nav-link user-dropdown fw-bold px-3 py-1 ms_border_primary ms-bg-dark my-3 text-center"
             >
               <span class="align-middle text-white">Area Utente</span>

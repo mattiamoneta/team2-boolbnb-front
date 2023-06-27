@@ -19,25 +19,25 @@ export default {
     AppFormVue,
   },
   methods: {
-     //funzione di creazione mappa
-     createMap() {
+    //funzione di creazione mappa
+    createMap() {
       var map = tt.map({
-
         key: this.store.apiKey,
 
-        container: 'map-div-details',
+        container: "map-div-details",
 
-        center: { lng: 9.1900, lat: 45.4642 },
+        center: { lng: 9.19, lat: 45.4642 },
 
-        zoom: 12
-
+        zoom: 12,
       });
     },
     handleScroll() {
       this.scrollPos = window.scrollY;
     },
 
-    getApartmentDetails(id) {
+    getApartmentDetails() {
+      const id = this.$route.params.id;
+
       axios
         .get(`${this.store.baseUrl}/api/apartment/${id}`)
         .then((response) => {
