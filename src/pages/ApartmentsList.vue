@@ -56,19 +56,15 @@ export default {
                */
 
 
-              let fixedPrice = 0;
-
-              if (this.$route.query.price == 0) {
-                fixedPrice = null;
-              }
-
               axios
                 .post(
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${fixedPrice}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
-                  console.log(this.store.retApartmnets);
+
+                  console.log(`${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`);
+                  
                   this.store.retApartmnets.forEach((value, index) => {
 
                     axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
