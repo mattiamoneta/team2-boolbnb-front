@@ -1,6 +1,7 @@
 <script>
 import AppSearchBar from "../components/AppSearchBar.vue";
 import ApartmentResultCard from "../components/ApartmentResultCard.vue";
+import AppLoader from "../components/AppLoader.vue";
 
 import { store } from "../store";
 import axios from "axios";
@@ -14,8 +15,8 @@ export default {
       filters: [],
       currentLat: 0,
       currentLong: 0,
-      generateMap: false
-      //retApartmnets: {},
+      generateMap: false,
+      loading: true
     };
   },
   watch: {
@@ -80,6 +81,7 @@ export default {
 
                         if (this.store.retApartmnets.length > 0){
                           this.createMap(this.currentLat, this.currentLong);
+                          this.loading = false;
                         }
 
                       })
@@ -148,11 +150,13 @@ export default {
   components: {
     ApartmentResultCard,
     AppSearchBar,
+    AppLoader
   },
 };
 </script>
 
 <template>
+  <AppLoader v-if="loading"/>
   <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <div class="row mt-4">
