@@ -70,8 +70,21 @@ export default {
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-auto">
               <li class="nav-item mx-lg-3">
                 <router-link
+                  :to="{ name: 'home' }"
+                  class="ms-nav-link py-4"
+                  exact
+                  active-class="active-link"
+                  aria-current="page"
+                >
+                  Home
+                </router-link>
+              </li>
+              <li class="nav-item mx-lg-3">
+                <router-link
                   :to="{ name: 'about-us' }"
                   class="ms-nav-link py-4"
+                  exact
+                  active-class="active-link"
                   aria-current="page"
                 >
                   Chi Siamo
@@ -81,6 +94,8 @@ export default {
                 <router-link
                   :to="{ name: 'support' }"
                   class="ms-nav-link py-4"
+                  exact
+                  active-class="active-link"
                   aria-current="page"
                 >
                   Supporto

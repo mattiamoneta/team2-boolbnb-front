@@ -11,18 +11,28 @@ export default {
   <!-- section they say -->
   <section id="they_say">
     <div class="container">
-      <div class="ms_magazine_logos d-flex justify-content-between">
-        <img src="../assets/they_say/techcrunch.png" alt="Techcrunch logo" />
+      <div class="ms_magazine_logos row justify-content-between">
+        <div class="col-12 col-lg-auto text-center mb-5 mb-lg-0">
+          <img src="../assets/they_say/techcrunch.png" alt="Techcrunch logo" />
+        </div>
+       <div class="col-12 col-lg-auto text-center mb-5 mb-lg-0">
         <img
           src="../assets/they_say/business-insider.png"
           alt="Business Insider logo"
         />
+       </div>
+       <div class="col-12 col-lg-auto text-center mb-5 mb-lg-0">
         <img
           src="../assets/they_say/the-new-york-times.png"
           alt="The New York Times logo"
         />
-        <img src="../assets/they_say/forbes.png" alt="Forbes logo" />
-        <img src="../assets/they_say/usa-today.png" alt="USA Today logo" />
+       </div>
+        <div class="col-12 col-lg-auto text-center mb-5 mb-lg-0">
+          <img src="../assets/they_say/forbes.png" alt="Forbes logo" />
+        </div>
+        <div class="col-12 col-lg-auto text-center">
+          <img src="../assets/they_say/usa-today.png" alt="USA Today logo" />
+        </div>
       </div>
     </div>
   </section>

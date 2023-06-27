@@ -23,7 +23,6 @@
     height: 2px;
     transition: width $transition_fast, opacity $transition_fast;
     background-color: $main_darker2_color;
-
 }
 
 .ms-nav-link:before{
@@ -46,6 +45,10 @@
     opacity: 1;
 }
 
+
+.ms-nav-link.active-link:after{
+  opacity: 1;
+}
 
 
 .nav-link.user-dropdown{
