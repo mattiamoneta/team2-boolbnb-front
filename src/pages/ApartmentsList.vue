@@ -81,8 +81,9 @@ export default {
 
                         if (this.store.retApartmnets.length > 0){
                           this.createMap(this.currentLat, this.currentLong);
-                          this.loading = false;
                         }
+
+                  
 
                       })
                       .catch(error => {
@@ -104,7 +105,7 @@ export default {
             this.generateMap = true;
             /* Ottengo la location esatta */
 
-
+            this.loading = false;
           })
           .catch((error) => {
             console.error(error);
