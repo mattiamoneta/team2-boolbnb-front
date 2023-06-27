@@ -4,8 +4,13 @@ export default {
   data() {
     return {
       scrollPos: 0,
+      loading: true
     };
   },
+  mounted(){
+    this.loading = false;
+  },
+
   methods: {
     /* Salva la posizione corrente dello scroll */
     handleScroll() {
@@ -16,6 +21,7 @@ export default {
 </script>
 
 <template>
+  <AppLoader v-if="loading"/>
   <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
     <section id="cover-image" class="position-relative">
       <div class="container h-100">
