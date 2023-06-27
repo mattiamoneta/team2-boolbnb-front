@@ -29,7 +29,9 @@ export default {
           :to="{ name: 'home' }"
           class="navbar-brand fw-bolder ms_text_main_darker"
         >
-          Boolbnb
+          <div class="navbar-logo d-flex align-items-center">
+            <img src="../assets/boolbnb-logo-sm.png" alt="">
+          </div>
         </router-link>
 
         <button
