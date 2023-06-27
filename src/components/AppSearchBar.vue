@@ -231,6 +231,7 @@ export default {
                     id="price"
                     name="price"
                     v-model="this.apartmentFilter.price"
+                    min="0"
                   />
                 </li>
                 <li
@@ -243,6 +244,7 @@ export default {
                     id="size_m2"
                     name="size_m2"
                     v-model="this.apartmentFilter.meters"
+                    min="0"
                   />
                 </li>
                 <li
@@ -256,6 +258,7 @@ export default {
                     name="available"
                     role="switch"
                     v-model="store.available"
+                    min="0"
                   />
                 </li>
               </ul>
@@ -279,6 +282,7 @@ export default {
                     id="beds"
                     name="beds"
                     v-model="this.apartmentFilter.beds"
+                    min="0"
                   />
                 </li>
                 <li
@@ -291,6 +295,7 @@ export default {
                     id="bedrooms"
                     name="bedrooms"
                     v-model="this.apartmentFilter.rooms"
+                    min="0"
                   />
                 </li>
                 <li
@@ -303,6 +308,7 @@ export default {
                     id="bathrooms"
                     name="bathrooms"
                     v-model="this.apartmentFilter.bathrooms"
+                    min="0"
                   />
                 </li>
               </ul>
