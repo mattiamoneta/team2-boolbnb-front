@@ -13,13 +13,13 @@ export default {
       store,
       scrollPos: 0,
       apartmentDetails: {},
-      loading: true
+      loading: true,
     };
   },
   components: {
     AppSearchBar,
     AppFormVue,
-    AppLoader
+    AppLoader,
   },
   methods: {
     //funzione di creazione mappa
@@ -37,18 +37,22 @@ export default {
     handleScroll() {
       this.scrollPos = window.scrollY;
     },
-    getApartmentAddress(){
-      axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${this.apartmentDetails.latitude},${this.apartmentDetails.longitude}.json?key=${this.store.apiKey}`)
-          .then((response) => {
-
-            this.apartmentDetails.address = response.data.addresses[0].address.streetNameAndNumber;
-            this.apartmentDetails.city = response.data.addresses[0].address.municipality;
-            this.apartmentDetails.country = response.data.addresses[0].address.country;
-
-          })
-          .catch(error => {
-            console.error(error);
-      });
+    getApartmentAddress() {
+      axios
+        .get(
+          `https://api.tomtom.com/search/2/reverseGeocode/${this.apartmentDetails.latitude},${this.apartmentDetails.longitude}.json?key=${this.store.apiKey}`
+        )
+        .then((response) => {
+          this.apartmentDetails.address =
+            response.data.addresses[0].address.streetNameAndNumber;
+          this.apartmentDetails.city =
+            response.data.addresses[0].address.municipality;
+          this.apartmentDetails.country =
+            response.data.addresses[0].address.country;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     getApartmentDetails() {
       const id = this.$route.params.id;
@@ -58,9 +62,12 @@ export default {
         .then((response) => {
           if (response.data.success == true) {
             this.apartmentDetails = response.data.results;
-            console.log(this.apartmentDetails)
+            console.log(this.apartmentDetails);
             this.getApartmentAddress();
-            this.createMap(this.apartmentDetails.latitude, this.apartmentDetails.longitude);
+            this.createMap(
+              this.apartmentDetails.latitude,
+              this.apartmentDetails.longitude
+            );
             this.loading = false;
           } else {
             console.error(response.data.error);
@@ -74,13 +81,12 @@ export default {
   mounted() {
     const id = this.$route.params.id;
     this.getApartmentDetails();
-
   },
 };
 </script>
 
 <template>
-    <AppLoader v-if="loading"/>
+  <AppLoader v-if="loading" />
   <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <!-- Search Bar -->
@@ -107,7 +113,10 @@ export default {
                   </h2>
                 </div>
                 <div class="col-2 text-end">
-                  <div class="badge ms-bg-dark" v-if="apartmentDetails.available == 0">
+                  <div
+                    class="badge ms-bg-dark"
+                    v-if="apartmentDetails.available == 1"
+                  >
                     <i class="fa-solid fa-eye text-light me-2"></i>
                     <span class="xsmall text-uppercase fw-bolder text-light">
                       disponibile
@@ -131,7 +140,8 @@ export default {
                     <div class="col-6">
                       <!-- Provincia -->
                       <div class="xsmall text-uppercase fw-bolder mb-1">
-                        {{ apartmentDetails.city }},{{ apartmentDetails.country }}
+                        {{ apartmentDetails.city }},
+                        {{ apartmentDetails.country }}
                       </div>
 
                       <!-- Indirizzo -->
@@ -187,7 +197,9 @@ export default {
                             <i class="fa-solid fa-door-open fs-5"></i>
                           </div>
                           <div>Stanze</div>
-                          <div class="amount fw-bold">{{ apartmentDetails.bedrooms }}</div>
+                          <div class="amount fw-bold">
+                            {{ apartmentDetails.bedrooms }}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -200,7 +212,9 @@ export default {
                             <i class="fa-solid fa-bed fs-5"></i>
                           </div>
                           <div>Letti</div>
-                          <div class="amount fw-bold">{{ apartmentDetails.beds }}</div>
+                          <div class="amount fw-bold">
+                            {{ apartmentDetails.beds }}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -213,7 +227,9 @@ export default {
                             <i class="fa-solid fa-restroom fs-5"></i>
                           </div>
                           <div>Bagni</div>
-                          <div class="amount fw-bold">{{ apartmentDetails.bathrooms }}</div>
+                          <div class="amount fw-bold">
+                            {{ apartmentDetails.bathrooms }}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -245,19 +261,19 @@ export default {
                     </div>
 
                     <div class="row">
-                
-                    <div class="col-4" v-if="apartmentDetails.length > 0">
+                      <div class="col-4">
                         <ul class="list-unstyled">
-                          <li class="my-2" v-for="elem in apartmentDetails.facilities">
-                            <i :class="elem.icon"></i>
-                            {{ elem.name }}
+                          <li
+                            class="my-3"
+                            v-for="facility in apartmentDetails.facilities"
+                          >
+                            <i :class="facility.icon"></i>
+                            {{ facility.name }}
                           </li>
                         </ul>
-                    </div>
-                    <div class="col" v-else>
-                        Nessun Servizio
-                    </div>
-                 
+                      </div>
+                      <!-- <div class="col">Nessun Servizio</div> -->
+
                       <div class="col-4 offset-8">
                         <div class="card">
                           <div class="card-body">
