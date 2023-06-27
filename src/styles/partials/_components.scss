@@ -507,6 +507,14 @@ input[type="checkbox"]:checked{
   overflow-y: auto !important;
 }
 
+@media screen and (max-width: 768px) {
+  
+.fixed-box {
+  overflow-y: auto!important;
+  height: 100vh;
+}
+
+}
 
 
 
