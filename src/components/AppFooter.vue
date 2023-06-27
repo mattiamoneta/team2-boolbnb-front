@@ -10,8 +10,7 @@ export default {
   methods: {
     handlePositions() {
       this.scrollPos = window.scrollY;
-      this.bottomPage =
-        document.documentElement.scrollHeight - window.innerHeight;
+      this.bottomPage = document.documentElement.scrollHeight - window.innerHeight;
     },
     scrollToTop() {
       window.scrollTo({
@@ -71,7 +70,7 @@ export default {
 
     <!-- Section: Links  -->
     <section class="">
-      <div class="footer-bottom container text-center text-md-start mt-5">
+      <div class="footer-bottom container text-center text-md-start mt-5 pb-5 mb-5">
         <div class="row">
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
@@ -141,15 +140,15 @@ export default {
               contatti
             </h6>
             <p class="d-flex">
-              <i class="fas fa-home me-3"></i>
+              <i class="fas fa-home me-3 ms_text_main_darker "></i>
               <span>Via Marmotta 12, 00042, Roma</span>
             </p>
             <p>
-              <i class="fas fa-envelope me-3"></i>
+              <i class="fas fa-envelope me-3 ms_text_main_darker"></i>
               info@example.com
             </p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+            <p><i class="fas fa-phone me-3 ms_text_main_darker"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print me-3 ms_text_main_darker"></i> + 01 234 567 89</p>
           </div>
           <!-- Grid column -->
         </div>
@@ -164,18 +163,15 @@ export default {
       style="background-color: rgba(0, 0, 0, 0.05)"
     >
       © 2023 Copyright: Boolbnb
+
+          <!-- Scroll-Top -->
+          <button class="" :class="scrollPos == bottomPage ? 'show' : ''" id="btnScrollTop" @click="scrollToTop">
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
     </div>
     <!-- Copyright -->
 
-    <!-- Scroll-Top -->
-    <button
-      class="btn"
-      :class="scrollPos == bottomPage ? 'show' : ''"
-      id="btnScrollTop"
-      @click="scrollToTop"
-    >
-      <i class="fa-solid fa-arrow-up"></i>
-    </button>
+
   </footer>
 </template>
 
@@ -184,12 +180,15 @@ export default {
 
 footer {
   margin-top: 8rem;
+  position: relative;
 
   .footer-top i {
     color: $main_darker2_color;
   }
 
   .footer-bottom {
+
+    
     a {
       text-decoration: none;
     }

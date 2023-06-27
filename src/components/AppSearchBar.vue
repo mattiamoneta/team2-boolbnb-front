@@ -112,7 +112,7 @@ export default {
   <div
     class="card card-tile border-0 d-block rounded-4 mb-4 apartment-card p-2"
   >
-    <div class="rounded-3 ps-3 border w-100">
+    <div class="rounded-3 ps-3 ms-border-search w-100">
       <form class="row align-items-center" role="search" @submit="handleSubmit" id="searchForm">
         <!-- Input Group -->
         <div class="input-group d-flex w-100 align-items-center">
@@ -122,7 +122,7 @@ export default {
 
           <div class="flex-grow-1">
             <input
-              class="form-control rounded-0 border-0 fw-semibold"
+              class="form-control rounded-0 border-0 fw-semibold ms-search-field shadow-none"
               type="search"
               placeholder="Cerca una località"
               v-model="store.queryAddress"
@@ -131,8 +131,8 @@ export default {
 
             <!-- Dropdown -->
             <ul
-              v-if="store.querySuggestions.length"
-              class="dropdown-menu w-80 show"
+              class="dropdown-menu w-80 dropdown-search"
+              :class="store.queryAddress.length > 2 && store.querySuggestions.length > 2 ? 'show' : ''"
             >
               <li
                 v-for="suggestion in store.querySuggestions"
@@ -171,10 +171,11 @@ export default {
           >
         </button>
       </div>
-      <div class="col-10 text-end"></div>
-      <!-- RANGE per il radius -->
-      <div>
+      <div class="col-10">
+       <div class="h-100 d-flex align-items-center">
+        <span class="xsmall me-2 text-uppercase fw-bold">Distanza</span>
         <input
+          class="ms-range-primary"
           type="range"
           v-model="radius"
           id="kilometres"
@@ -184,8 +185,10 @@ export default {
           step=" 1"
           @change="changeRadius"
         />
-        <h6>Raggio {{ radius }}Km</h6>
+        <label for="kilometres" class="xsmall text-uppercase fw-bold ms-3 d-inline-block fixed-label ms_text_main_darker2">{{ radius }}KM</label>
+       </div>
       </div>
+      <!-- RANGE per il radius -->
     </div>
     <!-- End Inline Filters -->
   </div>
@@ -224,7 +227,7 @@ export default {
                   <label for="price">Prezzo (max)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="price"
                     name="price"
                     v-model="this.apartmentFilter.price"
@@ -236,7 +239,7 @@ export default {
                   <label for="size_m2">Metratura (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="size_m2"
                     name="size_m2"
                     v-model="this.apartmentFilter.meters"
@@ -272,7 +275,7 @@ export default {
                   <label for="beds">Letti (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="beds"
                     name="beds"
                     v-model="this.apartmentFilter.beds"
@@ -284,7 +287,7 @@ export default {
                   <label for="bedrooms">Stanze (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="bedrooms"
                     name="bedrooms"
                     v-model="this.apartmentFilter.rooms"
@@ -296,7 +299,7 @@ export default {
                   <label for="bathrooms">Bagni (min)</label>
                   <input
                     type="number"
-                    class="border rounded ms_w_30"
+                    class="border rounded ms_w_30 text-end"
                     id="bathrooms"
                     name="bathrooms"
                     v-model="this.apartmentFilter.bathrooms"

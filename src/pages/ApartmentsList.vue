@@ -56,11 +56,11 @@ export default {
                */
 
 
-               let fixedPrice = 0;
+              let fixedPrice = 0;
 
-               if (this.$route.query.price == 0){
-                  fixedPrice = null;
-               }
+              if (this.$route.query.price == 0) {
+                fixedPrice = null;
+              }
 
               axios
                 .post(
@@ -68,18 +68,18 @@ export default {
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
-
+                  console.log(this.store.retApartmnets);
                   this.store.retApartmnets.forEach((value, index) => {
 
                     axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
-                    .then((response) => {
+                      .then((response) => {
 
                         value.city = response.data.addresses[0].address.municipality;
                         value.country = response.data.addresses[0].address.country;
-                    })
-                    .catch(error => {
-                      console.error(error);
-                    });
+                      })
+                      .catch(error => {
+                        console.error(error);
+                      });
                   });
                 })
                 .catch((error) => {
@@ -91,7 +91,7 @@ export default {
 
             /* Ottengo la location esatta */
 
-        
+
 
           })
           .catch((error) => {

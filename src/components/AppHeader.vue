@@ -33,7 +33,7 @@ export default {
         </router-link>
 
         <button
-          class="navbar-toggler"
+          class="navbar-toggler shadow-none"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
@@ -104,6 +104,7 @@ export default {
     </nav>
     <!-- End Navbar -->
   </header>
+  
 </template>
 
 <style scoped lang="scss"></style>
