@@ -25,10 +25,34 @@ export default {
       this.success = false;
       this.sending = true;
 
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+
       //console.log("Valore della props:", this.apartmentId);
 
       axios
         .post(`${this.store.baseUrl}/api/apartment/${this.apartmentId}`, {
+          apartment_id: this.apartmentId,
           name: this.name,
           email: this.email,
           message: this.message,
@@ -48,6 +72,8 @@ export default {
         .catch((error) => {
           this.sending = false;
         });
+
+      //console.log("response" + response.data.errors);
     },
   },
 };
