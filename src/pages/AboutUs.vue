@@ -123,7 +123,17 @@ export default {
       </div>
     </section>
 
-    <!-- section -->
+    <!-- section  team-->
+    <section id="team">
+      <div class="container">
+        <div class="d-flex align-items-center flex-column mt-5">
+          <h1 class="mb-4">Lavora con noi</h1>
+          <a href="#" class="btn ms-btn ms-btn-md ms-btn-primary">
+            Incontra le persone che guidano il nostro team.
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
