@@ -55,15 +55,75 @@ export default {
       </div>
     </section>
 
-    <!-- about us  section -->
-    <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <div></div>
+    <!-- about us section -->
+    <section id="about-us">
+      <div class="container">
+        <!-- row 1 -->
+        <div class="row">
+          <div class="col-lg-6">
+            <div>
+              <img
+                src="../assets/about_us/our-mission.webp"
+                class="img-fluid rounded-4"
+                alt="our mission"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 px-lg-5 mt-4 mt-lg-0">
+            <div
+              class="d-flex justify-content-start justify-content-lg-center flex-column h-100"
+            >
+              <h2 class="mb-3">La nostra missione</h2>
+              <p>
+                There are many variations of passages of Lorem Ipsum available,
+                but the majority have suffered alteration in some form, by
+                injected humour, or randomised words which don't look even
+                slightly believable. If you are going to use a passage of Lorem
+                Ipsum, you need to be sure there isn't anything embarrassing
+                hidden in the middle of text. All the Lorem Ipsum generators on
+                the Internet tend to repeat predefined chunks as necessary,
+                making this the first true generator on the Internet.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="col-4"></div>
+
+        <!-- row 2 -->
+
+        <div class="row mt-lg-5 mt-5 pt-lg-5 mb-5">
+          <div class="col-lg-6 px-lg-5 mt-lg-0">
+            <div
+              class="d-flex justify-content-start justify-content-lg-center flex-column h-100"
+            >
+              <h2 class="mb-3">Come abbiamo iniziato</h2>
+              <p>
+                There are many variations of passages of Lorem Ipsum available,
+                but the majority have suffered alteration in some form, by
+                injected humour, or randomised words which don't look even
+                slightly believable. If you are going to use a passage of Lorem
+                Ipsum, you need to be sure there isn't anything embarrassing
+                hidden in the middle of text.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div>
+              <img
+                src="../assets/about_us/Münster,_LVM,_Bürogebäude_--_2013_--_5149-51.jpg"
+                class="img-fluid rounded-4"
+                alt="Buidling"
+              />
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <!-- img middle -->
+        <!-- <div class="img-middle"></div> -->
       </div>
-    </div>
+    </section>
+
+    <!-- section -->
   </main>
 </template>
 
@@ -72,8 +132,8 @@ export default {
 
 #cover-image {
   height: 550px;
-  background-image: url("../assets/about_us/LuxuryApartmentCortina_1.jpg");
-  background-position: center;
+  background-image: url("https://www.baxter.it/sites/default/files/seo_image/LuxuryApartmentCortina_1.jpg");
+  background-position: bottom;
   background-size: cover;
 
   .waves {
@@ -82,5 +142,17 @@ export default {
     right: 0;
     width: 100%;
   }
+}
+
+#about-us {
+  margin-top: 120px;
+
+  // .img-middle {
+  //   background-image: url("../assets/about_us/Screen-Shot-2022-02-04-at-2.28.40-PM.webp");
+  //   background-position: center;
+  //   background-size: cover;
+  //   height: 500px;
+  //   margin-top: 50px;
+  // }
 }
 </style>
