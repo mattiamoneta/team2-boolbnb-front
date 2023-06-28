@@ -15,6 +15,10 @@ $premium_color: #fcc419;
 .ms-bg-light-gradient {
   background-image: linear-gradient($main_color, transparent) !important;
 }
+.ms-bg-light-dark {
+  background-color: $main_darker_color !important;
+}
+
 .ms-bg-dark {
   background-color: $main_darker2_color !important;
 }
