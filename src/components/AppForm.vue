@@ -4,6 +4,9 @@ import { store } from "../store";
 
 export default {
   name: "AppForm",
+  props: {
+    apartmentId: Number,
+  },
   data() {
     return {
       store,
@@ -71,7 +74,7 @@ export default {
     <!-- form bottom -->
     <div class="w-100 px-4 xmedium">
       <!-- form -->
-      <form @submit.prevent="sendForm(apartment.id)">
+      <form @submit.prevent="sendForm()" novalidate>
         <!-- nome -->
         <div class="mb-4">
           <label for="name" class="form-label font-semibold"
@@ -84,6 +87,7 @@ export default {
             id="name"
             placeholder="Inserisci il tuo nome"
             v-model="name"
+            required
           />
         </div>
         <div class="invalid-feedback" v-for="error in errors.name">
@@ -102,6 +106,7 @@ export default {
             id="email"
             placeholder="nome@example.com"
             v-model="email"
+            required
           />
         </div>
         <div class="invalid-feedback" v-for="error in errors.email">
@@ -120,6 +125,7 @@ export default {
             rows="5"
             v-model="message"
             placeholder="Scrivi qui il tuo messaggio..."
+            required
           ></textarea>
           <div class="invalid-feedback" v-for="error in errors.message">
             {{ error }}

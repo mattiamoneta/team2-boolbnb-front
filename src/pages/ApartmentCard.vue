@@ -312,7 +312,7 @@ export default {
 
                 <!-- RIGHT SIDE: Contacts -->
                 <div class="col-4 border-start">
-                  <AppFormVue />
+                  <AppFormVue :apartmentId="apartmentDetails.id" />
                 </div>
                 <!-- End RIGHT SIDE: Contacts -->
               </div>
