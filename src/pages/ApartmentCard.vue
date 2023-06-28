@@ -11,7 +11,6 @@ export default {
   data() {
     return {
       store,
-      scrollPos: 0,
       apartmentDetails: {},
       loading: true,
     };
@@ -22,6 +21,9 @@ export default {
     AppLoader,
   },
   methods: {
+    // handleScroll() {
+    //   this.store.scrollPos = window.scrollY;
+    // },
     //funzione di creazione mappa
     createMap(lat, long) {
       var map = tt.map({
@@ -75,7 +77,7 @@ export default {
     },
   },
   created() {
-
+    // window.addEventListener("scroll", this.handleScroll);
   },
   mounted() {
     const id = this.$route.params.id;
@@ -86,7 +88,7 @@ export default {
 
 <template>
   <AppLoader v-if="loading" />
-  <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
+  <main :class="store.scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <!-- Search Bar -->
       <div class="row">

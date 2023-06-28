@@ -5,13 +5,12 @@ export default {
   name: "AppHeader",
   data() {
     return {
-      scrollPos: 0,
       store
     };
   },
   methods: {
     handleScroll() {
-      this.scrollPos = window.scrollY;
+      this.store.scrollPos = window.scrollY;
     },
   },
   created() {
@@ -25,7 +24,7 @@ export default {
     <!-- Navbar -->
     <nav
       class="navbar navbar-expand-lg ms-bg-light-gradient py-lg-0"
-      :class="scrollPos > 230 ? 'fixed-top navbar-float-animation' : ''"
+      :class="store.scrollPos > 230 ? 'fixed-top navbar-float-animation' : ''"
     >
       <div class="container">
         <router-link
