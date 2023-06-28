@@ -7,6 +7,7 @@ export default {
   props: {
     apartmentId: Number,
   },
+
   data() {
     return {
       store,
@@ -18,15 +19,16 @@ export default {
       errors: {},
     };
   },
+  mounted() {},
   methods: {
     sendForm() {
       this.success = false;
       this.sending = true;
 
-      const id = this.$route.params.id;
+      //console.log("Valore della props:", this.apartmentId);
 
       axios
-        .post(`${this.store.baseUrl}/api/apartment/${id}`, {
+        .post(`${this.store.baseUrl}/api/apartment/${this.apartmentId}`, {
           name: this.name,
           email: this.email,
           message: this.message,
