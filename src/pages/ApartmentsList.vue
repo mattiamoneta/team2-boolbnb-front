@@ -11,7 +11,6 @@ export default {
   data() {
     return {
       store,
-      scrollPos: 0,
       filters: [],
       currentLat: 0,
       currentLong: 0,
@@ -28,9 +27,9 @@ export default {
   },
   methods: {
     /* Salva la posizione corrente dello scroll */
-    handleScroll() {
-      this.scrollPos = window.scrollY;
-    },
+    // handleScroll() {
+    //   this.scrollPos = window.scrollY;
+    // },
     performSearch() {
 
       this.loading = true;
@@ -130,7 +129,7 @@ export default {
   },
   created() {
     /* Intercetta lo scroll del mouse */
-    window.addEventListener("scroll", this.handleScroll);
+    // window.addEventListener("scroll", this.handleScroll);
   },
   beforeMount(){
     //funzione che viene lanciata quando store.radius viene aggiornata nello store.js
@@ -159,7 +158,7 @@ export default {
 
 <template>
   <AppLoader v-if="loading"/>
-  <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
+  <main :class="store.scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <div class="row mt-4">
         <div class="col">
