@@ -4,6 +4,10 @@ import { store } from "../store";
 
 export default {
   name: "AppForm",
+  props: {
+    apartmentId: Number,
+  },
+
   data() {
     return {
       store,
@@ -15,15 +19,40 @@ export default {
       errors: {},
     };
   },
+  mounted() {},
   methods: {
     sendForm() {
       this.success = false;
       this.sending = true;
 
-      const id = this.$route.params.id;
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+
+      //console.log("Valore della props:", this.apartmentId);
 
       axios
-        .post(`${this.store.baseUrl}/api/apartment/${id}`, {
+        .post(`${this.store.baseUrl}/api/apartment/${this.apartmentId}`, {
+          apartment_id: this.apartmentId,
           name: this.name,
           email: this.email,
           message: this.message,
@@ -43,6 +72,8 @@ export default {
         .catch((error) => {
           this.sending = false;
         });
+
+      //console.log("response" + response.data.errors);
     },
   },
 };
@@ -71,7 +102,7 @@ export default {
     <!-- form bottom -->
     <div class="w-100 px-4 xmedium">
       <!-- form -->
-      <form @submit.prevent="sendForm(apartment.id)">
+      <form @submit.prevent="sendForm()">
         <!-- nome -->
         <div class="mb-4">
           <label for="name" class="form-label font-semibold"
@@ -84,6 +115,7 @@ export default {
             id="name"
             placeholder="Inserisci il tuo nome"
             v-model="name"
+            required
           />
         </div>
         <div class="invalid-feedback" v-for="error in errors.name">
@@ -102,6 +134,7 @@ export default {
             id="email"
             placeholder="nome@example.com"
             v-model="email"
+            required
           />
         </div>
         <div class="invalid-feedback" v-for="error in errors.email">
@@ -120,6 +153,7 @@ export default {
             rows="5"
             v-model="message"
             placeholder="Scrivi qui il tuo messaggio..."
+            required
           ></textarea>
           <div class="invalid-feedback" v-for="error in errors.message">
             {{ error }}
