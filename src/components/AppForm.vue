@@ -102,7 +102,7 @@ export default {
     <!-- form bottom -->
     <div class="w-100 px-4 xmedium">
       <!-- form -->
-      <form @submit.prevent="sendForm()" novalidate>
+      <form @submit.prevent="sendForm()">
         <!-- nome -->
         <div class="mb-4">
           <label for="name" class="form-label font-semibold"
