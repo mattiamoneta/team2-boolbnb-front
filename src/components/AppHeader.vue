@@ -1,9 +1,12 @@
 <script>
+import { store } from "../store";
+
 export default {
   name: "AppHeader",
   data() {
     return {
       scrollPos: 0,
+      store
     };
   },
   methods: {
@@ -107,7 +110,7 @@ export default {
 
             <a
               id=""
-              href="#"
+              :href="this.store.baseUrl"
               class="nav-link user-dropdown fw-bold px-3 py-1 ms_border_primary ms-bg-dark my-3 text-center"
             >
               <span class="align-middle text-white">Area Utente</span>

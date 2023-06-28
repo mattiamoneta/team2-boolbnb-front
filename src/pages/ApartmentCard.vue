@@ -34,9 +34,6 @@ export default {
         zoom: 12,
       });
     },
-    handleScroll() {
-      this.scrollPos = window.scrollY;
-    },
     getApartmentAddress() {
       axios
         .get(
@@ -64,10 +61,12 @@ export default {
             this.apartmentDetails = response.data.results;
             console.log(this.apartmentDetails);
             this.getApartmentAddress();
+
             this.createMap(
               this.apartmentDetails.latitude,
               this.apartmentDetails.longitude
             );
+            
             this.loading = false;
           } else {
             console.error(response.data.error);
@@ -76,7 +75,7 @@ export default {
     },
   },
   created() {
-    window.addEventListener("scroll", this.handleScroll);
+
   },
   mounted() {
     const id = this.$route.params.id;
