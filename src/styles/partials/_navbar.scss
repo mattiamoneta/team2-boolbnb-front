@@ -3,6 +3,10 @@
 
 /* NAVBAR */
 
+.navbar-logo img{
+  height: 18px;
+}
+
 .ms-nav-link{
     font-size: .9rem!important;
     position: relative;
@@ -124,9 +128,16 @@ a.offcanvas-btn i{
     font-weight: 2rem!important;
 }
 
+.offcanvas-navbar{
+  height: 100vh!important;
+  z-index: 999;
+}
+
 
 
 /* Fixed nav */
+
+
 
   .navbar-top-fix{
       padding-top: 72px!important;
