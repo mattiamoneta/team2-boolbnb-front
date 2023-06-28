@@ -30,7 +30,7 @@ export default {
           class="navbar-brand fw-bolder ms_text_main_darker"
         >
           <div class="navbar-logo d-flex align-items-center">
-            <img src="../assets/boolbnb-logo-sm.png" alt="">
+            <img src="../assets/boolbnb-logo-png.png" alt="">
           </div>
         </router-link>
 
