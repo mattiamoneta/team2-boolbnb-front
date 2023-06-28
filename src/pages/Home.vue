@@ -22,17 +22,16 @@ export default {
   data() {
     return {
       store,
-      scrollPos: 0,
       loading: true
     }
   },
     methods:{
-        handleScroll(){
-            this.scrollPos = window.scrollY;
-        }
+        // handleScroll(){
+        //     this.scrollPos = window.scrollY;
+        // }
     },
     created(){
-        window.addEventListener('scroll', this.handleScroll);
+        // window.addEventListener('scroll', this.handleScroll);
     },
     mounted(){
       this.loading = false;
@@ -42,7 +41,7 @@ export default {
 
 <template>
     <AppLoader v-if="loading"/>
-  <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
+  <main :class="store.scrollPos > 230 ? 'navbar-top-fix' : ''">
     <!-- jumbotron -->
     <div id="jumbotron" class="p-5">
       <div class="ms_overlay">
