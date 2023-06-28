@@ -22,33 +22,10 @@ export default {
   mounted() {},
   methods: {
     sendForm() {
+      this.errors = {}; // Resetta gli errori
+
       this.success = false;
       this.sending = true;
-
-      (() => {
-        "use strict";
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll(".needs-validation");
-
-        // Loop over them and prevent submission
-        Array.from(forms).forEach((form) => {
-          form.addEventListener(
-            "submit",
-            (event) => {
-              if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-
-              form.classList.add("was-validated");
-            },
-            false
-          );
-        });
-      })();
-
-      //console.log("Valore della props:", this.apartmentId);
 
       axios
         .post(`${this.store.baseUrl}/api/apartment/${this.apartmentId}`, {
@@ -64,16 +41,30 @@ export default {
             this.message = "";
             this.success = true;
           } else {
-            this.errors = response.data.errors;
+            // Esegui le validazioni
+            if (!this.name) {
+              this.errors.name = "Il campo Nome è obbligatorio.";
+            }
+
+            if (!this.email) {
+              this.errors.email = "Il campo Email è obbligatorio.";
+            }
+
+            // else if (!this.isValidEmail(this.email)) {
+            //   this.email = "Inserisci un indirizzo email valido.";
+            // }
+
+            if (!this.message) {
+              this.errors.message = "Il campo Messaggio è obbligatorio.";
+            }
           }
+          console.log(this.errors);
 
           this.sending = false;
         })
         .catch((error) => {
           this.sending = false;
         });
-
-      //console.log("response" + response.data.errors);
     },
   },
 };
@@ -102,7 +93,7 @@ export default {
     <!-- form bottom -->
     <div class="w-100 px-4 xmedium">
       <!-- form -->
-      <form @submit.prevent="sendForm()">
+      <form @submit.prevent="sendForm()" novalidate>
         <!-- nome -->
         <div class="mb-4">
           <label for="name" class="form-label font-semibold"
@@ -117,9 +108,9 @@ export default {
             v-model="name"
             required
           />
-        </div>
-        <div class="invalid-feedback" v-for="error in errors.name">
-          {{ error }}
+          <div class="invalid-feedback" v-if="errors.name">
+            {{ errors.name }}
+          </div>
         </div>
 
         <!-- email -->
@@ -136,9 +127,9 @@ export default {
             v-model="email"
             required
           />
-        </div>
-        <div class="invalid-feedback" v-for="error in errors.email">
-          {{ error }}
+          <div class="invalid-feedback" v-if="errors.email">
+            {{ errors.email }}
+          </div>
         </div>
 
         <!-- messaggio -->
@@ -155,8 +146,8 @@ export default {
             placeholder="Scrivi qui il tuo messaggio..."
             required
           ></textarea>
-          <div class="invalid-feedback" v-for="error in errors.message">
-            {{ error }}
+          <div class="invalid-feedback d-block" v-if="errors.message">
+            {{ errors.message }}
           </div>
         </div>
 

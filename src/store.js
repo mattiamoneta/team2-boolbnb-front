@@ -7,10 +7,7 @@ export const store = reactive({
   querySuggestionsLimit: 6,
   querySuggestions: [],
   radius: 20,
-  retApartmnets: {}
-
-
+  retApartmnets: {},
 
   //dati per filtraggio
-
 });
