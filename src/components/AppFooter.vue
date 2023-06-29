@@ -78,9 +78,7 @@ export default {
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <!-- Content -->
-            <h5 class="fw-bold mb-4 font-secondary ms_text_main_darker">
-              Boolbnb
-            </h5>
+            <img src="../assets/boolbnb-logo-png.png" class="mb-5" alt="">
             <p>
               Pianifica il tuo viaggio perfetto con Boolbnb: scopri, prenota e
               goditi il mondo!
@@ -92,21 +90,21 @@ export default {
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6
-              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-5 small ms_text_main_darker2"
             >
               Ospitare
             </h6>
             <p>
-              <a href="#!" class="text-reset">Apri un Boolbnb</a>
+              <a href="#!" class="footer-link">Apri un Boolbnb</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">BoolCover per gli host</a>
+              <a href="#!" class="footer-link">BoolCover per gli host</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Come ospitare</a>
+              <a href="#!" class="footer-link">Come ospitare</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Forum community</a>
+              <a href="#!" class="footer-link">Forum community</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -115,21 +113,21 @@ export default {
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6
-              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-5 small ms_text_main_darker2"
             >
               Assistenza
             </h6>
             <p>
-              <a href="#!" class="text-reset">Centro Assistenza</a>
+              <a href="#!" class="footer-link">Centro Assistenza</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">BoolCover</a>
+              <a href="#!" class="footer-link">BoolCover</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Accessibilità per tutti</a>
+              <a href="#!" class="footer-link">Accessibilità per tutti</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Opzioni di cancellazione</a>
+              <a href="#!" class="footer-link">Opzioni di cancellazione</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -138,7 +136,7 @@ export default {
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
             <h6
-              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-5 small ms_text_main_darker2"
             >
               contatti
             </h6>
