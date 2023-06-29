@@ -564,3 +564,15 @@ input.underlined:focus::after {
   border: 1px solid $main_darker2_color!important;
   background-color: $main_color!important;
 }
+
+/* Card */
+.ms_card_sm {
+  height: 24rem!important;
+
+  img {
+      height: 15rem;
+      width: 100%!important;
+      object-fit: cover;
+  }
+
+}

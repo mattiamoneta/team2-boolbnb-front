@@ -74,10 +74,12 @@ export default {
     <div class="searchbar-fix"></div>
 
     <AppMainSection title="In Evidenza" theme="dark">
-      <AppCard
-        v-for="sponsorized in sponsorApartments"
-        :sponsorized="sponsorized"
-      />
+      <div class="row">
+          <AppCard
+          v-for="sponsorized in sponsorApartments"
+          :sponsorized="sponsorized"
+        />
+      </div>
     </AppMainSection>
 
     <div class="container-fluid ms-bg-light">
