@@ -71,7 +71,7 @@ export default {
         <div class="container">
           <div class="row">
             <div class="col-10 col-lg-6 mx-auto text-center">
-              <h5 class="font-secondary mb-3">
+              <h5 class="font-secondary mb-3 text-muted">
                 Esplora, prenota, vivi. La tua avventura inizia qui.
               </h5>
               <h1 class="display-5">
@@ -136,7 +136,7 @@ export default {
 #jumbotron {
   height: 40rem;
   background-color: lightgray;
-  background-image: url("../assets/hero-bg.jpg");
+  background-image: url("../assets/hero-bg-min.jpg");
 
   background-size: cover;
   background-position: center;
