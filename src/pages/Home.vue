@@ -1,5 +1,6 @@
 <script>
 import { store } from "../store";
+import axios from "axios";
 
 import AppSearchBar from "../components/AppSearchBar.vue";
 import AppMainSection from "../components/AppMainSection.vue";
@@ -16,31 +17,37 @@ export default {
     TheySaySection,
     AppCard,
     AppFeatureSection,
-    AppLoader
-    
+    AppLoader,
   },
   data() {
     return {
       store,
-      loading: true
-    }
+      loading: true,
+      sponsorApartments: null,
+    };
   },
-    methods:{
-        // handleScroll(){
-        //     this.scrollPos = window.scrollY;
-        // }
+  methods: {
+    loadSponsorized() {
+      axios
+        .post(`${this.store.baseUrl}/api/apartments/sponsorized`)
+        .then((response) => {
+          this.sponsorApartments = response.data.results.data;
+          //console.log("Apartments " + this.sponsorApartments);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
-    created(){
-        // window.addEventListener('scroll', this.handleScroll);
-    },
-    mounted(){
-      this.loading = false;
-    }
+  },
+  mounted() {
+    this.loading = false;
+    this.loadSponsorized();
+  },
 };
 </script>
 
 <template>
-    <AppLoader v-if="loading"/>
+  <AppLoader v-if="loading" />
   <main :class="store.scrollPos > 230 ? 'navbar-top-fix' : ''">
     <!-- jumbotron -->
     <div id="jumbotron" class="p-5">
@@ -55,27 +62,26 @@ export default {
     </div>
 
     <!-- Search Bar -->
-  <div class="position-relative">
-    <div class="container p-3 rounded-4 bg-white position-absolute top-0 start-50 translate-middle">
-
-
-          <AppSearchBar :showFilters="false"/>
-
-      
+    <div class="position-relative">
+      <div
+        class="container p-3 rounded-4 bg-white position-absolute top-0 start-50 translate-middle"
+      >
+        <AppSearchBar :showFilters="false" />
+      </div>
     </div>
-  </div>
     <!-- End Search Bar -->
-
-
 
     <div class="searchbar-fix"></div>
 
     <AppMainSection title="In Evidenza" theme="dark">
-      <AppCard v-for="n in 4" />
+      <AppCard
+        v-for="sponsorized in sponsorApartments"
+        :sponsorized="sponsorized"
+      />
     </AppMainSection>
 
     <div class="container-fluid ms-bg-light">
-      <AppFeatureSection/>
+      <AppFeatureSection />
     </div>
 
     <AppMainSection title="Dicono di noi" align="center">

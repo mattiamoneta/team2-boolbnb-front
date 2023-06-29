@@ -21,10 +21,10 @@ export default {
   },
   mounted() {},
   methods: {
-    hideContact(){
-      let timeout = setTimeout(function(){
-        let alert = document.getElementById('contact-success');
-        alert.classList.add('d-none');
+    hideContact() {
+      let timeout = setTimeout(function () {
+        let alert = document.getElementById("contact-success");
+        alert.classList.add("d-none");
       }, 5000);
     },
 
@@ -79,10 +79,12 @@ export default {
 
 <template>
   <div v-if="success" class="row w-100 mx-3 text-center">
-      <div class="alert alert-custom w-100" role="alert" id="contact-success">
-        <i class="fa-regular fa-face-smile fa-2x mb-3"></i>
-       <div class="msg">Grazie per avermi contattato, ti risponderò entro 48h!</div>
+    <div class="alert alert-custom w-100" role="alert" id="contact-success">
+      <i class="fa-regular fa-face-smile fa-2x mb-3"></i>
+      <div class="msg">
+        Grazie per avermi contattato, ti risponderò entro 48h!
       </div>
+    </div>
   </div>
 
   <div
