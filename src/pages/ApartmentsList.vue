@@ -57,19 +57,19 @@ export default {
 
               this.currentLat = retVal[0].position.lat;
               this.currentLong = retVal[0].position.lon;
-              
+
 
               axios
                 .post(
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.available}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
                 )
                 .then((response) => {
                   this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
                   console.log(this.store.retApartmnets)
-           
+
 
                   // console.log(`${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`);
-                  
+
                   this.store.retApartmnets.forEach((value) => {
 
                     axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
@@ -79,11 +79,11 @@ export default {
                         value.country = response.data.addresses[0].address.country;
                         value.address = response.data.addresses[0].address.streetNameAndNumber;
 
-                        if (this.store.retApartmnets.length > 0){
+                        if (this.store.retApartmnets.length > 0) {
                           this.createMap(this.currentLat, this.currentLong);
                         }
 
-                  
+
 
                       })
                       .catch(error => {
@@ -91,7 +91,7 @@ export default {
                       });
                   });
 
-               
+
                 })
                 .catch((error) => {
                   console.error(error);
@@ -131,7 +131,7 @@ export default {
     /* Intercetta lo scroll del mouse */
     // window.addEventListener("scroll", this.handleScroll);
   },
-  beforeMount(){
+  beforeMount() {
     //funzione che viene lanciata quando store.radius viene aggiornata nello store.js
     this.$watch(
       () => store.radius,
@@ -141,7 +141,7 @@ export default {
         }
       }
     );
-    
+
   },
   mounted() {
     // this.createMap(this.currentLat, this.currentLong);
@@ -157,7 +157,7 @@ export default {
 </script>
 
 <template>
-  <AppLoader v-if="loading"/>
+  <AppLoader v-if="loading" />
   <main :class="store.scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <div class="row mt-4">
@@ -177,7 +177,7 @@ export default {
       <div class="row">
         <!-- !!!SEARCH BAR QUI!!! -->
         <div class="col-12">
-          <AppSearchBar :showFilters="true" :allowModal="store.retApartmnets.length > 0 ? true : false"/>
+          <AppSearchBar :showFilters="true" :allowModal="store.retApartmnets.length > 0 ? true : false" />
         </div>
       </div>
       <!-- End Search Bar -->
@@ -223,6 +223,4 @@ export default {
   width: 100%;
   height: 100%;
 }
-
-
 </style>
