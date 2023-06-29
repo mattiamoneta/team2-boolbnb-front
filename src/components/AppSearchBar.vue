@@ -17,7 +17,8 @@ export default {
         beds: null,
         meters: null,
         bathrooms: null,
-        rooms: null
+        rooms: null,
+        available: false
       },
       servicesFilter: {}
     };
@@ -84,6 +85,7 @@ export default {
           meters: this.apartmentFilter.meters  != '' ? this.apartmentFilter.meters : null,
           rooms: this.apartmentFilter.rooms  != '' ? this.apartmentFilter.rooms : null,
           bathrooms: this.apartmentFilter.bathrooms  != '' ? this.apartmentFilter.bathrooms : null,
+          available: this.apartmentFilter.available,
           amn_wifi: this.checkboxOptions[0].checked,
           amn_car: this.checkboxOptions[1].checked,
           amn_pool: this.checkboxOptions[2].checked,
@@ -264,7 +266,7 @@ export default {
                     id="available"
                     name="available"
                     role="switch"
-                    v-model="store.available"
+                    v-model="this.apartmentFilter.available"
                     min="0"
                   />
                 </li>
