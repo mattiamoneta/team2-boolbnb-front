@@ -24,6 +24,8 @@ export default {
       store,
       loading: true,
       sponsorApartments: null,
+      currentPage: 1,
+      lastPage: null
     };
   },
   methods: {
@@ -38,10 +40,24 @@ export default {
           console.error(error);
         });
     },
+    getApartments(gotoPage) {
+      axios.post(`${this.store.baseUrl}/api/apartments/sponsorized`, {
+        params: { //questo è il paramatro dinamico concatenato dopo l'uri base. es: ?page=1
+          page: gotoPage
+        }
+      })
+        .then(response => {
+          //console.log(response.data.results.data);
+          this.sponsorApartments = response.data.results.data;
+          this.currentPage = gotoPage;
+          this.lastPage = response.data.results.last_page;
+
+        });
+    }
   },
   mounted() {
     this.loading = false;
-    this.loadSponsorized();
+    this.getApartments(1);
   },
 };
 </script>
@@ -63,9 +79,7 @@ export default {
 
     <!-- Search Bar -->
     <div class="position-relative">
-      <div
-        class="container p-3 rounded-4 bg-white position-absolute top-0 start-50 translate-middle"
-      >
+      <div class="container p-3 rounded-4 bg-white position-absolute top-0 start-50 translate-middle">
         <AppSearchBar :showFilters="false" />
       </div>
     </div>
@@ -74,10 +88,26 @@ export default {
     <div class="searchbar-fix"></div>
 
     <AppMainSection title="In Evidenza" theme="dark">
-      <AppCard
-        v-for="sponsorized in sponsorApartments"
-        :sponsorized="sponsorized"
-      />
+      <AppCard v-for="sponsorized in sponsorApartments" :sponsorized="sponsorized" />
+
+      <nav aria-label="Page navigation ">
+        <ul class="pagination d-flex justify-content-center">
+
+          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage == 1 }"
+              @click="getApartments(currentPage - 1)">Previous</button>
+          </li>
+
+          <li v-for="(page, item) in lastPage" :key="item" class="page-item">
+            <button @click="getApartments(item + 1)" class="page-link"
+              :class="(currentPage == (item + 1)) ? 'active' : ''">{{
+                item + 1
+              }}</button>
+          </li>
+
+          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage == lastPage }"
+              @click="getApartments(currentPage + 1)">Next</button></li>
+        </ul>
+      </nav>
     </AppMainSection>
 
     <div class="container-fluid ms-bg-light">
@@ -118,12 +148,10 @@ export default {
     top: 0;
     height: 100%;
     width: 100%;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0.7) 10%,
-      rgba(0, 212, 255, 0) 50%
-    );
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.7) 10%,
+        rgba(0, 212, 255, 0) 50%);
   }
 }
 </style>
