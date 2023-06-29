@@ -511,7 +511,11 @@ input[type="checkbox"]:checked{
   
 .fixed-box {
   overflow-y: auto!important;
-  height: 100vh;
+  height: auto;
+}
+
+.fixed-box .map-card{
+  height: 300px!important;
 }
 
 }
@@ -575,4 +579,15 @@ input.underlined:focus::after {
       object-fit: cover;
   }
 
+}
+
+
+.pagination .page-item .page-link{
+  color: $main_darker2_color;
+}
+
+.pagination .page-item .page-link.active{
+  background-color: $main_darker2_color;
+  color: white;
+  border: 1px solid $main_darker2_color;
 }
