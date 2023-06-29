@@ -78,7 +78,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="success" class="row w-100 mx-3 text-center">
+  <div v-if="success" class="row w-100 text-center">
     <div class="alert alert-custom w-100" role="alert" id="contact-success">
       <i class="fa-regular fa-face-smile fa-2x mb-3"></i>
       <div class="msg">
@@ -88,7 +88,7 @@ export default {
   </div>
 
   <div
-    class="d-flex align-items-center flex-column w-100 mx-3 rounded-4 shadow_only"
+    class="d-flex align-items-center flex-column w-100 rounded-4 shadow_only"
   >
     <!-- form top -->
     <!-- title -->
