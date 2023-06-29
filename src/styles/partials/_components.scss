@@ -557,3 +557,10 @@ input.underlined:focus::after {
 .footer-link:hover{
   text-decoration: underline!important;
 }
+
+/* alert */
+
+.alert.alert-custom{
+  border: 1px solid $main_darker2_color!important;
+  background-color: $main_color!important;
+}
