@@ -188,9 +188,16 @@ export default {
 <style scoped lang="scss">
 @use "../styles/partials/colors" as *;
 
+@media screen and (max-width: 996px) {
+  footer{
+    margin-top: 1rem!important;
+  }
+}
+
 footer {
   margin-top: 8rem;
   position: relative;
+  
 
   .footer-top i {
     color: $main_darker2_color;

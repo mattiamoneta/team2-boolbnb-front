@@ -1,4 +1,5 @@
 @use 'vars' as *;
+@use 'typo' as *;
 @use 'colors' as *;
 
 /* NAVBAR */
@@ -52,6 +53,57 @@
 
 .ms-nav-link.active-link:after{
   opacity: 1;
+}
+
+@media screen and (max-width: 991px) {
+  
+      .offcanvas-body,
+      .offcanvas-body .navbar-nav{
+          width: 100%!important;
+      }
+
+      .nav-item{
+        // height: 80px;
+      }
+
+      .nav-item .ms-nav-link{
+        display: block;
+        font-size: 1.1rem!important;
+      }
+
+      .nav-item .ms-nav-link.active-link{
+        font-weight: bold;
+      }
+
+      .nav-item .ms-nav-link:after{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 5px;
+        height: 100%;
+        transition: width $transition_fast, opacity $transition_fast, border-radius $transition_fast;
+        background: $main_darker2_color;
+        background: linear-gradient(22deg, rgba(12,133,144,1) 0%, rgba(12,133,144,.2) 100%);
+    }
+
+    
+    .nav-item .ms-nav-link.active-link:after{
+      width: 100%;
+      opacity: .1;
+      border-radius: 50px;
+   }
+
+    .nav-item .ms-nav-link:hover:after{
+      width: 100%;
+      border-radius: 50px;
+      opacity: .1;
+    }
+
+
+      .ms-nav-link:before{
+        display: none!important;
+      }
 }
 
 

@@ -165,7 +165,7 @@ export default {
     </div>
     <!-- Inline Filters -->
     <div class="row filters py-3" v-if="showFilters == true">
-      <div class="col-2">
+      <div class="col-lg-3 col-xl-2 col-md-4 col-12 col-xs-2 text-center text-lg-start my-lg-3 my-3">
         <button
           class="btn ms-btn ms-btn-textual-outline btn-sm "
           :class="allowModal == false ? 'disabled' : ''"
@@ -180,8 +180,8 @@ export default {
 
         </button>
       </div>
-      <div class="col-10">
-       <div class="h-100 d-flex align-items-center">
+      <div class="col-12 col-lg-9 col-xl-10 col-md-8">
+       <div class="h-100 d-flex align-items-center justify-content-center justify-content-md-start">
         <span class="xsmall me-2 text-uppercase fw-bold">Distanza</span>
         <input
           class="ms-range-primary"

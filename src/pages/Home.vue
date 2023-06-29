@@ -90,12 +90,13 @@ export default {
     <AppMainSection title="In Evidenza" theme="dark">
       <AppCard v-for="sponsorized in sponsorApartments" :sponsorized="sponsorized" />
 
-      <nav aria-label="Page navigation ">
+      <nav aria-label="Page navigation" class="mt-5">
 
         <ul class="pagination d-flex justify-content-center">
 
           <li class="page-item">
-            <button class="page-link" :class="{ 'disabled': currentPage == 1 }" @click="getApartments(currentPage - 1)">Previous</button>
+            <button class="page-link" :class="{ 'disabled': currentPage == 1 }" @click="getApartments(currentPage - 1)">
+              <i class="fa-solid fa-chevron-left ms_text_main_darker2"></i></button>
           </li>
 
           <li v-for="(page, item) in lastPage" :key="item" class="page-item">
@@ -103,7 +104,9 @@ export default {
           </li>
 
           <li class="page-item">
-            <button class="page-link" :class="{ 'disabled': currentPage == lastPage }" @click="getApartments(currentPage + 1)">Next</button>
+            <button class="page-link" :class="{ 'disabled': currentPage == lastPage }" @click="getApartments(currentPage + 1)">
+              <i class="fa-solid fa-chevron-right ms_text_main_darker2"></i>
+            </button>
           </li>
 
         </ul>
