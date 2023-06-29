@@ -41,13 +41,13 @@ export default {
         });
     },
     getApartments(gotoPage) {
-      axios.post(`${this.store.baseUrl}/api/apartments/sponsorized`, {
-        params: { //questo è il paramatro dinamico concatenato dopo l'uri base. es: ?page=1
+      axios.post(`${this.store.baseUrl}/api/apartments/sponsorized`, null, {
+        params: {
           page: gotoPage
         }
       })
         .then(response => {
-          //console.log(response.data.results.data);
+          console.log(response);
           this.sponsorApartments = response.data.results.data;
           this.currentPage = gotoPage;
           this.lastPage = response.data.results.last_page;
@@ -91,22 +91,23 @@ export default {
       <AppCard v-for="sponsorized in sponsorApartments" :sponsorized="sponsorized" />
 
       <nav aria-label="Page navigation ">
+
         <ul class="pagination d-flex justify-content-center">
 
-          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage == 1 }"
-              @click="getApartments(currentPage - 1)">Previous</button>
+          <li class="page-item">
+            <button class="page-link" :class="{ 'disabled': currentPage == 1 }" @click="getApartments(currentPage - 1)">Previous</button>
           </li>
 
           <li v-for="(page, item) in lastPage" :key="item" class="page-item">
-            <button @click="getApartments(item + 1)" class="page-link"
-              :class="(currentPage == (item + 1)) ? 'active' : ''">{{
-                item + 1
-              }}</button>
+            <button @click="getApartments(item + 1)" class="page-link" :class="(currentPage == (item + 1)) ? 'active' : ''">{{item + 1}}</button>
           </li>
 
-          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage == lastPage }"
-              @click="getApartments(currentPage + 1)">Next</button></li>
+          <li class="page-item">
+            <button class="page-link" :class="{ 'disabled': currentPage == lastPage }" @click="getApartments(currentPage + 1)">Next</button>
+          </li>
+
         </ul>
+
       </nav>
     </AppMainSection>
 

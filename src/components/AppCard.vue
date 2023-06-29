@@ -13,7 +13,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.sponsorized);
     this.getApartmentAddress();
   },
   methods: {
@@ -28,7 +27,6 @@ export default {
           this.sponsorized.city =
             response.data.addresses[0].address.municipality;
           this.sponsorized.country = response.data.addresses[0].address.country;
-          console.log(response.data.addresses[0].address.streetNameAndNumber);
         })
         .catch((error) => {
           console.error(error);
@@ -39,10 +37,9 @@ export default {
 </script>
 
 <template>
-  <div class="col-lg-3 col-12 mb-5 mb-lg-0">
+  <div class="col-lg-3 col-12 mb-5 mb-lg-4">
     <div
-      class="card card-tile flat-shadow drop-shadow-sm rounded-4 overflow-hidden"
-    >
+      class="card card-tile flat-shadow drop-shadow-sm rounded-4 overflow-hidden ms_card_sm">
       <router-link
         :to="{ name: 'apartment', params: { id: sponsorized['id'] } }"
       >
@@ -53,32 +50,36 @@ export default {
         />
       </router-link>
 
-      <div class="card-body">
-        <div class="xsmall text-uppercase fw-bolder">
-          {{ sponsorized.city }}, italia
-        </div>
-        <h6 class="font-secondary text-secondary mb-2">
-          {{ sponsorized.title }}
-        </h6>
+      <div class="card-body d-flex align-items-end">
+       
+        <div class="wrapper w-100">
+              <div class="xsmall text-uppercase fw-bolder">
+              {{ sponsorized.city }}, {{ sponsorized.country }}
+            </div>
+            <h6 class="font-secondary text-secondary mb-2 text-truncate">
+              {{ sponsorized.title }}
+            </h6>
 
-        <div class="small text-secondary mb-3">
-          <i class="fa-solid fa-location-pin me-1 text-muted"></i>
-          {{ sponsorized.address }}
+            <div class="small text-secondary mb-3 text-truncate">
+              <i class="fa-solid fa-location-pin me-1 text-muted"></i>
+              {{ sponsorized.address }}
+            </div>
+
+            <div class="row align-items-center">
+              <div class="col-6 small text-secondary">
+                <span class="badge ms-bg-dark">
+                  <i class="fa-solid fa-star xsmall text-warning me-1"></i>
+                  In Evidenza
+                </span>
+              </div>
+              <div class="col-6 text-end">
+                <span class="small fw-bold me-1">€</span>
+                <span class="fw-bold">{{ sponsorized.price }}</span>
+                <span class="xsmall">/notte</span>
+              </div>
+            </div>
         </div>
 
-        <div class="row align-items-center">
-          <div class="col-6 small text-secondary">
-            <span class="badge ms-bg-dark">
-              <i class="fa-solid fa-star xsmall text-warning me-1"></i>
-              In Evidenza
-            </span>
-          </div>
-          <div class="col-6 text-end">
-            <span class="small fw-bold me-1">€</span>
-            <span class="fw-bold">{{ sponsorized.price }}</span>
-            <span class="xsmall">/notte</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>

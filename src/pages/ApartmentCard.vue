@@ -61,7 +61,6 @@ export default {
         .then((response) => {
           if (response.data.success == true) {
             this.apartmentDetails = response.data.results;
-            console.log(this.apartmentDetails);
             this.getApartmentAddress();
 
             this.createMap(
