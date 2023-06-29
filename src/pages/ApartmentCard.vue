@@ -68,7 +68,7 @@ export default {
               this.apartmentDetails.latitude,
               this.apartmentDetails.longitude
             );
-            
+
             this.loading = false;
           } else {
             console.error(response.data.error);
@@ -108,12 +108,12 @@ export default {
             />
             <div class="card-body mt-4 p-4">
               <div class="row pb-3 mb-5 border-bottom mt-4">
-                <div class="col-10">
+                <div class="col-6 col-lg-10">
                   <h2 class="font-semibold">
                     {{ apartmentDetails.title }}
                   </h2>
                 </div>
-                <div class="col-2 text-end">
+                <div class="col-6 col-lg-2 text-end">
                   <div
                     class="badge ms-bg-dark"
                     v-if="apartmentDetails.available == 1"
@@ -134,11 +134,11 @@ export default {
 
               <div class="row">
                 <!-- LEFT SIDE: Apartment details -->
-                <div class="col-8 pe-4">
+                <div class="col-12 col-lg-7 pe-4">
                   <!-- Price/Address Row -->
                   <div class="row">
                     <!-- Address -->
-                    <div class="col-6">
+                    <div class="col-12 col-lg-6">
                       <!-- Provincia -->
                       <div class="xsmall text-uppercase fw-bolder mb-1">
                         {{ apartmentDetails.city }},
@@ -146,7 +146,7 @@ export default {
                       </div>
 
                       <!-- Indirizzo -->
-                      <div class="text-muted">
+                      <div class="text-muted mb-4 mb-lg-0">
                         <i class="fa-solid fa-location-pin text-muted me-1"></i>
                         {{ apartmentDetails.address }}
                       </div>
@@ -154,7 +154,7 @@ export default {
                     <!-- End Address -->
 
                     <!-- Price -->
-                    <div class="col-6 text-end">
+                    <div class="col-12 col-lg-6 text-end">
                       <h2 class="fw-bold mb-0">
                         <span class="small font-primary text-muted">€</span>
                         {{ apartmentDetails.price }}
@@ -183,7 +183,7 @@ export default {
                   <!-- End Description Row -->
 
                   <!-- Features -->
-                  <div class="row mb-5 py-3">
+                  <div class="row mb-5 py-3 gy-3">
                     <div
                       class="xsmall text-uppercase fw-bolder mb-4 ms_text_main_darker2"
                     >
@@ -191,7 +191,7 @@ export default {
                     </div>
 
                     <!-- Rooms Amount -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
@@ -206,7 +206,7 @@ export default {
                     </div>
 
                     <!-- Beds Amount -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
@@ -221,7 +221,7 @@ export default {
                     </div>
 
                     <!-- Bathrooms Amount -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
@@ -236,7 +236,7 @@ export default {
                     </div>
 
                     <!-- Room Size -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
@@ -262,7 +262,7 @@ export default {
                     </div>
 
                     <div class="row">
-                      <div class="col-4">
+                      <div class="col-6">
                         <ul class="list-unstyled">
                           <li
                             class="my-3"
@@ -275,7 +275,7 @@ export default {
                       </div>
                       <!-- <div class="col">Nessun Servizio</div> -->
 
-                      <div class="col-4 offset-8">
+                      <div class="col-6">
                         <div class="card">
                           <div class="card-body">
                             <div
@@ -312,7 +312,7 @@ export default {
                 <!-- End LEFT SIDE: Apartment details -->
 
                 <!-- RIGHT SIDE: Contacts -->
-                <div class="col-4 border-start">
+                <div class="co-12 col-lg-4 mt-5 mt-lg-0 offset-lg-1">
                   <AppFormVue :apartmentId="apartmentDetails.id" />
                 </div>
                 <!-- End RIGHT SIDE: Contacts -->
