@@ -49,12 +49,12 @@ export default {
           <div class="line-3"></div>
         </button>
 
-        <!-- Offcanvas -->
         <div
           class="offcanvas offcanvas-end z-foreground offcanvas-navbar"
           tabindex="-1"
           id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel">
+          aria-labelledby="offcanvasNavbarLabel"
+        >
           <div class="offcanvas-header">
             <h5
               class="offcanvas-title font-secondary"
@@ -107,8 +107,7 @@ export default {
               </li>
             </ul>
 
-          </div>
-          <a
+            <a
               id=""
               :href="this.store.baseUrl"
               class="nav-link user-dropdown fw-bold px-3 py-1 ms_border_primary ms-bg-dark my-3 text-center"
@@ -118,8 +117,8 @@ export default {
                 <i class="fa-solid fa-user ms_text_main_darker"></i>
               </div>
             </a>
+          </div>
         </div>
-        <!-- End Offcanvas -->
       </div>
     </nav>
     <!-- End Navbar -->

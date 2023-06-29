@@ -13,7 +13,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.sponsorized);
     this.getApartmentAddress();
   },
   methods: {
@@ -28,7 +27,6 @@ export default {
           this.sponsorized.city =
             response.data.addresses[0].address.municipality;
           this.sponsorized.country = response.data.addresses[0].address.country;
-          console.log(response.data.addresses[0].address.streetNameAndNumber);
         })
         .catch((error) => {
           console.error(error);
