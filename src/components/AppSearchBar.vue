@@ -18,7 +18,7 @@ export default {
         meters: null,
         bathrooms: null,
         rooms: null,
-        available: false
+        available: true
       },
       servicesFilter: {}
     };
