@@ -71,7 +71,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="success" class="alert alert-success" role="alert">
+  <div v-if="success" class="alert alert-success mx-3 w-100" role="alert">
     Grazie per avermi contattato, ti risponderò entro 48h!
   </div>
 
