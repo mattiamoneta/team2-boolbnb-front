@@ -546,3 +546,14 @@ input.underlined:focus::after {
 #map-div-details{
   height: 200px;
 }
+
+
+/* Footer */
+
+.footer-link{
+  color: $black_text_color;
+}
+
+.footer-link:hover{
+  text-decoration: underline!important;
+}
