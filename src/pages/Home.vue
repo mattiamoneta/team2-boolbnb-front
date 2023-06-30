@@ -52,6 +52,27 @@ export default {
           this.currentPage = gotoPage;
           this.lastPage = response.data.results.last_page;
 
+          /* Chiamata TomTom */
+
+          
+          this.sponsorApartments.forEach((single) => {
+            axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${single.latitude},${single.longitude}.json?key=${this.store.apiKey}`)
+              .then((response) => {
+
+                single.address = response.data.addresses[0].address.streetNameAndNumber;
+                single.street = response.data.addresses[0].address.street;
+                single.city = response.data.addresses[0].address.municipality;
+                single.country = response.data.addresses[0].address.country;
+
+              })
+              .catch((error) => {
+                console.error(error);
+          });
+          });
+
+          /* Fine TomTom */
+
+
         });
     }
   },

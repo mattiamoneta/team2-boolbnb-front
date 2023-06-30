@@ -12,27 +12,6 @@ export default {
       store,
     };
   },
-  mounted() {
-    this.getApartmentAddress();
-  },
-  methods: {
-    getApartmentAddress() {
-      axios
-        .get(
-          `https://api.tomtom.com/search/2/reverseGeocode/${this.sponsorized.latitude},${this.sponsorized.longitude}.json?key=${this.store.apiKey}`
-        )
-        .then((response) => {
-          this.sponsorized.address =
-            response.data.addresses[0].address.streetNameAndNumber;
-          this.sponsorized.city =
-            response.data.addresses[0].address.municipality;
-          this.sponsorized.country = response.data.addresses[0].address.country;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-  },
 };
 </script>
 
@@ -60,9 +39,14 @@ export default {
               {{ sponsorized.title }}
             </h6>
 
-            <div class="small text-secondary mb-3 text-truncate">
+            <div class="small text-secondary mb-3 text-truncate" v-if="sponsorized.address != null">
               <i class="fa-solid fa-location-pin me-1 text-muted"></i>
               {{ sponsorized.address }}
+            </div>
+
+            <div class="small text-secondary mb-3 text-truncate" v-else>
+              <i class="fa-solid fa-location-pin me-1 text-muted"></i>
+              {{ sponsorized.street }}
             </div>
 
             <div class="row align-items-center">
