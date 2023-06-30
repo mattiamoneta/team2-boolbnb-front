@@ -39,9 +39,14 @@ export default {
               {{ sponsorized.title }}
             </h6>
 
-            <div class="small text-secondary mb-3 text-truncate">
+            <div class="small text-secondary mb-3 text-truncate" v-if="sponsorized.address != null">
               <i class="fa-solid fa-location-pin me-1 text-muted"></i>
               {{ sponsorized.address }}
+            </div>
+
+            <div class="small text-secondary mb-3 text-truncate" v-else>
+              <i class="fa-solid fa-location-pin me-1 text-muted"></i>
+              {{ sponsorized.street }}
             </div>
 
             <div class="row align-items-center">
