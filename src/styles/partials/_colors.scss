@@ -15,6 +15,10 @@ $premium_color: #fcc419;
 .ms-bg-light-gradient {
   background-image: linear-gradient($main_color, transparent) !important;
 }
+.ms-bg-light-dark {
+  background-color: $main_darker_color !important;
+}
+
 .ms-bg-dark {
   background-color: $main_darker2_color !important;
 }
@@ -62,3 +66,4 @@ $premium_color: #fcc419;
   filter: brightness(0) saturate(100%) invert(56%) sepia(39%) saturate(859%)
     hue-rotate(140deg) brightness(81%) contrast(100%);
 }
+

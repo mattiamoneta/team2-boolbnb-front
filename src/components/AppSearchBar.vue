@@ -14,20 +14,22 @@ export default {
       showModal: false,
       apartmentFilter: {
         price: null,
-        beds: 1,
-        meters: 1,
-        bathrooms: 1,
-        rooms: 1
+        beds: null,
+        meters: null,
+        bathrooms: null,
+        rooms: null,
+        available: true
       },
       servicesFilter: {}
     };
   },
   props: {
     showFilters: Boolean,
+    allowModal: Boolean
   },
   methods: {
     /* Chiamata API real-time durante la digitazione */
-    handleInput() {
+    handleInput() {      
       if (this.store.queryAddress.length > 2) {
         axios
           .get(
@@ -44,6 +46,7 @@ export default {
             console.error(error);
           });
       } else {
+
         this.querySuggestions = []; //Cancella dropdown se niente elementi
       }
     },
@@ -70,16 +73,19 @@ export default {
 
     /* Blocca il submit, effettua la ricerca e rimanda alla pagina di risultati */
     handleSubmit(event) {
+
       event.preventDefault(); // Evita il comportamento predefinito del modulo
-      this.$router.push({
+
+        this.$router.push({
         name: "search",
         query: {
           indirizzo: this.store.queryAddress,
-          price: this.apartmentFilter.price,
-          beds: this.apartmentFilter.beds,
-          meters: this.apartmentFilter.meters,
-          rooms: this.apartmentFilter.rooms,
-          bathrooms: this.apartmentFilter.bathrooms,
+          price: this.apartmentFilter.price != '' ? this.apartmentFilter.price : null,
+          beds: this.apartmentFilter.beds  != '' ? this.apartmentFilter.beds : null,
+          meters: this.apartmentFilter.meters  != '' ? this.apartmentFilter.meters : null,
+          rooms: this.apartmentFilter.rooms  != '' ? this.apartmentFilter.rooms : null,
+          bathrooms: this.apartmentFilter.bathrooms  != '' ? this.apartmentFilter.bathrooms : null,
+          available: this.apartmentFilter.available,
           amn_wifi: this.checkboxOptions[0].checked,
           amn_car: this.checkboxOptions[1].checked,
           amn_pool: this.checkboxOptions[2].checked,
@@ -89,6 +95,7 @@ export default {
 
         },
       }); // Redirect alla pagina dei risultati
+      
     },
     /* cambia il valore di store.radius se viene modificato il range */
     changeRadius() {
@@ -158,9 +165,10 @@ export default {
     </div>
     <!-- Inline Filters -->
     <div class="row filters py-3" v-if="showFilters == true">
-      <div class="col-2">
+      <div class="col-lg-3 col-xl-2 col-md-4 col-12 col-xs-2 text-center text-lg-start my-lg-3 my-3">
         <button
-          class="btn ms-btn ms-btn-textual-outline btn-sm"
+          class="btn ms-btn ms-btn-textual-outline btn-sm "
+          :class="allowModal == false ? 'disabled' : ''"
           data-bs-toggle="modal"
           data-bs-target="#filtersModal"
           @click="openModal"
@@ -169,10 +177,11 @@ export default {
           <span class="xsmall text-uppercase fw-bold align-middle"
             >filtra risultati</span
           >
+
         </button>
       </div>
-      <div class="col-10">
-       <div class="h-100 d-flex align-items-center">
+      <div class="col-12 col-lg-9 col-xl-10 col-md-8">
+       <div class="h-100 d-flex align-items-center justify-content-center justify-content-md-start">
         <span class="xsmall me-2 text-uppercase fw-bold">Distanza</span>
         <input
           class="ms-range-primary"
@@ -231,6 +240,7 @@ export default {
                     id="price"
                     name="price"
                     v-model="this.apartmentFilter.price"
+                    min="0"
                   />
                 </li>
                 <li
@@ -243,6 +253,7 @@ export default {
                     id="size_m2"
                     name="size_m2"
                     v-model="this.apartmentFilter.meters"
+                    min="0"
                   />
                 </li>
                 <li
@@ -255,7 +266,8 @@ export default {
                     id="available"
                     name="available"
                     role="switch"
-                    v-model="store.available"
+                    v-model="this.apartmentFilter.available"
+                    min="0"
                   />
                 </li>
               </ul>
@@ -279,6 +291,7 @@ export default {
                     id="beds"
                     name="beds"
                     v-model="this.apartmentFilter.beds"
+                    min="0"
                   />
                 </li>
                 <li
@@ -291,6 +304,7 @@ export default {
                     id="bedrooms"
                     name="bedrooms"
                     v-model="this.apartmentFilter.rooms"
+                    min="0"
                   />
                 </li>
                 <li
@@ -303,6 +317,7 @@ export default {
                     id="bathrooms"
                     name="bathrooms"
                     v-model="this.apartmentFilter.bathrooms"
+                    min="0"
                   />
                 </li>
               </ul>

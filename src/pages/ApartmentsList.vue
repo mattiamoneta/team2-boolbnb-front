@@ -1,6 +1,7 @@
 <script>
 import AppSearchBar from "../components/AppSearchBar.vue";
 import ApartmentResultCard from "../components/ApartmentResultCard.vue";
+import AppLoader from "../components/AppLoader.vue";
 
 import { store } from "../store";
 import axios from "axios";
@@ -10,9 +11,11 @@ export default {
   data() {
     return {
       store,
-      scrollPos: 0,
-      filters: []
-      //retApartmnets: {},
+      filters: [],
+      currentLat: 0,
+      currentLong: 0,
+      generateMap: false,
+      loading: true
     };
   },
   watch: {
@@ -24,10 +27,16 @@ export default {
   },
   methods: {
     /* Salva la posizione corrente dello scroll */
-    handleScroll() {
-      this.scrollPos = window.scrollY;
-    },
+    // handleScroll() {
+    //   this.scrollPos = window.scrollY;
+    // },
+
     performSearch() {
+
+      this.store.retApartmnets =  [];
+      this.loading = true;
+      this.generateMap = false;
+
       if (this.store.queryAddress == "") {
         this.store.queryAddress = this.$route.query.indirizzo;
       }
@@ -41,6 +50,8 @@ export default {
           )
           .then((response) => {
             const retVal = response.data.results;
+
+
             if (retVal.length > 0) {
               // Se ci sono risultati
 
@@ -48,50 +59,41 @@ export default {
               const lat = retVal[0].position.lat;
               const long = retVal[0].position.lon;
 
-
-              // console.log(`${lat}/${long}/${this.store.radius * 1000}`);
-
-              /* Ottengo tutti gli appartamenti  dalle API Laravel entro il raggio selezionato.
-               *  this.store.radius è in km quindi moltiplico per 1000 per averlo in metri
-               */
+              this.currentLat = retVal[0].position.lat;
+              this.currentLong = retVal[0].position.lon;
 
 
               axios
                 .post(
-                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
+                  `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.available}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
                 )
                 .then((response) => {
-                  this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
-
-                  console.log(`${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`);
-                  
-                  this.store.retApartmnets.forEach((value, index) => {
-
-                    axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
-                      .then((response) => {
-
-                        value.city = response.data.addresses[0].address.municipality;
-                        value.country = response.data.addresses[0].address.country;
-                        value.address = response.data.addresses[0].address.streetNameAndNumber;
-
                  
-                      })
-                      .catch(error => {
-                        console.error(error);
-                      });
-                  });
+                    this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
+
+                    let timeout = setTimeout(() => {
+                      if (this.store.retApartmnets.length > 0) {
+                        this.createMap(this.currentLat, this.currentLong);
+                      }
+                    }, 1);
+           
                 })
                 .catch((error) => {
-                  console.error(error);
+                   if (error.response && error.response.status != 500) {
+                      // Gestisci l'errore 500
+                      console.error(error);
+                    }
                 });
 
+            } else {
+              this.store.retApartmnets = [];
             }
 
 
+            this.generateMap = true;
             /* Ottengo la location esatta */
 
-
-
+            this.loading = false;
           })
           .catch((error) => {
             console.error(error);
@@ -102,32 +104,22 @@ export default {
       return Object.keys(obj).length === 0;
     },
     //funzione di creazione mappa
-    createMap() {
-      var map = tt.map({
+    createMap(latitude, longitude) {
+      let map = tt.map({
 
         key: this.store.apiKey,
-
         container: 'map-div',
-
-        center: { lng: 9.1900, lat: 45.4642 },
-
+        center: { lng: longitude, lat: latitude },
         zoom: 12
 
       });
-    }
+    },
   },
   created() {
     /* Intercetta lo scroll del mouse */
-    window.addEventListener("scroll", this.handleScroll);
+    // window.addEventListener("scroll", this.handleScroll);
   },
-  updated() {
-    // this.performSearch();
-  },
-  mounted() {
-    this.performSearch();
-
-    this.createMap();
-
+  beforeMount() {
     //funzione che viene lanciata quando store.radius viene aggiornata nello store.js
     this.$watch(
       () => store.radius,
@@ -137,18 +129,24 @@ export default {
         }
       }
     );
-  },
 
+  },
+  mounted() {
+    // this.createMap(this.currentLat, this.currentLong);
+    this.performSearch();
+  },
 
   components: {
     ApartmentResultCard,
     AppSearchBar,
+    AppLoader
   },
 };
 </script>
 
 <template>
-  <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
+  <AppLoader v-if="loading" />
+  <main :class="store.scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <div class="row mt-4">
         <div class="col">
@@ -167,12 +165,12 @@ export default {
       <div class="row">
         <!-- !!!SEARCH BAR QUI!!! -->
         <div class="col-12">
-          <AppSearchBar :showFilters="true" />
+          <AppSearchBar :showFilters="true" :allowModal="store.retApartmnets.length > 0 ? true : false" />
         </div>
       </div>
       <!-- End Search Bar -->
 
-      <div class="row" v-if="this.$route.query.indirizzo != ''">
+      <div class="row" v-if="this.$route.query.indirizzo != '' && store.retApartmnets.length > 0">
         <!-- Results -->
         <div class="col-12 col-lg-5">
           <div class="fixed-box pe-4 py-3">
@@ -185,8 +183,8 @@ export default {
         <!-- End Results -->
 
         <!-- Map -->
-        <div class="col-7 max-fixed d-none d-lg-block">
-          <div class="card d-block rounded-4 overflow-hidden border-1 h-100">
+        <div class="col-12 col-lg-7 fixed-box">
+          <div class="card d-block rounded-4 overflow-hidden border-1 h-100 map-card">
             <div id="map-div"></div>
           </div>
         </div>
@@ -209,7 +207,8 @@ export default {
 
 <style lang="scss" scoped>
 #map-div {
-  width: 100vw;
-  height: 100vh;
+
+  width: 100%;
+  height: 100%;
 }
 </style>

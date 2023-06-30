@@ -1,6 +1,7 @@
 <script>
 import AppSearchBar from "../components/AppSearchBar.vue";
 import AppFormVue from "../components/AppForm.vue";
+import AppLoader from "../components/AppLoader.vue";
 
 import { store } from "../store";
 import axios from "axios";
@@ -10,40 +11,64 @@ export default {
   data() {
     return {
       store,
-      scrollPos: 0,
-      apartmentDetails: null,
+      apartmentDetails: {},
+      loading: true,
     };
   },
   components: {
     AppSearchBar,
     AppFormVue,
+    AppLoader,
   },
   methods: {
-     //funzione di creazione mappa
-     createMap() {
+    // handleScroll() {
+    //   this.store.scrollPos = window.scrollY;
+    // },
+    //funzione di creazione mappa
+    createMap(lat, long) {
       var map = tt.map({
-
         key: this.store.apiKey,
 
-        container: 'map-div-details',
+        container: "map-div-details",
 
-        center: { lng: 9.1900, lat: 45.4642 },
+        center: { lng: long, lat: lat },
 
-        zoom: 12
-
+        zoom: 12,
       });
     },
-    handleScroll() {
-      this.scrollPos = window.scrollY;
-    },
-
-    getApartmentDetails(id) {
+    getApartmentAddress() {
       axios
-        .get(`${this.store.baseUrl}/api/apartment/${id}`)
+        .get(
+          `https://api.tomtom.com/search/2/reverseGeocode/${this.apartmentDetails.latitude},${this.apartmentDetails.longitude}.json?key=${this.store.apiKey}`
+        )
+        .then((response) => {
+          this.apartmentDetails.address =
+            response.data.addresses[0].address.streetNameAndNumber;
+          this.apartmentDetails.city =
+            response.data.addresses[0].address.municipality;
+          this.apartmentDetails.country =
+            response.data.addresses[0].address.country;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    getApartmentDetails() {
+      const id = this.$route.params.id;
+
+      axios
+        .get(`${this.store.baseUrl}/api/apartments/${id}`)
         .then((response) => {
           if (response.data.success == true) {
             this.apartmentDetails = response.data.results;
-            console.log(this.apartmentDetails);
+            this.getApartmentAddress();
+
+            this.createMap(
+              this.apartmentDetails.latitude,
+              this.apartmentDetails.longitude
+            );
+
+            this.loading = false;
           } else {
             console.error(response.data.error);
           }
@@ -51,17 +76,18 @@ export default {
     },
   },
   created() {
-    window.addEventListener("scroll", this.handleScroll);
+    // window.addEventListener("scroll", this.handleScroll);
   },
   mounted() {
     const id = this.$route.params.id;
-    this.createMap();
+    this.getApartmentDetails();
   },
 };
 </script>
 
 <template>
-  <main :class="scrollPos > 230 ? 'navbar-top-fix' : ''">
+  <AppLoader v-if="loading" />
+  <main :class="store.scrollPos > 230 ? 'navbar-top-fix' : ''">
     <div class="container py-5">
       <!-- Search Bar -->
       <div class="row">
@@ -75,20 +101,31 @@ export default {
         <div class="col">
           <div class="card card-tile rounded-4 flat-shadow overflow-hidden">
             <img
-              src="https://picsum.photos/2000/500"
+              :src="`${store.baseUrl}/storage/${apartmentDetails.cover_image}`"
               alt=""
               class="w-100 card-img-top object-fit-cover apartment-cover-image"
             />
             <div class="card-body mt-4 p-4">
               <div class="row pb-3 mb-5 border-bottom mt-4">
-                <div class="col-10">
-                  <h2 class="font-semibold">Appartamento Bello Bello</h2>
+                <div class="col-6 col-lg-10">
+                  <h2 class="font-semibold">
+                    {{ apartmentDetails.title }}
+                  </h2>
                 </div>
-                <div class="col-2 text-end">
-                  <div class="badge ms-bg-dark">
+                <div class="col-6 col-lg-2 text-end">
+                  <div
+                    class="badge ms-bg-dark"
+                    v-if="apartmentDetails.available == 1"
+                  >
                     <i class="fa-solid fa-eye text-light me-2"></i>
                     <span class="xsmall text-uppercase fw-bolder text-light">
                       disponibile
+                    </span>
+                  </div>
+                  <div class="badge bg-light" v-else>
+                    <i class="fa-solid fa-ban text-muted me-2"></i>
+                    <span class="xsmall text-uppercase fw-bolder text-muted">
+                      non disponibile
                     </span>
                   </div>
                 </div>
@@ -96,29 +133,30 @@ export default {
 
               <div class="row">
                 <!-- LEFT SIDE: Apartment details -->
-                <div class="col-8 pe-4">
+                <div class="col-12 col-lg-7 pe-4">
                   <!-- Price/Address Row -->
                   <div class="row">
                     <!-- Address -->
-                    <div class="col-6">
+                    <div class="col-12 col-lg-6">
                       <!-- Provincia -->
                       <div class="xsmall text-uppercase fw-bolder mb-1">
-                        milano, italia
+                        {{ apartmentDetails.city }},
+                        {{ apartmentDetails.country }}
                       </div>
 
                       <!-- Indirizzo -->
-                      <div class="text-muted">
+                      <div class="text-muted mb-4 mb-lg-0">
                         <i class="fa-solid fa-location-pin text-muted me-1"></i>
-                        Via Roma, 3
+                        {{ apartmentDetails.address }}
                       </div>
                     </div>
                     <!-- End Address -->
 
                     <!-- Price -->
-                    <div class="col-6 text-end">
+                    <div class="col-12 col-lg-6 text-end">
                       <h2 class="fw-bold mb-0">
                         <span class="small font-primary text-muted">€</span>
-                        220
+                        {{ apartmentDetails.price }}
                       </h2>
                       <div class="font-secondary xsmall text-muted fw-bold">
                         /notte
@@ -138,20 +176,13 @@ export default {
                     </div>
 
                     <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Praesentium voluptatum repudiandae recusandae! Aliquid,
-                      accusantium soluta? Enim inventore voluptatibus voluptates
-                      ducimus aliquid optio voluptatum vel quidem, quod
-                      obcaecati reiciendis nulla laboriosam recusandae.
-                      Distinctio dolores libero sit, delectus at ipsam voluptas
-                      id non veritatis amet ea unde suscipit ex maiores expedita
-                      earum.
+                      {{ apartmentDetails.description }}
                     </p>
                   </div>
                   <!-- End Description Row -->
 
                   <!-- Features -->
-                  <div class="row mb-5 py-3">
+                  <div class="row mb-5 py-3 gy-3">
                     <div
                       class="xsmall text-uppercase fw-bolder mb-4 ms_text_main_darker2"
                     >
@@ -159,46 +190,52 @@ export default {
                     </div>
 
                     <!-- Rooms Amount -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
                             <i class="fa-solid fa-door-open fs-5"></i>
                           </div>
                           <div>Stanze</div>
-                          <div class="amount fw-bold">2</div>
+                          <div class="amount fw-bold">
+                            {{ apartmentDetails.bedrooms }}
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     <!-- Beds Amount -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
                             <i class="fa-solid fa-bed fs-5"></i>
                           </div>
                           <div>Letti</div>
-                          <div class="amount fw-bold">3</div>
+                          <div class="amount fw-bold">
+                            {{ apartmentDetails.beds }}
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     <!-- Bathrooms Amount -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
                             <i class="fa-solid fa-restroom fs-5"></i>
                           </div>
                           <div>Bagni</div>
-                          <div class="amount fw-bold">1</div>
+                          <div class="amount fw-bold">
+                            {{ apartmentDetails.bathrooms }}
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     <!-- Room Size -->
-                    <div class="col-3">
+                    <div class="col-lg-3 col-6">
                       <div class="card card-tile drop-shadow-sm">
                         <div class="card-body text-center">
                           <div class="icon mb-2">
@@ -206,7 +243,7 @@ export default {
                           </div>
                           <div>Dimensione</div>
                           <div class="amount fw-bold">
-                            32
+                            {{ apartmentDetails.size_m2 }}
                             <span class="small"> m<sup>2</sup> </span>
                           </div>
                         </div>
@@ -224,65 +261,20 @@ export default {
                     </div>
 
                     <div class="row">
-                      <div class="col-4">
+                      <div class="col-6">
                         <ul class="list-unstyled">
-                          <li class="my-2">
-                            <i class="fa-solid fa-wifi me-1"></i>
-                            Wifi
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-car me-1"></i>
-                            Posto Macchina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water-ladder me-1"></i>
-                            Piscina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-door-open me-1"></i>
-                            Portineria
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-hot-tub-person me-1"></i>
-                            Sauna
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water me-1"></i>
-                            Vista Mare
+                          <li
+                            class="my-3"
+                            v-for="facility in apartmentDetails.facilities"
+                          >
+                            <i :class="facility.icon"></i>
+                            {{ facility.name }}
                           </li>
                         </ul>
                       </div>
+                      <!-- <div class="col">Nessun Servizio</div> -->
 
-                      <div class="col-4">
-                        <ul class="list-unstyled">
-                          <li class="my-2">
-                            <i class="fa-solid fa-wifi me-1"></i>
-                            Wifi
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-car me-1"></i>
-                            Posto Macchina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water-ladder me-1"></i>
-                            Piscina
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-door-open me-1"></i>
-                            Portineria
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-hot-tub-person me-1"></i>
-                            Sauna
-                          </li>
-                          <li class="my-2">
-                            <i class="fa-solid fa-water me-1"></i>
-                            Vista Mare
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div class="col-4">
+                      <div class="col-6">
                         <div class="card">
                           <div class="card-body">
                             <div
@@ -296,6 +288,7 @@ export default {
                       </div>
                     </div>
                   </div>
+
                   <!-- End Services Row -->
 
                   <!-- Map -->
@@ -318,8 +311,8 @@ export default {
                 <!-- End LEFT SIDE: Apartment details -->
 
                 <!-- RIGHT SIDE: Contacts -->
-                <div class="col-4 border-start">
-                  <AppFormVue />
+                <div class="co-12 col-lg-4 mt-5 mt-lg-0 offset-lg-1">
+                  <AppFormVue :apartmentId="apartmentDetails.id" />
                 </div>
                 <!-- End RIGHT SIDE: Contacts -->
               </div>
@@ -336,3 +329,5 @@ export default {
   height: 200px;
 }
 </style>
+
+<!-- 000 -->

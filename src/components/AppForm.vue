@@ -4,6 +4,10 @@ import { store } from "../store";
 
 export default {
   name: "AppForm",
+  props: {
+    apartmentId: Number,
+  },
+
   data() {
     return {
       store,
@@ -15,13 +19,24 @@ export default {
       errors: {},
     };
   },
+  mounted() {},
   methods: {
+    hideContact() {
+      let timeout = setTimeout(function () {
+        let alert = document.getElementById("contact-success");
+        alert.classList.add("d-none");
+      }, 5000);
+    },
+
     sendForm() {
+      this.errors = {}; // Resetta gli errori
+
       this.success = false;
       this.sending = true;
 
       axios
-        .post(`${this.store.baseUrl}/api/apartment/:id`, {
+        .post(`${this.store.baseUrl}/api/apartment/${this.apartmentId}`, {
+          apartment_id: this.apartmentId,
           name: this.name,
           email: this.email,
           message: this.message,
@@ -33,8 +48,24 @@ export default {
             this.message = "";
             this.success = true;
           } else {
-            this.errors = response.data.errors;
+            // Esegui le validazioni
+            if (!this.name) {
+              this.errors.name = "Il campo Nome è obbligatorio.";
+            }
+
+            if (!this.email) {
+              this.errors.email = "Il campo Email è obbligatorio.";
+            }
+
+            // else if (!this.isValidEmail(this.email)) {
+            //   this.email = "Inserisci un indirizzo email valido.";
+            // }
+
+            if (!this.message) {
+              this.errors.message = "Il campo Messaggio è obbligatorio.";
+            }
           }
+          console.log(this.errors);
 
           this.sending = false;
         })
@@ -47,12 +78,17 @@ export default {
 </script>
 
 <template>
-  <div v-if="success" class="alert alert-success" role="alert">
-    Grazie per avermi contattato, ti risponderò entro 48h!
+  <div v-if="success" class="row w-100 text-center">
+    <div class="alert alert-custom w-100" role="alert" id="contact-success">
+      <i class="fa-regular fa-face-smile fa-2x mb-3"></i>
+      <div class="msg">
+        Grazie per avermi contattato, ti risponderò entro 48h!
+      </div>
+    </div>
   </div>
 
   <div
-    class="d-flex align-items-center flex-column w-100 mx-3 rounded-4 shadow_only"
+    class="d-flex align-items-center flex-column w-100 rounded-4 shadow_only"
   >
     <!-- form top -->
     <!-- title -->
@@ -69,7 +105,7 @@ export default {
     <!-- form bottom -->
     <div class="w-100 px-4 xmedium">
       <!-- form -->
-      <form @submit.prevent="sendForm()">
+      <form @submit.prevent="sendForm()" novalidate>
         <!-- nome -->
         <div class="mb-4">
           <label for="name" class="form-label font-semibold"
@@ -82,10 +118,11 @@ export default {
             id="name"
             placeholder="Inserisci il tuo nome"
             v-model="name"
+            required
           />
-        </div>
-        <div class="invalid-feedback" v-for="error in errors.name">
-          {{ error }}
+          <div class="invalid-feedback" v-if="errors.name">
+            {{ errors.name }}
+          </div>
         </div>
 
         <!-- email -->
@@ -100,10 +137,11 @@ export default {
             id="email"
             placeholder="nome@example.com"
             v-model="email"
+            required
           />
-        </div>
-        <div class="invalid-feedback" v-for="error in errors.email">
-          {{ error }}
+          <div class="invalid-feedback" v-if="errors.email">
+            {{ errors.email }}
+          </div>
         </div>
 
         <!-- messaggio -->
@@ -118,9 +156,10 @@ export default {
             rows="5"
             v-model="message"
             placeholder="Scrivi qui il tuo messaggio..."
+            required
           ></textarea>
-          <div class="invalid-feedback" v-for="error in errors.message">
-            {{ error }}
+          <div class="invalid-feedback d-block" v-if="errors.message">
+            {{ errors.message }}
           </div>
         </div>
 
@@ -128,6 +167,7 @@ export default {
           type="submit"
           class="btn ms-btn ms-btn-primary mb-4"
           :disabled="sending"
+          @click="hideContact"
         >
           {{ sending ? "Invio..." : "Invia messaggio" }}
         </button>

@@ -10,7 +10,8 @@ export default {
   methods: {
     handlePositions() {
       this.scrollPos = window.scrollY;
-      this.bottomPage = document.documentElement.scrollHeight - window.innerHeight;
+      this.bottomPage =
+        document.documentElement.scrollHeight - window.innerHeight;
     },
     scrollToTop() {
       window.scrollTo({
@@ -70,14 +71,14 @@ export default {
 
     <!-- Section: Links  -->
     <section class="">
-      <div class="footer-bottom container text-center text-md-start mt-5 pb-5 mb-5">
+      <div
+        class="footer-bottom container text-center text-md-start mt-5 pb-5 mb-5"
+      >
         <div class="row">
           <!-- Grid column -->
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
             <!-- Content -->
-            <h5 class="fw-bold mb-4 font-secondary ms_text_main_darker">
-              Boolbnb
-            </h5>
+            <img src="../assets/boolbnb-logo-png.png" class="mb-5" alt="">
             <p>
               Pianifica il tuo viaggio perfetto con Boolbnb: scopri, prenota e
               goditi il mondo!
@@ -89,21 +90,21 @@ export default {
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6
-              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-5 small ms_text_main_darker2"
             >
               Ospitare
             </h6>
             <p>
-              <a href="#!" class="text-reset">Apri un Boolbnb</a>
+              <a href="#!" class="footer-link">Apri un Boolbnb</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">BoolCover per gli host</a>
+              <a href="#!" class="footer-link">BoolCover per gli host</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Come ospitare</a>
+              <a href="#!" class="footer-link">Come ospitare</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Forum community</a>
+              <a href="#!" class="footer-link">Forum community</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -112,21 +113,21 @@ export default {
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6
-              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-5 small ms_text_main_darker2"
             >
               Assistenza
             </h6>
             <p>
-              <a href="#!" class="text-reset">Centro Assistenza</a>
+              <a href="#!" class="footer-link">Centro Assistenza</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">BoolCover</a>
+              <a href="#!" class="footer-link">BoolCover</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Accessibilità per tutti</a>
+              <a href="#!" class="footer-link">Accessibilità per tutti</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Opzioni di cancellazione</a>
+              <a href="#!" class="footer-link">Opzioni di cancellazione</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -135,20 +136,26 @@ export default {
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
             <h6
-              class="text-uppercase font-semibold font-secondary letter_spacing mb-4 xmedium"
+              class="text-uppercase font-semibold font-secondary letter_spacing mb-5 small ms_text_main_darker2"
             >
               contatti
             </h6>
-            <p class="d-flex">
-              <i class="fas fa-home me-3 ms_text_main_darker "></i>
+            <p>
+              <i class="fas fa-home me-3 ms_text_main_darker"></i>
               <span>Via Marmotta 12, 00042, Roma</span>
             </p>
             <p>
               <i class="fas fa-envelope me-3 ms_text_main_darker"></i>
               info@example.com
             </p>
-            <p><i class="fas fa-phone me-3 ms_text_main_darker"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3 ms_text_main_darker"></i> + 01 234 567 89</p>
+            <p>
+              <i class="fas fa-phone me-3 ms_text_main_darker"></i> + 01 234 567
+              88
+            </p>
+            <p>
+              <i class="fas fa-print me-3 ms_text_main_darker"></i> + 01 234 567
+              89
+            </p>
           </div>
           <!-- Grid column -->
         </div>
@@ -164,31 +171,39 @@ export default {
     >
       © 2023 Copyright: Boolbnb
 
-          <!-- Scroll-Top -->
-          <button class="" :class="scrollPos == bottomPage ? 'show' : ''" id="btnScrollTop" @click="scrollToTop">
-            <i class="fa-solid fa-arrow-up"></i>
-          </button>
+      <!-- Scroll-Top -->
+      <button
+        class=""
+        :class="scrollPos == bottomPage ? 'show' : ''"
+        id="btnScrollTop"
+        @click="scrollToTop"
+      >
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
     </div>
     <!-- Copyright -->
-
-
   </footer>
 </template>
 
 <style scoped lang="scss">
 @use "../styles/partials/colors" as *;
 
+@media screen and (max-width: 996px) {
+  footer{
+    margin-top: 1rem!important;
+  }
+}
+
 footer {
   margin-top: 8rem;
   position: relative;
+  
 
   .footer-top i {
     color: $main_darker2_color;
   }
 
   .footer-bottom {
-
-    
     a {
       text-decoration: none;
     }
