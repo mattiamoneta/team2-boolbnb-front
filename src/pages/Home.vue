@@ -47,7 +47,6 @@ export default {
         }
       })
         .then(response => {
-          console.log(response);
           this.sponsorApartments = response.data.results.data;
           this.currentPage = gotoPage;
           this.lastPage = response.data.results.last_page;
