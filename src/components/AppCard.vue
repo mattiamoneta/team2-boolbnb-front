@@ -12,27 +12,6 @@ export default {
       store,
     };
   },
-  mounted() {
-    this.getApartmentAddress();
-  },
-  methods: {
-    getApartmentAddress() {
-      axios
-        .get(
-          `https://api.tomtom.com/search/2/reverseGeocode/${this.sponsorized.latitude},${this.sponsorized.longitude}.json?key=${this.store.apiKey}`
-        )
-        .then((response) => {
-          this.sponsorized.address =
-            response.data.addresses[0].address.streetNameAndNumber;
-          this.sponsorized.city =
-            response.data.addresses[0].address.municipality;
-          this.sponsorized.country = response.data.addresses[0].address.country;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-  },
 };
 </script>
 
