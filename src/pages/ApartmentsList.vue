@@ -30,6 +30,18 @@ export default {
     // handleScroll() {
     //   this.scrollPos = window.scrollY;
     // },
+    handleResultsScroll(event){
+        const element = event.target;
+        let resultsScrollY = element.scrollTop;
+        let resultsScrollBottom = element.scrollHeight - element.clientHeight;
+
+        if(resultsScrollY == resultsScrollBottom && this.currentPage < this.lastPage){
+          // this.performSearch(this.currentPage + 1, false);
+          this.performSearch(this.currentPage + 1)
+        }
+
+    },
+
     performSearch() {
 
       this.loading = true;
@@ -184,7 +196,7 @@ export default {
       <div class="row" v-if="this.$route.query.indirizzo != '' && store.retApartmnets.length > 0">
         <!-- Results -->
         <div class="col-12 col-lg-5">
-          <div class="fixed-box pe-4 py-3">
+          <div class="fixed-box pe-4 py-3" @scroll="handleResultsScroll">
             <div>
               <ApartmentResultCard v-for="singleApartment in store.retApartmnets" :objApartment="singleApartment"
                 hrefURI="/apartment" />
