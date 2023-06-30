@@ -69,10 +69,16 @@ export default {
     <div id="jumbotron" class="p-5">
       <div class="ms_overlay">
         <div class="container">
-          <h1 class="display-5">
-            Prenota case al mare, ville e appartamenti<br />
-            in tutto il mondo.
-          </h1>
+          <div class="row">
+            <div class="col-10 col-lg-6 mx-auto text-center">
+              <h5 class="font-secondary mb-3 text-muted">
+                Esplora, prenota, vivi. La tua avventura inizia qui.
+              </h5>
+              <h1 class="display-5">
+                Prenota case al mare, ville e appartamenti <span class="ms_text_main_darker2 font-primary">in tutto il mondo</span>.
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,16 +134,16 @@ export default {
 @use "../styles/partials/colors" as *;
 
 #jumbotron {
-  height: 30rem;
+  height: 40rem;
   background-color: lightgray;
-  background-image: url("../assets/hero-bg.jpg");
+  background-image: url("../assets/hero-bg-min.jpg");
 
   background-size: cover;
   background-position: center;
   position: relative;
 
   .container {
-    margin-top: 6rem;
+    padding-top: 8rem;
   }
 
   h1 {
@@ -156,6 +162,15 @@ export default {
         rgba(255, 255, 255, 1) 0%,
         rgba(255, 255, 255, 0.7) 10%,
         rgba(0, 212, 255, 0) 50%);
+  }
+}
+
+@media screen and (max-width: 575px) {
+  #jumbotron .container{
+    background-color: rgba(#fff, .4);
+    height: 100%;
+    backdrop-filter: blur(5px);
+
   }
 }
 </style>
