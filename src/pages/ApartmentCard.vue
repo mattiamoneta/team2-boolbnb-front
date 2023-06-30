@@ -36,23 +36,7 @@ export default {
         zoom: 12,
       });
     },
-    getApartmentAddress() {
-      axios
-        .get(
-          `https://api.tomtom.com/search/2/reverseGeocode/${this.apartmentDetails.latitude},${this.apartmentDetails.longitude}.json?key=${this.store.apiKey}`
-        )
-        .then((response) => {
-          this.apartmentDetails.address =
-            response.data.addresses[0].address.streetNameAndNumber;
-          this.apartmentDetails.city =
-            response.data.addresses[0].address.municipality;
-          this.apartmentDetails.country =
-            response.data.addresses[0].address.country;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
+
     getApartmentDetails() {
       const id = this.$route.params.id;
 
@@ -61,7 +45,6 @@ export default {
         .then((response) => {
           if (response.data.success == true) {
             this.apartmentDetails = response.data.results;
-            this.getApartmentAddress();
 
             this.createMap(
               this.apartmentDetails.latitude,
