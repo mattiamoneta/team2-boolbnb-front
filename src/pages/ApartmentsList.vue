@@ -30,20 +30,10 @@ export default {
     // handleScroll() {
     //   this.scrollPos = window.scrollY;
     // },
-    handleResultsScroll(event){
-        const element = event.target;
-        let resultsScrollY = element.scrollTop;
-        let resultsScrollBottom = element.scrollHeight - element.clientHeight;
-
-        if(resultsScrollY == resultsScrollBottom && this.currentPage < this.lastPage){
-          // this.performSearch(this.currentPage + 1, false);
-          this.performSearch(this.currentPage + 1)
-        }
-
-    },
 
     performSearch() {
 
+      this.store.retApartmnets =  [];
       this.loading = true;
       this.generateMap = false;
 
@@ -60,6 +50,8 @@ export default {
           )
           .then((response) => {
             const retVal = response.data.results;
+
+
             if (retVal.length > 0) {
               // Se ci sono risultati
 
@@ -76,36 +68,21 @@ export default {
                   `${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.available}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`
                 )
                 .then((response) => {
-                  this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
+                 
+                    this.store.retApartmnets = response.data.results.data; //Ottengo gli appartamenti
 
-
-                  // console.log(`${this.store.baseUrl}/api/apartments/search/${lat}/${long}/${this.store.radius * 1000}/${this.$route.query.price}/${this.$route.query.beds}/${this.$route.query.meters}/${this.$route.query.rooms}/${this.$route.query.bathrooms}/${this.$route.query.amn_wifi}/${this.$route.query.amn_car}/${this.$route.query.amn_pool}/${this.$route.query.amn_door}/${this.$route.query.amn_sauna}/${this.$route.query.amn_water}`);
-
-                  this.store.retApartmnets.forEach((value) => {
-
-                    axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${value.latitude},${value.longitude}.json?key=${this.store.apiKey}`)
-                      .then((response) => {
-
-                        value.city = response.data.addresses[0].address.municipality;
-                        value.country = response.data.addresses[0].address.country;
-                        value.address = response.data.addresses[0].address.streetNameAndNumber;
-
-                        if (this.store.retApartmnets.length > 0) {
-                          this.createMap(this.currentLat, this.currentLong);
-                        }
-
-
-
-                      })
-                      .catch(error => {
-                        console.error(error);
-                      });
-                  });
-
-
+                    let timeout = setTimeout(() => {
+                      if (this.store.retApartmnets.length > 0) {
+                        this.createMap(this.currentLat, this.currentLong);
+                      }
+                    }, 1);
+           
                 })
                 .catch((error) => {
-                  console.error(error);
+                   if (error.response && error.response.status != 500) {
+                      // Gestisci l'errore 500
+                      console.error(error);
+                    }
                 });
 
             } else {
@@ -196,7 +173,7 @@ export default {
       <div class="row" v-if="this.$route.query.indirizzo != '' && store.retApartmnets.length > 0">
         <!-- Results -->
         <div class="col-12 col-lg-5">
-          <div class="fixed-box pe-4 py-3" @scroll="handleResultsScroll">
+          <div class="fixed-box pe-4 py-3">
             <div>
               <ApartmentResultCard v-for="singleApartment in store.retApartmnets" :objApartment="singleApartment"
                 hrefURI="/apartment" />

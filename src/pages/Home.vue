@@ -47,7 +47,6 @@ export default {
         }
       })
         .then(response => {
-          console.log(response);
           this.sponsorApartments = response.data.results.data;
           this.currentPage = gotoPage;
           this.lastPage = response.data.results.last_page;
@@ -55,20 +54,20 @@ export default {
           /* Chiamata TomTom */
 
           
-          this.sponsorApartments.forEach((single) => {
-            axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${single.latitude},${single.longitude}.json?key=${this.store.apiKey}`)
-              .then((response) => {
+          // this.sponsorApartments.forEach((single) => {
+          //   axios.get(`https://api.tomtom.com/search/2/reverseGeocode/${single.latitude},${single.longitude}.json?key=${this.store.apiKey}`)
+          //     .then((response) => {
 
-                single.address = response.data.addresses[0].address.streetNameAndNumber;
-                single.street = response.data.addresses[0].address.street;
-                single.city = response.data.addresses[0].address.municipality;
-                single.country = response.data.addresses[0].address.country;
+          //       single.address = response.data.addresses[0].address.streetNameAndNumber;
+          //       single.street = response.data.addresses[0].address.street;
+          //       single.city = response.data.addresses[0].address.municipality;
+          //       single.country = response.data.addresses[0].address.country;
 
-              })
-              .catch((error) => {
-                console.error(error);
-          });
-          });
+          //     })
+          //     .catch((error) => {
+          //       console.error(error);
+          // });
+          // });
 
           /* Fine TomTom */
 
