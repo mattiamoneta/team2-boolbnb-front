@@ -1,17 +1,12 @@
 <template>
-  <div
-    class="card card-tile flat-shadow d-block rounded-4 overflow-hidden drop-shadow-sm mb-4 apartment-card"
-  >
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <div class="card card-tile flat-shadow d-block rounded-4 overflow-hidden drop-shadow-sm mb-4 apartment-card">
     <div class="row">
       <div class="col-5">
-        <router-link
-          :to="{ name: 'apartment', params: { id: objApartment['id'] } }"
-        >
-          <img
-            :src="`${store.baseUrl}/storage/${objApartment['cover_image']}`"
-            :alt="objApartment['title']"
-            class="w-100 h-100 object-fit-cover"
-          />
+        <router-link :to="{ name: 'apartment', params: { id: objApartment['id'] } }">
+          <img :src="`${store.baseUrl}/storage/${objApartment['cover_image']}`" :alt="objApartment['title']"
+            class="w-100 h-100 object-fit-cover" @click="incrementViews(objApartment['id'])" />
+
         </router-link>
       </div>
 
@@ -46,6 +41,7 @@
 
 <script>
 import { store } from "../store";
+import axios from 'axios';
 
 export default {
   name: "ApartmentResultCard",
@@ -54,7 +50,18 @@ export default {
       store,
     };
   },
-  methods: {},
+  methods: {
+    incrementViews(apartmentId) {
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      axios.post(`${this.store.baseUrl}/api/apartments/views/${apartmentId}`, csrfToken)
+        .then(() => {
+          // Aggiornamento riuscito, esegui eventuali azioni aggiuntive
+        })
+        .catch((error) => {
+          console.error('Errore durante l\'incremento delle visualizzazioni:', error);
+        });
+    }
+  },
   props: {
     objApartment: Object,
     hrefURI: "",
