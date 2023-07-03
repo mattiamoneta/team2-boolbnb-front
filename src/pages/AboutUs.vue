@@ -75,10 +75,20 @@ export default {
             >
               <h2 class="mb-3">La nostra missione</h2>
               <p>
-                La nostra missione in Boolbnb è creare esperienze indimenticabili per i viaggiatori di tutto il mondo. Siamo dedicati a offrire un'ampia selezione di case vacanze di alta qualità, garantendo che ogni ospite si senta come a casa, ovunque si trovi. 
+                La nostra missione in Boolbnb è creare esperienze
+                indimenticabili per i viaggiatori di tutto il mondo. Siamo
+                dedicati a offrire un'ampia selezione di case vacanze di alta
+                qualità, garantendo che ogni ospite si senta come a casa,
+                ovunque si trovi.
               </p>
               <p>
-                Con un'attenzione particolare alla cura dei dettagli e al comfort degli ospiti, lavoriamo per superare le aspettative e creare un legame duraturo tra viaggiatori e host. Siamo determinati a rendere il processo di prenotazione facile e sicuro, fornendo un'assistenza professionale e una piattaforma intuitiva per garantire la massima soddisfazione dei nostri clienti.
+                Con un'attenzione particolare alla cura dei dettagli e al
+                comfort degli ospiti, lavoriamo per superare le aspettative e
+                creare un legame duraturo tra viaggiatori e host. Siamo
+                determinati a rendere il processo di prenotazione facile e
+                sicuro, fornendo un'assistenza professionale e una piattaforma
+                intuitiva per garantire la massima soddisfazione dei nostri
+                clienti.
               </p>
             </div>
           </div>
@@ -93,10 +103,18 @@ export default {
             >
               <h2 class="mb-3">Come abbiamo iniziato</h2>
               <p>
-                Boolbnb è nato da una passione condivisa per i viaggi e la condivisione delle esperienze. I fondatori, dopo aver sperimentato personalmente la gioia di soggiornare in case vacanze autentiche e accoglienti, hanno deciso di creare una piattaforma che permettesse a tutti di vivere esperienze simili. 
+                Boolbnb è nato da una passione condivisa per i viaggi e la
+                condivisione delle esperienze. I fondatori, dopo aver
+                sperimentato personalmente la gioia di soggiornare in case
+                vacanze autentiche e accoglienti, hanno deciso di creare una
+                piattaforma che permettesse a tutti di vivere esperienze simili.
               </p>
               <p>
-                Con una combinazione di talento tecnologico e amore per l'ospitalità, hanno lanciato Boolbnb con l'obiettivo di connettere i viaggiatori con host di tutto il mondo e offrire una vasta gamma di opzioni per soggiorni unici, offrendo al contempo un servizio affidabile e di qualità.
+                Con una combinazione di talento tecnologico e amore per
+                l'ospitalità, hanno lanciato Boolbnb con l'obiettivo di
+                connettere i viaggiatori con host di tutto il mondo e offrire
+                una vasta gamma di opzioni per soggiorni unici, offrendo al
+                contempo un servizio affidabile e di qualità.
               </p>
             </div>
           </div>
