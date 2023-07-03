@@ -166,6 +166,8 @@ export default {
     padding-top: 8rem;
   }
 
+
+
   h1 {
     font-size: 3rem;
     font-weight: 500;
@@ -190,6 +192,7 @@ export default {
     background-color: rgba(#fff, .4);
     height: 100%;
     backdrop-filter: blur(5px);
+    padding-top: 3.5rem;
 
   }
 }

@@ -263,9 +263,9 @@ export default {
                             <div
                               class="xsmall text-uppercase fw-bolder ms_text_main_darker2 mb-2"
                             >
-                              ALTRO
+                              NOTE AGGIUNTIVE
                             </div>
-                            Lorem ipsum dolor sit amet.
+                            Nessuna nota dal proprietario
                           </div>
                         </div>
                       </div>
