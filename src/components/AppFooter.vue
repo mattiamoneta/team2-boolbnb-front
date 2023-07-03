@@ -10,8 +10,7 @@ export default {
   methods: {
     handlePositions() {
       this.scrollPos = window.scrollY;
-      this.bottomPage =
-        document.documentElement.scrollHeight - window.innerHeight;
+      this.bottomPage = document.documentElement.scrollHeight - window.innerHeight - 50;
     },
     scrollToTop() {
       window.scrollTo({
@@ -172,12 +171,7 @@ export default {
       © 2023 Copyright: Boolbnb
 
       <!-- Scroll-Top -->
-      <button
-        class=""
-        :class="scrollPos == bottomPage ? 'show' : ''"
-        id="btnScrollTop"
-        @click="scrollToTop"
-      >
+      <button class="" :class="scrollPos >= bottomPage ? 'show' : ''" id="btnScrollTop" @click="scrollToTop">
         <i class="fa-solid fa-arrow-up"></i>
       </button>
     </div>
