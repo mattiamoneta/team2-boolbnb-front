@@ -1,9 +1,12 @@
 <template>
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <div class="card card-tile flat-shadow d-block rounded-4 overflow-hidden drop-shadow-sm mb-4 apartment-card">
+  <div class="card card-tile flat-shadow d-block rounded-4 overflow-hidden drop-shadow-sm mb-4 apartment-card position-relative">
     <div class="row">
       <div class="col-5">
         <router-link :to="{ name: 'apartment', params: { id: objApartment['id'] } }">
+          <span class="badge ms-bg-light-dark text-center result-card-badge py-2" v-if="objApartment['sponsorships'].length > 0">
+                <i class="fa-solid fa-star xsmall text-warning"></i>
+          </span>
           <img :src="`${store.baseUrl}/storage/${objApartment['cover_image']}`" :alt="objApartment['title']"
             class="w-100 h-100 object-fit-cover" @click="incrementViews(objApartment['id'])" />
 

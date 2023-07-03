@@ -83,11 +83,17 @@ export default {
       <div class="row mt-4">
         <div class="col">
           <div class="card card-tile rounded-4 flat-shadow overflow-hidden">
-            <img
-              :src="`${store.baseUrl}/storage/${apartmentDetails.cover_image}`"
-              alt=""
-              class="w-100 card-img-top object-fit-cover apartment-cover-image"
-            />
+            <div class="img-div position-relative">
+              <span class="badge ms-bg-light-dark text-center result-card-badge" v-if="apartmentDetails.hasOwnProperty('sponsorships') && apartmentDetails.sponsorships.length > 0">
+                  <i class="fa-solid fa-star xsmall text-warning me-2 "></i>
+                  <span class="xsmall text-uppercase text-light ">in evidenza</span>
+              </span>
+              <img
+                :src="`${store.baseUrl}/storage/${apartmentDetails.cover_image}`"
+                alt=""
+                class="w-100 card-img-top object-fit-cover apartment-cover-image"
+              />
+            </div>
             <div class="card-body mt-4 p-4">
               <div class="row pb-3 mb-5 border-bottom mt-4">
                 <div class="col-6 col-lg-10">
