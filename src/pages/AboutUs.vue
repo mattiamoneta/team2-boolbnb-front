@@ -142,7 +142,7 @@ export default {
 
   .waves {
     position: absolute;
-    bottom: 0rem;
+    bottom: -0.3rem;
     right: 0;
     width: 100%;
   }
