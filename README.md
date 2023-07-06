@@ -26,8 +26,9 @@ Syntax: <a href="website"><img src="https://img.shields.io/badge/-LABEL-COLORHEX
   <a href="#"><img src="https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white" alt="CSS3"></a>
 </p>
 
-Boolflix è una piccola single-page application, graficamente ispirata a Netflix, che sfrutta le REST API di [The Movie DB](https://developer.themoviedb.org/) per mostrare a schermo le informazioni di film e serie tv, partendo da una chiave di ricerca. Il progetto è stato realizzato
-a scopo didattico per [Boolean](https://boolean.careers/).
+BoolBNB è una web application completa che si rifà a siti di case vacanze come Airbnb e Vrbo. Consente all'utente non registrato di cercare all'interno del sito appartamenti disponibili in una
+zona specifica e di filtrare i risultati. Inoltre permette di visualizzare il dettaglio dei singoli appartamenti e di contattare il locatore. 
+Il progetto è stato realizzato in gruppo, come progetto di fine corso, per [Boolean](https://boolean.careers/).
 
 
 ## Tecnologie
