@@ -3,7 +3,7 @@ LOGO
 -->
 
 <p align="center">
-  <img src="https://github.com/mattiamoneta/vite-boolflix/blob/master/public/logo.png" alt="Boolbnb" height="50px"/>
+  <img src="https://github.com/mattiamoneta/team2-boolbnb-front/blob/main/logo.png?raw=true" alt="Boolbnb" height="50px"/>
 </p>
 
 <!---
@@ -11,7 +11,7 @@ THUMBNAIL GIF
 -->
 
 <p align="center">
-  <img src="https://github.com/mattiamoneta/vite-boolflix/blob/master/thumbnail.gif" alt="Boolbnb"/>
+  <img src="https://github.com/mattiamoneta/team2-boolbnb-front/blob/main/thumbnail.gif" alt="Boolbnb"/>
 </p>
 
 <!---
