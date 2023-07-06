@@ -37,3 +37,11 @@ Il progetto è stato realizzato in gruppo, come progetto di fine corso, per [Boo
 - [Vite 4.2](https://vitejs.dev/)
 - HTML/CSS
 - SCSS
+
+## Team
+
+- @irenebrignoli
+- @nicolofossati
+- @simonecarcagni
+- @mikaeltreppo
+
