@@ -3,7 +3,7 @@ LOGO
 -->
 
 <p align="center">
-  <img src="https://github.com/mattiamoneta/team2-boolbnb-front/blob/main/logo-spaced.png?raw=true" alt="Boolbnb" height="70px"/>
+  <img src="https://github.com/mattiamoneta/team2-boolbnb-front/blob/main/logo-spaced.png?raw=true" alt="Boolbnb" height="65px"/>
 </p>
 
 <!---
