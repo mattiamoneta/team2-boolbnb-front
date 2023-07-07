@@ -33,7 +33,7 @@ Il progetto è stato realizzato in gruppo, come progetto di fine corso, per [Boo
 
 ## Tecnologie
 
-- [Vue 3.2](https://vuejs.org/)
+- [Laravel 9](https://laravel.com/)
 - [Vite 4.2](https://vitejs.dev/)
 - HTML/CSS
 - SCSS
